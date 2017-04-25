@@ -1,0 +1,13 @@
+
+{% block body %}
+    <h2>{{ texto.id }}.{{ texto.titulo }}</h2><br>
+
+    Creado por: <a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{ texto.author }}</a>
+    {{ texto.createdAt | date}}<br>
+    {% if texto.createdAt != texto.updatedAt %}
+        Editado: {{ texto.updatedAt | date("d/m/Y H:i:s") }}<br>
+    {% endif %}
+    {{ texto.cuerpo }}
+
+
+{% endblock %}

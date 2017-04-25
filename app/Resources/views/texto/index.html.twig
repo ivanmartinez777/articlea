@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+    {% block tittle %}Textos{% endblock %}
+
+    {% block body %}
+        {% if is_granted('ROLE_USER') %}
+          Logeado como  <a href="{{ path('app_texto_show', {'author': app.user}) }}">{{ app.user.username }}</a> <br>
+            <a href="{{ path('app_texto_create') }}"><button> Introducir nuevo texto</button></a>
+        {% endif %}
+        {% for texto in textos %}
+            {{ include('texto/texto.html.twig', { 'texto': texto }) }}
+            <a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
+
+        {% endfor %}
+        <br>
+
+    {% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <!-- http://stackoverflow.com/questions/18848870/how-to-display-all-form-error-at-one-place -->
+    <div>
+        <form method="post" action="{{ action }}" novalidate="novalidate">
+            <div>
+                <!--no validate es porque estamos en producción y no queremos que html5 valide automaticamente-->
+                <!-- form is based on User Entity -->
+                {{ dump(form.vars.value) }}
+                <!-- http://stackoverflow.com/questions/12497133/directly-access-a-form-fields-value-when-overriding-widget-in-a-twig-template -->
+
+                {% for error in form.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+
+                <!--esto indica los errores que hemos cometido. Aunque se han puesto dos formas de mostrar errores, la de arriba
+                y la de abajo, solo dejamos una-->
+            </div>
+            <div>{{ form_errors(form.titulo) }}{{ form_label(form.titulo) }}: {{ form_widget(form.titulo) }}</div>
+            <div>{{ form_errors(form.cuerpo) }}{{ form_label(form.cuerpo) }}: {{ form_widget(form.cuerpo)}}</div>
+
+            {{ form_rest(form) }} <!-- prints hidden fields and others -->
+            <div><input type="submit" value="Ok"></div>
+        </form>
+    </div>
+{% endblock %}

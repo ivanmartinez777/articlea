@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+    {% block tittle %}Textos{% endblock %}
+
+    {% block body %}
+
+        <a href="{{ path('app_texto_index') }}">Volver</a> <br>
+
+
+            {{ include('texto/texto.html.twig', { 'texto': texto }) }}<br>
+
+        {% if (app.user == texto.author) or (app.user == "admin") %}
+            <a href="{{ path('app_texto_remove', {'id': texto.id}) }}">remove</a> <br>
+            <a href="{{ path('app_texto_update', {'id': texto.id}) }}">Editar texto</a> <br>
+        {% endif %}
+        <h3>Comentarios</h3>
+        {{ render(controller('AppBundle:Comentario:index', {'id': texto.id})) }}
+        <a href="{{ path('app_comentario_create', {'id': texto.id}) }}">Crear comentario</a> <br>
+
+    {% endblock %}

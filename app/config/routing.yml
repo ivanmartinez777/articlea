@@ -1,0 +1,16 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+
+app.index:
+    resource: "@AppBundle/Controller/IndexController.php"
+    type: annotation
+
+app.texto:
+    resource: "@AppBundle/Controller/TextoController.php"
+    type:     annotation
+    prefix: /textos
+
+app.comentario:
+    resource: "@AppBundle/Controller/ComentarioController.php"
+    type:     annotation
+    prefix: /textos

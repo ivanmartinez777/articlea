@@ -1,0 +1,27 @@
+
+
+
+
+    {% block body %}
+        {% if comentarios is empty %}
+           <h2>Aun no hay comentarios, se el primero en hacerlo</h2>
+        {% else %}
+
+        {% for comentario in comentarios %}
+           <h4>{{ comentario.id }}.{{ comentario.cuerpo }}</h4>
+            {{ comentario.texto.getId() }}-- {{ comentario.author }}
+           Creado: {{ comentario.createdAt | date}}<br>
+            {% if comentario.createdAt != comentario.updatedAt %}
+                Editado: {{ comentario.updatedAt | date("d/m/Y H:i:s") }}<br>
+            {% endif %}
+            {% if (app.user == comentario.author) or (app.user == "admin") %}
+                <a href="{{ path('app_comentario_remove', {'id': comentario.id})}}">remove</a> <br>
+                <a href="{{ path('app_comentario_update', {'id': comentario.id}) }}">Editar comentario</a> <br>
+            {% endif %}
+
+
+        {% endfor %}
+        <br>
+
+        {% endif %}
+    {% endblock %}
