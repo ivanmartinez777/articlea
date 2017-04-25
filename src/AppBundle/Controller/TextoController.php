@@ -146,7 +146,7 @@ class TextoController extends Controller
         $texto = $repository->find($id);
         $user = $this->getUser();
         $textoUser= $texto->getAuthor();
-        if($user->getId() === $textoUser->getId()) {
+        if($user->getId() === $textoUser->getId() or ($user->getUsername() === "admin")){
             $form = $this->createForm(TextoType::class, $texto);
 
             return $this->render(':texto:form.html.twig',
@@ -172,7 +172,7 @@ class TextoController extends Controller
         $texto = $repository->find($id);
         $user = $this->getUser();
         $textoUser= $texto->getAuthor();
-        if($user->getId() === $textoUser->getId()) {
+        if($user->getId() === $textoUser->getId() or ($user->getUsername() === "admin")){
             $form       = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {
