@@ -4,7 +4,7 @@
     <!-- http://stackoverflow.com/questions/18848870/how-to-display-all-form-error-at-one-place -->
     <div>
         <form method="post" action="{{ action }}" novalidate="novalidate">
-        
+
             <div>{{ form_errors(form.cuerpo) }}{{ form_label(form.cuerpo) }}: {{ form_widget(form.cuerpo)}}</div>
 
             {{ form_rest(form) }} <!-- prints hidden fields and others -->
