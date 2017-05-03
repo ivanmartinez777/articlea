@@ -15,6 +15,7 @@
         {% endif %}
         <h3>Comentarios</h3>
         {{ render(controller('AppBundle:Comentario:index', {'id': texto.id})) }}
-        <a href="{{ path('app_comentario_create', {'id': texto.id}) }}">Crear comentario</a> <br>
+        {{ render(controller('AppBundle:Comentario:create', {'id': texto.id})) }}
+
 
     {% endblock %}

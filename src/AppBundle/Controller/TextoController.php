@@ -25,7 +25,7 @@ class TextoController extends Controller
         $m = $this->getDoctrine()->getManager();
         $repo = $m->getRepository('AppBundle:Texto');
 
-        $textos = $repo->findAll();
+        $textos = $repo->findBy(array(), array('id' => 'DESC'));
         return $this->render(':texto:index.html.twig',
         [
             'textos' => $textos,

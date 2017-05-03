@@ -75,7 +75,7 @@ class ComentarioController extends Controller
                 return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
             }
             $this->addFlash('messages', 'Review your form data');
-            return $this->render(':texto:form.html.twig',
+            return $this->render(':comentario:form.html.twig',
                 [
                     'form' => $form->createView(),
                     'action' => $this->generateUrl('app_comentario_doCreate', ['id' => $id])
