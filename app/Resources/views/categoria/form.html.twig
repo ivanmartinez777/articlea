@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <!-- http://stackoverflow.com/questions/18848870/how-to-display-all-form-error-at-one-place -->
+    <div>
+        <form method="post" action="{{ action }}" novalidate="novalidate">
+
+            <div>{{ form_errors(form.nombre) }}{{ form_label(form.nombre) }}: {{ form_widget(form.nombre) }}</div>
+            <div>{{ form_errors(form.descripcion) }}{{ form_label(form.descripcion) }}: {{ form_widget(form.descripcion)}}</div>
+
+            {{ form_rest(form) }} <!-- prints hidden fields and others -->
+            <div><input type="submit" value="Ok"></div>
+        </form>
+    </div>
+{% endblock %}

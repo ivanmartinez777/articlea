@@ -3,6 +3,10 @@
     {% block tittle %}Textos{% endblock %}
 
     {% block body %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_categoria_index') }}">Categorias</a> <br>
+
+        {% endif %}
         {% if is_granted('ROLE_USER') %}
           Logeado como  <a href="{{ path('app_texto_show', {'author': app.user}) }}">{{ app.user.username }}</a> <br>
             <a href="{{ path('app_texto_create') }}"><button> Introducir nuevo texto</button></a>

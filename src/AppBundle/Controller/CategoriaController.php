@@ -1,0 +1,171 @@
+<?php
+
+namespace AppBundle\Controller;
+
+use AppBundle\Entity\Categoria;
+use AppBundle\Form\CategoriaType;
+use Trascastro\UserBundle\Entity;
+use AppBundle\Form\ImageType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use AppBundle\Form\TextoType;
+
+
+
+
+class CategoriaController extends Controller
+{
+   /**
+    * @Route("/categoria/", name="app_categoria_index")
+    * @return \Symfony\Component\HttpFoundation\Response
+    *
+    */
+    public function indexAction()
+    {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $m = $this->getDoctrine()->getManager();
+            $repo = $m->getRepository('AppBundle:Categoria');
+
+            $categorias = $repo->findBy(array(), array('nombre' => 'ASC'));
+            return $this->render(':categoria:index.html.twig',
+                [
+                    'categorias' => $categorias,
+                ]
+            );
+        }return $this->redirectToRoute('app_texto_index');
+    }
+
+
+    /**
+     * @Route("/categoriaCreate", name="app_categoria_create")
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     */
+    public function createAction()
+
+    {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $categoria = new Categoria();
+            $form = $this->createForm(CategoriaType::class, $categoria);
+
+            return $this->render(':categoria:form.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'action' => $this->generateUrl('app_categoria_doCreate')
+                ]
+            );
+        }
+        return $this->redirectToRoute('app_texto_index');
+    }
+
+
+    /**
+     * @Route("/categoriaDoCreate", name="app_categoria_doCreate")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function doCreateAction(Request $request)
+    {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $categoria = new Categoria();
+            $form = $this->createForm(CategoriaType::class, $categoria);
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $m = $this->getDoctrine()->getManager();
+                $m->persist($categoria);
+                $m->flush();
+                $this->addFlash('messages', 'Categoria creada');
+                return $this->redirectToRoute('app_categoria_index');
+            }
+            $this->addFlash('messages', 'Review your form data');
+            return $this->render(':categoria:form.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'action' => $this->generateUrl('app_categoria_doCreate')
+                ]
+            );
+        }
+        $this->addFlash('messages', 'Si no es administrador no tiene acceso a esta sección');
+        return $this->redirectToRoute('app_texto_index');
+
+    }
+
+    /**
+     * @Route("/categoriaUpdate/{id}", name="app_categoria_update")
+     *@return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function updateAction($id)
+    {
+
+        $m = $this->getDoctrine()->getManager();
+        $repository = $m->getRepository('AppBundle:Categoria');
+        $categoria = $repository->find($id);
+
+            $form = $this->createForm(CategoriaType::class, $categoria);
+
+            return $this->render(':categoria:form.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'action' => $this->generateUrl('app_categoria_doUpdate', ['id' => $id])
+                ]
+            );
+
+
+    }
+
+    /**
+     * @Route("/doUpdate/{id}", name="app_categoria_doUpdate")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function doUpdateAction($id, Request $request)
+    {
+
+        $m          = $this->getDoctrine()->getManager();
+        $repository = $m->getRepository('AppBundle:Categoria');
+        $categoria = $repository->find($id);
+
+
+
+            $form       = $this->createForm(CategoriaType::class, $categoria);
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $m->flush();
+                $this->addFlash('messages', 'categoria actualizada');
+                return $this->redirectToRoute('app_categoria_index');
+            }
+            $this->addFlash('messages', 'Review your form');
+            return $this->render(':categoria:form.html.twig',
+                [
+                    'form'      => $form->createView(),
+                    'action'    => $this->generateUrl('app_categoria_doUpdate', ['id' => $id]),
+                ]
+            );
+
+
+    }
+
+
+
+    /**
+     * @Route("/categoriaRemove/{id}", name="app_categoria_remove")
+     *@return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function removeAction( $id)
+    {
+        $m = $this->getDoctrine()->getManager();
+        $repository = $m->getRepository('AppBundle:Categoria');
+        $categoria = $repository->find($id);
+        $m->remove($categoria);
+        $m->flush();
+
+        return $this->redirectToRoute('app_categoria_index');
+    }
+
+
+
+}

@@ -1,0 +1,23 @@
+
+
+
+
+    {% block body %}
+        <a href="{{ path('app_texto_index')}}">Create</a> <br>
+        {% if categorias is empty %}
+           <h2>Aun no hay categorias. Inserte la primera</h2>
+            <a href="{{ path('app_categoria_create')}}">Create</a> <br>
+        {% else %}
+
+        {% for categoria in categorias %}
+           <h4>{{ categoria.id }}.{{ categoria.nombre }}</h4>
+            <p>{{ categoria.descripcion }}</p>
+
+                <a href="{{ path('app_categoria_remove', {'id': categoria.id})}}">remove</a> <br>
+                <a href="{{ path('app_categoria_update', {'id': categoria.id}) }}">Editar categoria</a> <br>
+
+        {% endfor %}
+            <a href="{{ path('app_categoria_create')}}">Create</a> <br>
+
+        {% endif %}
+    {% endblock %}

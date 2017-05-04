@@ -24,10 +24,22 @@ class Categoria
     /**
      * @var string
      *
-     * @ORM\Column(name="Nombre", type="string", length=45, unique=true)
+     * @ORM\Column(name="nombre", type="string", length=40, unique=true)
      */
     private $nombre;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, unique=true)
+     */
+    private $descripcion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="categoria")
+     */
+
+    private $textos;
 
     /**
      * Get id
@@ -61,6 +73,30 @@ class Categoria
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     *
+     * @return Categoria
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }
 

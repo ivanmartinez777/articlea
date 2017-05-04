@@ -14,3 +14,7 @@ app.comentario:
     resource: "@AppBundle/Controller/ComentarioController.php"
     type:     annotation
     prefix: /textos
+app.categoria:
+    resource: "@AppBundle/Controller/CategoriaController.php"
+    type:     annotation
+    prefix: /textos

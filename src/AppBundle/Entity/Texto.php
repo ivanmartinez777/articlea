@@ -59,6 +59,12 @@ class Texto
     private $author;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categoria", inversedBy="textos")
+     */
+
+    private $categoria;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comentario", mappedBy="texto", cascade={"remove"} )
      */
 
@@ -78,6 +84,22 @@ class Texto
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * @param mixed $categoria
+     */
+    public function setCategoria($categoria)
+    {
+        $this->author = $categoria;
     }
     /**
      * Get id
