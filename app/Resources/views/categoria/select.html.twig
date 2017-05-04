@@ -1,0 +1,12 @@
+
+
+
+
+    {% block body %}
+
+
+        {% for categoria in categorias %}
+            <option value={{ categoria.nombre }}>{{ categoria.nombre }}</option>
+        {% endfor %}
+
+    {% endblock %}

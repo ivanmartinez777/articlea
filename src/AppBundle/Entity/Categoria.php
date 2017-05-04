@@ -98,5 +98,10 @@ class Categoria
     {
         return $this->descripcion;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getNombre();
+    }
 }
 

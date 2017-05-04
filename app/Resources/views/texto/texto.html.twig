@@ -7,7 +7,9 @@
     {% if texto.createdAt != texto.updatedAt %}
         Editado: {{ texto.updatedAt | date("d/m/Y H:i:s") }}<br>
     {% endif %}
+    {{ texto.categoria}}<br>
     {{ texto.cuerpo }}
+
 </div>
 
 {% endblock %}

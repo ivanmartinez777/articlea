@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+
 
 class TextoType extends AbstractType
 {
@@ -15,7 +18,13 @@ class TextoType extends AbstractType
         $builder
             ->add('titulo', TextType::class)
             ->add('cuerpo', TextType::class)
-     
+            ->add('categoria', EntityType::class, array(
+                'class' => 'AppBundle:Categoria',
+                'choice_label' => 'nombre',
+                'choice_value' => 'id',
+
+
+            ));
         ;
 
     }

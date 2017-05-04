@@ -99,7 +99,7 @@ class Texto
      */
     public function setCategoria($categoria)
     {
-        $this->author = $categoria;
+        $this->categoria = $categoria;
     }
     /**
      * Get id

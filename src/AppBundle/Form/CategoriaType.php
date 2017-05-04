@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Categoria;
+use AppBundle\Repository\CategoriaRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +17,6 @@ class CategoriaType extends AbstractType
         $builder
             ->add('nombre', TextType::class)
             ->add('descripcion', TextType::class)
-
         ;
 
     }
