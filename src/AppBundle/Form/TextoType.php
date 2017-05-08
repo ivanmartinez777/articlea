@@ -18,13 +18,7 @@ class TextoType extends AbstractType
         $builder
             ->add('titulo', TextType::class)
             ->add('cuerpo', TextType::class)
-            ->add('categoria', EntityType::class, array(
-                'class' => 'AppBundle:Categoria',
-                'choice_label' => 'nombre',
-                'choice_value' => 'id',
 
-
-            ));
         ;
 
     }

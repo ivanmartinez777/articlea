@@ -1,0 +1,17 @@
+
+
+
+
+    {% block body %}
+        <a href="{{ path('app_texto_index')}}">Volver</a> <br>
+
+        {% for usuario in usuarios %}
+           <h4>{{ usuario.id }}.{{ usuario.username }}</h4>
+
+
+                <a href="{{ path('app_usuario_remove', {'id': usuario.id})}}">Eliminar Usuario</a> <br>
+                <a href="{{ path('app_usuario_update', {'id': usuario.id}) }}">Editar categoria</a> <br>
+
+        {% endfor %}
+
+    {% endblock %}

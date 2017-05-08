@@ -19,3 +19,8 @@ app.categoria:
     type:     annotation
     prefix: /textos
 
+app.usuario:
+    resource: "@AppBundle/Controller/UsuarioController.php"
+    type:     annotation
+    prefix: /textos
+

@@ -39,7 +39,6 @@ class Texto
     private $cuerpo;
     /**
      * @var mixed
-     * @Assert\NotBlank()
      * @ORM\Column(name="categoria", type="text")
      */
     private $categoria;

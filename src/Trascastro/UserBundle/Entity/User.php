@@ -68,8 +68,8 @@ class User extends BaseUser
     private $suscriptores;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="friendsWithMe")
-     * @ORM\JoinTable(name="suscripciones_suscripciones",
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="suscriptores")
+     * @ORM\JoinTable(name="usuarios_suscripciones",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="suscripcion_id", referencedColumnName="id")}
      *      )
@@ -181,12 +181,10 @@ class User extends BaseUser
 
 
     /**
-     * @param User|null $suscripcion
+     * @param User $suscripcion
      *
      */
-
-
-    public function addSuscripcion(User $suscripcion = null)
+    public function addSuscripcion(User $suscripcion )
     {
         if (!$this->suscripciones->contains($suscripcion)) {
             $this->suscripciones->add($suscripcion);

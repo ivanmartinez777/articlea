@@ -3,11 +3,12 @@
     <h2>{{ texto.id }}.{{ texto.titulo }}</h2><br>
 <div>
     Creado por: <a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{ texto.author }}</a>
+    <a href="{{ path('app_usuario_suscripcion', {'usuario': texto.author}) }}"><button>Suscribirse</button></a><br>
     {{ texto.createdAt | date}}<br>
     {% if texto.createdAt != texto.updatedAt %}
         Editado: {{ texto.updatedAt | date("d/m/Y H:i:s") }}<br>
     {% endif %}
-    {{ texto.categoria }}<br>
+
 <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
     {{ texto.cuerpo }}
 
