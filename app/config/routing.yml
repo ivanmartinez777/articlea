@@ -18,3 +18,4 @@ app.categoria:
     resource: "@AppBundle/Controller/CategoriaController.php"
     type:     annotation
     prefix: /textos
+

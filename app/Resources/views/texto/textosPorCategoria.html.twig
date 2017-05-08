@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+    {% block tittle %}{{ nomCategoria }}{% endblock %}
+
+    {% block body %}
+        <a href="{{ path('app_texto_index') }}">Volver</a> <br>
+
+        <h2>{{ nomCategoria }}</h2>
+
+
+
+        {% for texto in textos %}
+            {{ include('texto/texto.html.twig', { 'texto': texto }) }}<a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
+        {% endfor %}
+
+    {% endblock %}

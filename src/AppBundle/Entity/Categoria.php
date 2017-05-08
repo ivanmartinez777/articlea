@@ -39,7 +39,7 @@ class Categoria
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="categoria")
      */
 
-    private $textos;
+    private $usuarios;
 
     /**
      * Get id

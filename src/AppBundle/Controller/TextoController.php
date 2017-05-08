@@ -81,6 +81,28 @@ class TextoController extends Controller
 
     }
 
+
+    /**
+     * @Route("/textoPor{categoria}", name="app_textoCategoria_show")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function textoCategoriaAction($categoria, Request $request)
+    {
+        $m = $this->getDoctrine()->getManager();
+        $repo = $m->getRepository('AppBundle:Texto');
+        $textos = $repo->findBy(['categoria' => $categoria]);
+
+        return $this->render(':texto:textosPorCategoria.html.twig',
+            [
+                'textos' => $textos,
+                'nomCategoria' => $categoria,
+            ]
+        );
+
+    }
+
     /**
      * @Route("/create", name="app_texto_create")
      *@return \Symfony\Component\HttpFoundation\Response
@@ -116,6 +138,7 @@ class TextoController extends Controller
                 $user = $this->getUser();
                 $user->setNumTextos();
                 $texto->setAuthor($user);
+                $texto->setCategoria($user->getCategoria());
                 $m = $this->getDoctrine()->getManager();
                 $m->persist($texto);
                 $m->flush();
@@ -178,7 +201,7 @@ class TextoController extends Controller
             if ($form->isValid()) {
                 $m->flush();
                 $this->addFlash('messages', 'texto actualizado');
-                return $this->redirectToRoute('app_texto_index');
+                return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
             }
             $this->addFlash('messages', 'Review your form');
             return $this->render(':texto:form.html.twig',

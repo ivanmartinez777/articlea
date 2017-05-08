@@ -7,7 +7,8 @@
     {% if texto.createdAt != texto.updatedAt %}
         Editado: {{ texto.updatedAt | date("d/m/Y H:i:s") }}<br>
     {% endif %}
-    {{ texto.categoria}}<br>
+    {{ texto.categoria }}<br>
+<a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
     {{ texto.cuerpo }}
 
 </div>

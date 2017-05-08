@@ -37,6 +37,12 @@ class Texto
      * @ORM\Column(name="cuerpo", type="text")
      */
     private $cuerpo;
+    /**
+     * @var mixed
+     * @Assert\NotBlank()
+     * @ORM\Column(name="categoria", type="text")
+     */
+    private $categoria;
 
     /**
      * @var \DateTime
@@ -58,11 +64,7 @@ class Texto
 
     private $author;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categoria", inversedBy="textos")
-     */
 
-    private $categoria;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comentario", mappedBy="texto", cascade={"remove"} )
