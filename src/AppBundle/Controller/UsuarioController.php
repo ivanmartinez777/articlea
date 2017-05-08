@@ -32,6 +32,6 @@ class UsuarioController extends Controller
         return $this->redirectToRoute('app_texto_index');
     }
 
-    
+
 
 }

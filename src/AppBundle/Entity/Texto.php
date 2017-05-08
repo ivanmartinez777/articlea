@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Trascastro\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Texto
@@ -24,84 +25,7 @@ class Texto
      */
     private $id;
 
-    /**
-     * @var string
-     *@Assert\NotBlank()
-     * @ORM\Column(name="titulo", type="string", length=255)
-     */
-    private $titulo;
 
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="cuerpo", type="text")
-     */
-    private $cuerpo;
-    /**
-     * @var mixed
-     * @ORM\Column(name="categoria", type="text")
-     */
-    private $categoria;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="textos")
-     */
-
-    private $author;
-
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comentario", mappedBy="texto", cascade={"remove"} )
-     */
-
-    private $comentarios;
-
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param mixed $author
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoria()
-    {
-        return $this->categoria;
-    }
-
-    /**
-     * @param mixed $categoria
-     */
-    public function setCategoria($categoria)
-    {
-        $this->categoria = $categoria;
-    }
     /**
      * Get id
      *
@@ -111,6 +35,17 @@ class Texto
     {
         return $this->id;
     }
+
+
+
+    //Titulo
+
+    /**
+     * @var string
+     *@Assert\NotBlank()
+     * @ORM\Column(name="titulo", type="string", length=255)
+     */
+    private $titulo;
 
     /**
      * Set titulo
@@ -136,6 +71,16 @@ class Texto
         return $this->titulo;
     }
 
+
+    //Cuerpo
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="cuerpo", type="text")
+     */
+    private $cuerpo;
+
     /**
      * Set cuerpo
      *
@@ -160,6 +105,52 @@ class Texto
         return $this->cuerpo;
     }
 
+
+
+    //Categoria
+
+    /**
+     * @var mixed
+     * @ORM\Column(name="categoria", type="text")
+     */
+    private $categoria;
+
+    /**
+     * @return mixed
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * @param mixed $categoria
+     */
+    public function setCategoria($categoria)
+    {
+        $this->categoria = $categoria;
+    }
+
+    //CreatedAt
+
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
     /**
      * Set createdAt
      *
@@ -174,17 +165,16 @@ class Texto
         return $this;
     }
 
+
+    //UpdatedAt
+
+
     /**
-     * Get createdAt
+     * @var \DateTime
      *
-     *
-     *
-     * @return \DateTime
+     * @ORM\Column(name="updated_at", type="datetime")
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
+    private $updatedAt;
 
     /**
      * Set updatedAt
@@ -199,7 +189,6 @@ class Texto
         return $this;
     }
 
-
     /**
      * Get updatedAt
      *
@@ -210,11 +199,100 @@ class Texto
         return $this->updatedAt;
     }
 
+    //Author
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="textos", cascade={"persist"})
+     */
+
+    private $author;
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+
+    //Comentarios
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comentario", mappedBy="texto", cascade={"remove"} )
+     */
+
+    private $comentarios;
+
+
+    //PagPrincipales
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="textosPagPrincipal")
+     * @ORM\JoinTable(name="textos_usuarios",
+     *      joinColumns={@ORM\JoinColumn(name="texto_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="usuario_id", referencedColumnName="id")}
+     *      )
+     */
+    private $pagPrincipales;
+
+    /**
+     * @param User $user
+     */
+    public function addPag(User $user)
+    {
+        if (!$this->pagPrincipales->contains($user)) {
+            $this->pagPrincipales->add($user);
+            $user->addTextoPag($this);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getTPag()
+    {
+        return $this->pagPrincipales->toArray();
+    }
+
+    /**
+     * @param User $user
+     */
+    public function removePagPrincipal(User $user)
+    {
+        if (!$this->pagPrincipales->contains($user)) {
+            return;
+        }
+        $this->pagPrincipales->removeElement($user);
+        $user->removeTextosPagPrincipal($this);
+    }
+
+    /**
+     *
+     */
+    public function removeAllPagPrincipal()
+    {
+        $this->pagPrincipales->clear();
+    }
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
+        $this->pagPrincipales = new ArrayCollection();
 
     }
+
 }
 

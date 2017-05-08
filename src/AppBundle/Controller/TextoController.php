@@ -140,6 +140,7 @@ class TextoController extends Controller
                 $texto->setAuthor($user);
                 $texto->setCategoria($user->getCategoria());
                 $m = $this->getDoctrine()->getManager();
+                $
                 $m->persist($texto);
                 $m->flush();
                 $this->addFlash('messages', 'Texto creado');
