@@ -162,11 +162,7 @@ class TextoController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
      */
-    /**
-     * @Route("/prueba", name="app_texto_prueba")
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
+
     public function enviarSuscriptor()
     {
         $user = $this->getUser();
@@ -184,6 +180,12 @@ class TextoController extends Controller
 
     }
 
+
+    /**
+     * @Route("/prueba", name="app_texto_prueba")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
     public function paginaPrincipal()
     {
         $user = $this->getUser();
