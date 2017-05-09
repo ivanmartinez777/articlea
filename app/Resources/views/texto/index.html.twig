@@ -2,7 +2,9 @@
 
     {% block tittle %}Textos{% endblock %}
 
+
     {% block body %}
+        <a href="{{ path('app_texto_prueba') }}">Vamos a ver</a>
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_categoria_index') }}">Categorias</a> <br>
 

@@ -2,15 +2,16 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\Texto;
-use Trascastro\UserBundle\Entity;
+use Trascastro\UserBundle\Entity\User;
 use AppBundle\Form\ImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Form\TextoType;
-use AppBundle\Entity\Comentario;
+
 
 
 
@@ -140,10 +141,9 @@ class TextoController extends Controller
                 $texto->setAuthor($user);
                 $texto->setCategoria($user->getCategoria());
                 $m = $this->getDoctrine()->getManager();
-                $
                 $m->persist($texto);
                 $m->flush();
-                $this->addFlash('messages', 'Texto creado');
+                $this->enviarSuscriptor();
                 return $this->redirectToRoute('app_texto_index');
             }
             $this->addFlash('messages', 'Review your form data');
@@ -154,6 +154,48 @@ class TextoController extends Controller
                 ]
             );
         }
+
+    }
+
+    /**
+     * @Route("/prueba", name="app_texto_prueba")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+    /**
+     * @Route("/prueba", name="app_texto_prueba")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function enviarSuscriptor()
+    {
+        $user = $this->getUser();
+        $m = $this->getDoctrine()->getManager();
+        $repositorio= $m->getRepository('AppBundle:Texto');
+        $texto = $repositorio->findOneBy(array('author'=> $user),
+            array('id'=> 'DESC'));
+        $repo = $m->getRepository('UserBundle:User');
+        $usuarios = $repo->findBy(array('id'=>$user->getSuscriptores()));
+        foreach ($usuarios as $usuario)
+            $usuario->addTextoPag($texto);
+        $m->flush();
+
+        return $this->addFlash('messages', 'Review your form data');
+
+    }
+
+    public function paginaPrincipal()
+    {
+        $user = $this->getUser();
+        $m = $this->getDoctrine()->getManager();
+        $repositorio = $m->getRepository('AppBundle:Texto');
+        $textos = $repositorio->findBy(array('id'=>$user->getTextosPag()));
+        return $this->render('texto/prueba.html.twig',
+            [
+                'textos' => $textos,
+                'usuario'=> $user->getUsername(),
+            ]
+        );
 
     }
 
@@ -214,7 +256,6 @@ class TextoController extends Controller
         } return $this->redirectToRoute('app_texto_index');
 
     }
-
 
 
     /**
