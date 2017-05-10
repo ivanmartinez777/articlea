@@ -204,7 +204,6 @@ class Texto
     /**
      * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="textos", cascade={"persist"})
      */
-
     private $author;
 
     /**
@@ -238,7 +237,7 @@ class Texto
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="textosPagPrincipal")
+     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="textosPagPrincipal", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="textos_usuarios",
      *      joinColumns={@ORM\JoinColumn(name="texto_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="usuario_id", referencedColumnName="id")}

@@ -191,7 +191,8 @@ class TextoController extends Controller
         $user = $this->getUser();
         $m = $this->getDoctrine()->getManager();
         $repositorio = $m->getRepository('AppBundle:Texto');
-        $textos = $repositorio->findBy(array('id'=>$user->getTextosPag()));
+        $textos = $repositorio->findBy(array('id'=>$user->getTextosPag()),
+                                        array('id'=> 'DESC'));
         return $this->render('texto/prueba.html.twig',
             [
                 'textos' => $textos,
@@ -270,6 +271,10 @@ class TextoController extends Controller
         $m = $this->getDoctrine()->getManager();
         $repository = $m->getRepository('AppBundle:Texto');
         $texto = $repository->find($id);
+        $repositoryUser= $m->getRepository('UserBundle:User');
+        $usuarios = $repositoryUser->findBy(array('id' => $texto->getTPag()));
+        foreach ($usuarios as $usuario)
+            $usuario->removeTextosPagPrincipal($texto);
         $m->remove($texto);
         $m->flush();
 

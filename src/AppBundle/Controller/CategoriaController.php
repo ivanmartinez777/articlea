@@ -4,13 +4,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categoria;
 use AppBundle\Form\CategoriaType;
-use Trascastro\UserBundle\Entity;
-use AppBundle\Form\ImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use AppBundle\Form\TextoType;
+
 
 
 
@@ -117,7 +115,7 @@ class CategoriaController extends Controller
     }
 
     /**
-     * @Route("/doUpdate/{id}", name="app_categoria_doUpdate")
+     * @Route("/categoriaDoUpdate/{id}", name="app_categoria_doUpdate")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_ADMIN')")
      */

@@ -254,7 +254,7 @@ class User extends BaseUser
     //Textos En la Página principal
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="pagPrincipales", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="pagPrincipales", cascade={"persist", "remove"})
      */
     private $textosPagPrincipal;
 
