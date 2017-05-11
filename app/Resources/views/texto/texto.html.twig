@@ -3,7 +3,15 @@
     <h2>{{ texto.id }}.{{ texto.titulo }}</h2><br>
 <div>
     Creado por: <a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{ texto.author }}</a>
+    {% if app.user %}
+    {% if app.user == texto.author %}
+    {% elseif  texto.author in app.user.getSuscripciones() %}
+
+    <a href="{{ path('app_usuario_suscripcion', {'usuario': texto.author}) }}"><button>Eliminar suscripcion</button></a><br>
+    {% else %}
     <a href="{{ path('app_usuario_suscripcion', {'usuario': texto.author}) }}"><button>Suscribirse</button></a><br>
+    {% endif %}
+    {% endif %}
     {{ texto.createdAt | date}}<br>
     {% if texto.createdAt != texto.updatedAt %}
         Editado: {{ texto.updatedAt | date("d/m/Y H:i:s") }}<br>

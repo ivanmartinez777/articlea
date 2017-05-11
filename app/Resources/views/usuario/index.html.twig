@@ -7,10 +7,11 @@
 
         {% for usuario in usuarios %}
            <h4>{{ usuario.id }}.{{ usuario.username }}</h4>
-
-
-                <a href="{{ path('app_usuario_remove', {'id': usuario.id})}}">Eliminar Usuario</a> <br>
-                <a href="{{ path('app_usuario_update', {'id': usuario.id}) }}">Editar categoria</a> <br>
+            {% if usuario.hasRole('ROLE_ADMIN') %}
+                <p>Administrador</p>
+            {% endif %}
+                <a href="{{ path('app_usuario_cambiarRole', {'id': usuario.id}) }}">Cambiar rol</a> <br>
+            <a href="{{ path('app_usuario_remove', {'id': usuario.id}) }}">Eliminar</a> <br>
 
         {% endfor %}
 
