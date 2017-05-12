@@ -36,7 +36,7 @@ class Categoria
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="categoria")
+     * @ORM\OneToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="categoria" ,cascade={"persist", "remove"})
      */
 
     private $usuarios;
@@ -103,5 +103,45 @@ class Categoria
     {
         return (string) $this->getNombre();
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->usuarios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add usuario
+     *
+     * @param \Trascastro\UserBundle\Entity\User $usuario
+     *
+     * @return Categoria
+     */
+    public function addUsuario(\Trascastro\UserBundle\Entity\User $usuario)
+    {
+        $this->usuarios[] = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Remove usuario
+     *
+     * @param \Trascastro\UserBundle\Entity\User $usuario
+     */
+    public function removeUsuario(\Trascastro\UserBundle\Entity\User $usuario)
+    {
+        $this->usuarios->removeElement($usuario);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+}

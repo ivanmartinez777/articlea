@@ -293,5 +293,72 @@ class Texto
 
     }
 
-}
 
+    /**
+     * Add comentario
+     *
+     * @param \AppBundle\Entity\Comentario $comentario
+     *
+     * @return Texto
+     */
+    public function addComentario(\AppBundle\Entity\Comentario $comentario)
+    {
+        $this->comentarios[] = $comentario;
+
+        return $this;
+    }
+
+    /**
+     * Remove comentario
+     *
+     * @param \AppBundle\Entity\Comentario $comentario
+     */
+    public function removeComentario(\AppBundle\Entity\Comentario $comentario)
+    {
+        $this->comentarios->removeElement($comentario);
+    }
+
+    /**
+     * Get comentarios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComentarios()
+    {
+        return $this->comentarios;
+    }
+
+    /**
+     * Add pagPrincipale
+     *
+     * @param \Trascastro\UserBundle\Entity\User $pagPrincipale
+     *
+     * @return Texto
+     */
+    public function addPagPrincipale(\Trascastro\UserBundle\Entity\User $pagPrincipale)
+    {
+        $this->pagPrincipales[] = $pagPrincipale;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagPrincipale
+     *
+     * @param \Trascastro\UserBundle\Entity\User $pagPrincipale
+     */
+    public function removePagPrincipale(\Trascastro\UserBundle\Entity\User $pagPrincipale)
+    {
+        $this->pagPrincipales->removeElement($pagPrincipale);
+    }
+
+    /**
+     * Get pagPrincipales
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPagPrincipales()
+    {
+        return $this->pagPrincipales;
+    }
+}

@@ -2,7 +2,7 @@
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     {{ form_widget(form) }}
-<div>{{ form_errors(form.categoria) }}{{ form_widget(form.categoria, { 'separator': '=====' }) }}</div>
+<div>{{ form_errors(form.categoria) }}{{ form_label(form.categoria) }}{{ form_widget(form.categoria, { 'separator': '=====' }) }}</div>
     <div>
         <input class="btn btn-default" type="submit" value="{{ 'registration.submit'|trans }}" />
     </div>
