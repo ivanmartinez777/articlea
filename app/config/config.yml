@@ -61,3 +61,9 @@ swiftmailer:
     password:  "%mailer_password%"
     #disable spool when using gmail
     #spool:     { type: memory }
+
+# app/config/config.yml
+fos_user:
+    registration:
+            form:
+                type: Trascastro\UserBundle\Form\UserRegistrationType

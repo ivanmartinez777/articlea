@@ -3,3 +3,8 @@ services:
         class: Twig_Extensions_Extension_Date
         tags:
             - { name: twig.extension }
+
+    app.form.registration:
+        class: Trascastro\UserBundle\Form\UserRegistrationType
+        tags:
+             - { name: form.type, alias: user_bundle_user_registration_type }
