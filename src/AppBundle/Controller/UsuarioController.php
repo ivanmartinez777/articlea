@@ -49,7 +49,7 @@ class UsuarioController extends Controller
      */
     public function indexAction()
     {
-        if ($this->isGranted('ROLE_ADMIN')) {
+        //if ($this->isGranted('ROLE_ADMIN')) {
             $m = $this->getDoctrine()->getManager();
             $repo = $m->getRepository('UserBundle:User');
 
@@ -59,14 +59,14 @@ class UsuarioController extends Controller
                     'usuarios' => $usuarios,
                 ]
             );
-        }return $this->redirectToRoute('app_texto_index');
+       // }return $this->redirectToRoute('app_texto_index');
     }
 
 
     /**
      * @Route("/cambiarRole/{id}", name="app_usuario_cambiarRole")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_ADMIN')")
+     *
      */
     public function cambiarRoleAction($id)
 
@@ -91,7 +91,7 @@ class UsuarioController extends Controller
     /**
      * @Route("/removeUser/{id}", name="app_usuario_remove")
      *@return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
+     *
      */
     public function removeUserAction( $id)
     {
@@ -99,7 +99,7 @@ class UsuarioController extends Controller
         $m = $this->getDoctrine()->getManager();
         $repository = $m->getRepository('UserBundle:User');
         $user = $repository->find($id);
-        $repositoryTexto= $m->getRepository('AppBundle:Texto');
+        /*$repositoryTexto= $m->getRepository('AppBundle:Texto');
         $textos = $repositoryTexto->findBy(array('author'=>$user));
         foreach ($textos as $texto)
         {
@@ -107,7 +107,7 @@ class UsuarioController extends Controller
                    'id'=>$texto
                ));
 
-        }
+        }*/
         $m->remove($user);
         $m->flush();
 
