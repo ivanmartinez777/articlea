@@ -67,3 +67,6 @@ fos_user:
     registration:
             form:
                 type: Trascastro\UserBundle\Form\UserRegistrationType
+    profile:
+                form:
+                    type: Trascastro\UserBundle\Form\UserProfileType

@@ -8,3 +8,8 @@ services:
         class: Trascastro\UserBundle\Form\UserRegistrationType
         tags:
              - { name: form.type, alias: user_bundle_user_registration_type }
+
+    app.form.profile:
+            class: Trascastro\UserBundle\Form\UserProfileType
+            tags:
+                 - { name: form.type, alias: user_bundle_user_profile_type }
