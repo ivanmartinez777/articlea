@@ -36,7 +36,7 @@ class Categoria
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="categoria")
+     * @ORM\OneToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="categoria")
      */
 
     private $usuarios;
