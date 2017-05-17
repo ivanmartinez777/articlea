@@ -233,6 +233,8 @@ class Texto
     private $comentarios;
 
 
+
+
     //PagPrincipales
 
 
@@ -284,81 +286,65 @@ class Texto
         $this->pagPrincipales->clear();
     }
 
+    //Tags
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="textos", cascade={"persist"})
+     * @ORM\JoinTable(name="textos_tags")
+     *          joinColumns={@ORM\JoinColumn(name="texto_id", referencedColumnName="id")},
+     *          inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
+     **/
+    private $tags;
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags->toArray();
+    }
+
+
+
+    /**
+     * @param Tag|null $tag
+     */
+    public function addTag(Tag $tag = null)
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+            $tag->addTextoTags($this);
+        }
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag)
+    {
+        if (!$this->tags->contains($tag)) {
+            return;
+        }
+        $this->tags->removeElement($tag);
+        $tag->removeTextosTag($this);
+    }
+
+    public function subsTag($pos)
+    {
+       $tag = $this->getTags()[$pos];
+        $this->removeTag($tag);
+    }
+
+
+
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
         $this->pagPrincipales = new ArrayCollection();
+        $this->tags = new ArrayCollection();
 
     }
 
-
-    /**
-     * Add comentario
-     *
-     * @param \AppBundle\Entity\Comentario $comentario
-     *
-     * @return Texto
-     */
-    public function addComentario(\AppBundle\Entity\Comentario $comentario)
-    {
-        $this->comentarios[] = $comentario;
-
-        return $this;
-    }
-
-    /**
-     * Remove comentario
-     *
-     * @param \AppBundle\Entity\Comentario $comentario
-     */
-    public function removeComentario(\AppBundle\Entity\Comentario $comentario)
-    {
-        $this->comentarios->removeElement($comentario);
-    }
-
-    /**
-     * Get comentarios
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComentarios()
-    {
-        return $this->comentarios;
-    }
-
-    /**
-     * Add pagPrincipale
-     *
-     * @param \Trascastro\UserBundle\Entity\User $pagPrincipale
-     *
-     * @return Texto
-     */
-    public function addPagPrincipale(\Trascastro\UserBundle\Entity\User $pagPrincipale)
-    {
-        $this->pagPrincipales[] = $pagPrincipale;
-
-        return $this;
-    }
-
-    /**
-     * Remove pagPrincipale
-     *
-     * @param \Trascastro\UserBundle\Entity\User $pagPrincipale
-     */
-    public function removePagPrincipale(\Trascastro\UserBundle\Entity\User $pagPrincipale)
-    {
-        $this->pagPrincipales->removeElement($pagPrincipale);
-    }
-
-    /**
-     * Get pagPrincipales
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPagPrincipales()
-    {
-        return $this->pagPrincipales;
-    }
 }

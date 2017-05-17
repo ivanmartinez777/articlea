@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Form\TextoType;
+use AppBundle\Entity\Tag;
 
 
 
@@ -84,7 +85,7 @@ class TextoController extends Controller
 
 
     /**
-     * @Route("/textoPor{categoria}", name="app_textoCategoria_show")
+     * @Route("/textoPorCategoria/{categoria}", name="app_textoCategoria_show")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
      */
@@ -105,6 +106,33 @@ class TextoController extends Controller
     }
 
     /**
+     * @Route("/textoPorTag/{tag}", name="app_textoTag_show")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function textoTagAction($tag, Request $request)
+    {
+
+        $m = $this->getDoctrine()->getManager();
+        $query = $m->createQuery("SELECT te 
+                                  from AppBundle:Texto te 
+                                  JOIN te.tags ta
+                                   WHERE ta.nombre= :price")->setParameter('price', $tag );;
+
+        $textos = $query->getResult();
+        return $this->render(':texto:textosPorCategoria.html.twig',
+            [
+                'textos' => $textos,
+
+            ]
+        );
+
+    }
+
+
+
+    /**
      * @Route("/create", name="app_texto_create")
      *@return \Symfony\Component\HttpFoundation\Response
      *  @Security("has_role('ROLE_USER')")
@@ -114,6 +142,15 @@ class TextoController extends Controller
     {
 
         $texto = new Texto();
+        //Dentro del texto, creamos los tags y ese texto después será pasado a form
+        $tag1 = new Tag();
+        $tag1->setNombre('tag1');
+        $texto->addTag($tag1);
+        $tag2 = new Tag();
+        $tag2->setNombre('tag2');
+        $texto->addTag($tag2);
+
+
         $form = $this->createForm(TextoType::class, $texto);
 
         return $this->render(':texto:form.html.twig',
@@ -133,17 +170,26 @@ class TextoController extends Controller
     {
         if ($this->isGranted('ROLE_USER')) {
             $texto = new Texto();
+            $tag1 = new Tag();
+            $tag1->setNombre('tag');
+            $texto->addTag($tag1);
+            $tag2 = new Tag();
+            $tag2->setNombre('tag2');
+            $texto->addTag($tag2);
             $form = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $user = $this->getUser();
-                $user->setNumTextos();
                 $texto->setAuthor($user);
                 $texto->setCategoria($user->getCategoria());
                 $m = $this->getDoctrine()->getManager();
+
                 $m->persist($texto);
                 $m->flush();
                 $this->enviarSuscriptor();
+
+
+
                 return $this->redirectToRoute('app_texto_index');
             }
             $this->addFlash('messages', 'Review your form data');

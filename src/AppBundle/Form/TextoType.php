@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 
@@ -19,10 +19,11 @@ class TextoType extends AbstractType
         $builder
             ->add('titulo', TextType::class)
             ->add('cuerpo', TextType::class)
-
-        ;
-
+            ->add('tags', CollectionType::class, array(
+                'entry_type' => TagType::class
+            ));
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {

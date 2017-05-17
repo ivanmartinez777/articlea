@@ -4,8 +4,8 @@
 <div>
     Creado por: <a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{ texto.author }}</a>
     {% if app.user %}
-    {% if app.user == texto.author %}
-    {% elseif  texto.author in app.user.getSuscripciones() %}
+      {% if app.user == texto.author %}
+      {% elseif  texto.author in app.user.getSuscripciones() %}
 
     <a href="{{ path('app_usuario_suscripcion', {'usuario': texto.author}) }}"><button>Eliminar suscripcion</button></a><br>
     {% else %}
@@ -16,7 +16,13 @@
     {% if texto.createdAt != texto.updatedAt %}
         Editado: {{ texto.updatedAt | date("d/m/Y H:i:s") }}<br>
     {% endif %}
+    {% for tag in texto.tags %}
+        {% if tag.getNombre()=="" %}
+        {% else %}
+            <a href="{{ path('app_textoTag_show', {'tag': tag.nombre()}) }}">{{ tag.getNombre() }}</a>
 
+        {% endif %}
+    {% endfor %}
 <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
     {{ texto.cuerpo }}
 

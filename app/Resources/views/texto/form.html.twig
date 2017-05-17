@@ -9,6 +9,14 @@
             <div>{{ form_errors(form.titulo) }}{{ form_label(form.titulo) }}: {{ form_widget(form.titulo) }}</div>
             <div>{{ form_errors(form.cuerpo) }}{{ form_label(form.cuerpo) }}: {{ form_widget(form.cuerpo)}}</div>
 
+            <h3>Tags</h3>
+            <ul class="tags">
+                {# iterate over each existing tag and render its only field: name #}
+                {% for tag in form.tags %}
+                    <li>{{ form_row(tag.nombre) }}</li>
+                {% endfor %}
+            </ul>
+
             {{ form_rest(form) }} <!-- prints hidden fields and others -->
             <div><input type="submit" value="Ok"></div>
         </form>
