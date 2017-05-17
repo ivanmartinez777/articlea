@@ -114,13 +114,8 @@ class TextoController extends Controller
     public function textoTagAction($tag, Request $request)
     {
 
-        $m = $this->getDoctrine()->getManager();
-        $query = $m->createQuery("SELECT te 
-                                  from AppBundle:Texto te 
-                                  JOIN te.tags ta
-                                   WHERE ta.nombre= :price")->setParameter('price', $tag );;
-
-        $textos = $query->getResult();
+        $em = $this->getDoctrine()->getManager();
+        $textos =$em->getRepository('AppBundle:Texto')->buscarPorTag($tag);
         return $this->render(':texto:textosPorCategoria.html.twig',
             [
                 'textos' => $textos,

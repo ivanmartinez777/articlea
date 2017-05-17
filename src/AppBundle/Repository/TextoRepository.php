@@ -10,6 +10,16 @@ namespace AppBundle\Repository;
  */
 class TextoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function buscarPorTag($tag)
+    {
+        return $this->getEntityManager()
 
+        ->createQuery("SELECT te 
+                                  from AppBundle:Texto te 
+                                  JOIN te.tags ta
+                                   WHERE ta.nombre= :price")->setParameter('price', $tag )
+
+        ->getResult();
+    }
 
 }
