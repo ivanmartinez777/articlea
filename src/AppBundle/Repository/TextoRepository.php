@@ -17,9 +17,20 @@ class TextoRepository extends \Doctrine\ORM\EntityRepository
         ->createQuery("SELECT te 
                                   from AppBundle:Texto te 
                                   JOIN te.tags ta
-                                   WHERE ta.nombre= :price")->setParameter('price', $tag )
+                                   WHERE ta.nombre LIKE :tag")->setParameter('tag', '%'.$tag.'%' )
 
         ->getResult();
+    }
+
+    public function buscarPorTitulo($palabra)
+    {
+        return $this->getEntityManager()
+
+            ->createQuery("SELECT te 
+                                  from AppBundle:Texto te 
+                                   WHERE te.titulo LIKE :palabra")->setParameter('palabra', '%'.$palabra.'%' )
+
+            ->getResult();
     }
 
 }

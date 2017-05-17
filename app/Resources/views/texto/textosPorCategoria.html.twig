@@ -5,10 +5,6 @@
     {% block body %}
         <a href="{{ path('app_texto_index') }}">Volver</a> <br>
 
-
-
-
-
         {% for texto in textos %}
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}<a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
         {% endfor %}

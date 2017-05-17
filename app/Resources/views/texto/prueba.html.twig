@@ -7,10 +7,7 @@
         <a href="{{ path('fos_user_profile_edit') }}">Actualizar perfil</a> <br>
 
         {% for texto in textos %}
-            <p>{{ texto.id }}</p>
-            <p>{{ texto.cuerpo }}</p><br>
-
-
+            {{ include('texto/texto.html.twig', { 'texto': texto }) }}
         {% endfor %}
 
 

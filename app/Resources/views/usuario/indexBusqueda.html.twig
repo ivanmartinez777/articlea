@@ -1,0 +1,22 @@
+
+{% extends '::base.html.twig' %}
+
+
+    {% block body %}
+        <a href="{{ path('app_texto_index')}}">Volver</a> <br>
+
+        {% for usuario in usuarios %}
+           <h4>{{ usuario.id }}.{{ usuario.username }}</h4>
+            <a href="{{ path('app_textoCategoria_show', {'categoria': usuario.categoria}) }}">{{ usuario.categoria }}</a>
+            {% if app.user %}
+                {% if app.user == usuario.username %}
+                {% elseif  usuario.username in app.user.getSuscripciones() %}
+
+                    <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario.id}) }}"><button>Eliminar suscripcion</button></a><br>
+                {% else %}
+                    <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario.id}) }}"><button>Suscribirse</button></a><br>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+    {% endblock %}

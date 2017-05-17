@@ -26,4 +26,15 @@ class UserRepository extends EntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function buscarPorNombre($nombre)
+    {
+        return $this->getEntityManager()
+
+            ->createQuery("SELECT us 
+                                  from UserBundle:User us
+                                   WHERE us.username LIKE :nombre")->setParameter('nombre', '%'.$nombre.'%' )
+
+            ->getResult();
+    }
 }

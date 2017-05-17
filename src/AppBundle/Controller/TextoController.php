@@ -2,10 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\AppBundle;
+
 use AppBundle\Entity\Texto;
-use Trascastro\UserBundle\Entity\User;
-use AppBundle\Form\ImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -125,6 +123,26 @@ class TextoController extends Controller
 
     }
 
+    /**
+     * @Route("/textoPorTitulo/{palabra}", name="app_textoTitulo_show")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function textoPalabraAction($palabra, Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $textos =$em->getRepository('AppBundle:Texto')->buscarPorTitulo($palabra);
+        return $this->render(':texto:textosPorCategoria.html.twig',
+            [
+                'textos' => $textos,
+
+            ]
+        );
+
+    }
+
 
 
     /**
@@ -138,12 +156,17 @@ class TextoController extends Controller
 
         $texto = new Texto();
         //Dentro del texto, creamos los tags y ese texto después será pasado a form
+
         $tag1 = new Tag();
-        $tag1->setNombre('tag1');
-        $texto->addTag($tag1);
         $tag2 = new Tag();
-        $tag2->setNombre('tag2');
+        $tag3 = new Tag();
+        $tag4 = new Tag();
+        $tag5 = new Tag();
+        $texto->addTag($tag1);
         $texto->addTag($tag2);
+        $texto->addTag($tag3);
+        $texto->addTag($tag4);
+        $texto->addTag($tag5);
 
 
         $form = $this->createForm(TextoType::class, $texto);
@@ -166,11 +189,15 @@ class TextoController extends Controller
         if ($this->isGranted('ROLE_USER')) {
             $texto = new Texto();
             $tag1 = new Tag();
-            $tag1->setNombre('tag');
-            $texto->addTag($tag1);
             $tag2 = new Tag();
-            $tag2->setNombre('tag2');
+            $tag3 = new Tag();
+            $tag4 = new Tag();
+            $tag5 = new Tag();
+            $texto->addTag($tag1);
             $texto->addTag($tag2);
+            $texto->addTag($tag3);
+            $texto->addTag($tag4);
+            $texto->addTag($tag5);
             $form = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -320,6 +347,27 @@ class TextoController extends Controller
         $m->flush();
 
         return $this->redirectToRoute('app_texto_index');
+    }
+
+    /**
+     * @Route("/buscar", name="app_texto_buscar")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function buscarAction(Request $request)
+    {
+            $busqueda = $_POST['busqueda'];
+            $tipo = $_POST['tipo'];
+        switch ($tipo) {
+            case "texto":
+                return $this->redirectToRoute('app_textoTitulo_show', ['palabra' => $busqueda]);
+            case "usuario":
+                return $this->forward('AppBundle:Usuario:usuariosUsername', ['palabra'=>$busqueda]);
+            case "tag":
+                return $this->redirectToRoute('app_textoTag_show', ['tag' => $busqueda]);
+        }
+
+
+
     }
 
 

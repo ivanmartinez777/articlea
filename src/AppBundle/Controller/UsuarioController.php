@@ -117,6 +117,26 @@ class UsuarioController extends Controller
         return $this->redirectToRoute('app_usuarios_index');
     }
 
+    /**
+     * @Route("/usuarioPorUsername/{palabra}", name="app_usuariosUsername_show")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function usuariosUsernameAction($palabra, Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $usuarios =$em->getRepository('UserBundle:User')->buscarPorNombre($palabra);
+        return $this->render(':usuario:indexBusqueda.html.twig',
+            [
+                'usuarios' => $usuarios,
+
+            ]
+        );
+
+    }
+
 
 
 }

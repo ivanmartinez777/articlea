@@ -3,7 +3,16 @@
     {% block tittle %}Textos{% endblock %}
 
 
+
+
     {% block body %}
+        <form action="{{ path('app_texto_buscar') }}" method="post">
+            Name: <input type="text" name="busqueda"><br>
+            <input type="radio" name="tipo" value="texto">Texto
+            <input type="radio" name="tipo" value="usuario">Usuarios
+            <input type="radio" name="tipo" value="tag" checked> Tag
+            <input type="submit">
+        </form>
         <a href="{{ path('app_texto_prueba') }}">Pagina principal del usuario</a><br>
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('app_categoria_index') }}">Categorias</a> <br>
