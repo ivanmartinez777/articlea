@@ -130,23 +130,6 @@ class User extends BaseUser
 
 
 
-    //Numero de textos
-
-    /**
-     * @ORM\Column(name="numTextos", type="integer")
-     */
-    private $numTextos;
-
-    public function setNumTextos()
-    {
-        $this->numTextos++;
-    }
-
-    public function getNumTextos()
-    {
-        return $this->numTextos;
-    }
-
     // Suscriptores
 
 
@@ -332,7 +315,6 @@ class User extends BaseUser
 
         $this->createdAt    = new \DateTime();
         $this->updatedAt    = $this->createdAt;
-        $this->numTextos    = 0;
         $this->suscriptores = new ArrayCollection();
         $this->suscripciones = new ArrayCollection();
         $this->textosPagPrincipal = new ArrayCollection();

@@ -98,7 +98,7 @@ class ComentarioController extends Controller
         $comentario = $repository->find($id);
         $user = $this->getUser();
         $comentarioUser= $comentario->getAuthor();
-        if($user->getId() === $comentarioUser->getId() or ($user->getUsername() === "admin")){
+        if($user->getId() === $comentarioUser->getId() or ($user->getRoles() === "ROLE_ADMIN")){
             $form = $this->createForm(ComentarioType::class, $comentario);
 
             return $this->render(':comentario:form.html.twig',
@@ -124,7 +124,7 @@ class ComentarioController extends Controller
         $comentario = $repository->find($id);
         $user = $this->getUser();
         $comentarioUser= $comentario->getAuthor();
-        if($user->getId() === $comentarioUser->getId() or ($user->getUsername() === "admin")){
+        if($user->getId() === $comentarioUser->getId() or ($user->getRoles() === "ROLE_ADMIN")){
             $form       = $this->createForm(ComentarioType::class, $comentario);
 
             $form->handleRequest($request);

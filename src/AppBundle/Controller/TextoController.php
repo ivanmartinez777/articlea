@@ -36,6 +36,7 @@ class TextoController extends Controller
     /**
      * @Route("/soloTexto/{id}", name="app_texto_individual")
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
      */
     public function individualAction($id)
     {
@@ -43,6 +44,8 @@ class TextoController extends Controller
         $repo = $m->getRepository('AppBundle:Texto');
 
         $texto = $repo->find($id);
+       $texto->setNumVisitas();
+        $m->flush($texto);
         return $this->render(':texto:textoInd.html.twig',
             [
                 'texto' => $texto,
@@ -283,7 +286,7 @@ class TextoController extends Controller
         $texto = $repository->find($id);
         $user = $this->getUser();
         $textoUser= $texto->getAuthor();
-        if($user->getId() === $textoUser->getId() or ($user->getUsername() === "admin")){
+        if($user->getId() === $textoUser->getId() or ($user->getRoles() === "ROLE_ADMIN")){
             $form = $this->createForm(TextoType::class, $texto);
 
             return $this->render(':texto:form.html.twig',
@@ -309,7 +312,7 @@ class TextoController extends Controller
         $texto = $repository->find($id);
         $user = $this->getUser();
         $textoUser= $texto->getAuthor();
-        if($user->getId() === $textoUser->getId() or ($user->getUsername() === "admin")){
+        if($user->getId() === $textoUser->getId() or ($user->hasRole("ROLE_ADMIN"))){
             $form       = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {

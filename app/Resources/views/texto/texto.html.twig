@@ -24,7 +24,8 @@
         {% endif %}
     {% endfor %}
 <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
-    {{ texto.cuerpo }}
+    {{ texto.cuerpo }}<br>
+    {{ texto.numVisitas }}
 
 </div>
 

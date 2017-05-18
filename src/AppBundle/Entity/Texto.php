@@ -336,7 +336,22 @@ class Texto
     }
 
 
+    //Numero de visitas
 
+    /**
+     * @ORM\Column(name="numVisitas", type="integer")
+     */
+    private $numVisitas;
+
+    public function setNumVisitas()
+    {
+        $this->numVisitas = $this->getNumVisitas()+1;
+    }
+
+    public function getNumVisitas()
+    {
+        return $this->numVisitas;
+    }
 
     public function __construct()
     {
@@ -344,7 +359,9 @@ class Texto
         $this->updatedAt = $this->createdAt;
         $this->pagPrincipales = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->numVisitas = 0;
 
     }
+
 
 }
