@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 
 
@@ -21,7 +23,14 @@ class TextoType extends AbstractType
             ->add('cuerpo', TextType::class)
             ->add('tags', CollectionType::class, array(
                 'entry_type' => TagType::class
-            ));
+            ))
+            ->add('imageFile', VichImageType::class,[
+                'required'=> false,
+                'allow_delete'=>true,
+                'download_link'=>false,
+            ])
+        ;
+
     }
 
 

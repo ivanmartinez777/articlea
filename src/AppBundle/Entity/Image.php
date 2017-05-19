@@ -24,7 +24,7 @@ class Image
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="image_upload", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="images_upload", fileNameProperty="imageName")
      *
      * @var File
      */
@@ -53,7 +53,7 @@ class Image
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
-     * @return Product
+     *
      */
     public function setImageFile(File $image = null)
     {
@@ -65,7 +65,7 @@ class Image
             $this->updatedAt = new \DateTime('now');
         }
 
-        return $this;
+
     }
 
     /**
@@ -79,13 +79,13 @@ class Image
     /**
      * @param string $imageName
      *
-     * @return Product
+     *
      */
     public function setImageName($imageName)
     {
         $this->imageName = $imageName;
 
-        return $this;
+
     }
 
     /**

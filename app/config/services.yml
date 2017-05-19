@@ -13,3 +13,8 @@ services:
             class: Trascastro\UserBundle\Form\UserProfileType
             tags:
                  - { name: form.type, alias: user_bundle_user_profile_type }
+
+    app.form.texto:
+                class: AppBundle\Form\TextoType
+                tags:
+                     - { name: form.type, alias: app_bundle_text_type }

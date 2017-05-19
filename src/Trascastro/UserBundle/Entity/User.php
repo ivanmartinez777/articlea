@@ -16,12 +16,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Texto;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 
 /**
  * @ORM\Table(name="app_user")
  * @ORM\Entity(repositoryClass="Trascastro\UserBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
@@ -308,6 +312,75 @@ class User extends BaseUser
     }
 
 
+    /**
+     * @ORM\Column(name="textosLeidos", type="simple_array")
+     */
+    private $textosLeidos;
+
+
+    /**
+     * @param Texto $texto
+     */
+    public function setTextosLeidos($texto)
+    {
+
+        if(!in_array($texto,$this->textosLeidos))
+        {
+            array_push($this->textosLeidos,$texto->getId());
+        }
+
+    }
+
+    /**
+     *
+     */
+    public function getTextosLeidos()
+    {
+        return $this->textosLeidos;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="images_upload", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
+
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+
 
     public function __construct()
     {
@@ -318,6 +391,7 @@ class User extends BaseUser
         $this->suscriptores = new ArrayCollection();
         $this->suscripciones = new ArrayCollection();
         $this->textosPagPrincipal = new ArrayCollection();
+        $this->textosLeidos = array();
     }
 
 

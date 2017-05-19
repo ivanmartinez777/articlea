@@ -10,8 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Form\TextoType;
 use AppBundle\Entity\Tag;
-
-
+use AppBundle\Entity\Image;
+use AppBundle\Form\ImageType;
+use Uploadable\Fixture\Entity\File;
 
 
 class TextoController extends Controller
@@ -44,6 +45,12 @@ class TextoController extends Controller
         $repo = $m->getRepository('AppBundle:Texto');
 
         $texto = $repo->find($id);
+        if ($this->isGranted('ROLE_USER'))
+        {
+            $user = $this->getUser();
+            $user->setTextosLeidos($texto);
+            $m->flush($user);
+        }
        $texto->setNumVisitas();
         $m->flush($texto);
         return $this->render(':texto:textoInd.html.twig',
@@ -172,6 +179,7 @@ class TextoController extends Controller
         $texto->addTag($tag5);
 
 
+
         $form = $this->createForm(TextoType::class, $texto);
 
         return $this->render(':texto:form.html.twig',
@@ -201,6 +209,7 @@ class TextoController extends Controller
             $texto->addTag($tag3);
             $texto->addTag($tag4);
             $texto->addTag($tag5);
+
             $form = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -373,6 +382,29 @@ class TextoController extends Controller
 
     }
 
+    /**
+     * @Route("/upload", name="app_index_upload")
+     */
+    public function uploadAction(Request $request)
+    {
+        $p = new Image();
+        $form = $this->createForm(ImageType::class, $p);
 
+        if ($request->getMethod() == Request::METHOD_POST) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $m = $this->getDoctrine()->getManager();
+                $m->persist($p);
+                $m->flush();
+
+                return $this->redirectToRoute('app_index_index');
+            }
+        }
+
+        return $this->render(':index:upload.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
 }

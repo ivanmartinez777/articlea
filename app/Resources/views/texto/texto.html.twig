@@ -25,7 +25,9 @@
     {% endfor %}
 <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
     {{ texto.cuerpo }}<br>
-    {{ texto.numVisitas }}
+    {{ texto.numVisitas }}<br>
+    <img src="{{ asset("images/upload/" ~texto.image) }}">
+    <a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
 
 </div>
 

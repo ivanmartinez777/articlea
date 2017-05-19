@@ -13,6 +13,8 @@ imports:
 parameters:
     locale: en
 
+    app.path.images_upload: /images/upload
+
 framework:
     esi: { enabled: true }
     fragments: { path: /_fragment }
@@ -70,3 +72,16 @@ fos_user:
     profile:
                 form:
                     type: Trascastro\UserBundle\Form\UserProfileType
+
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        images_upload:
+            uri_prefix:         /images/upload
+            upload_destination: %kernel.root_dir%/../web/images/upload
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+

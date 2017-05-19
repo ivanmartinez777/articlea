@@ -4,8 +4,8 @@ namespace Trascastro\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserProfileType extends AbstractType
 {
@@ -16,7 +16,15 @@ class UserProfileType extends AbstractType
                 'class' => 'AppBundle:Categoria',
                 'choice_label' => 'nombre',
 
-            ));
+            ))
+            ->add('imageFile', VichImageType::class,[
+                'required'=> false,
+                'allow_delete'=>true,
+                'download_link'=>false,
+            ])
+
+        ;
+
     }
 
     public function getParent()
