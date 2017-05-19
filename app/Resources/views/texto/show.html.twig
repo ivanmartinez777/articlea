@@ -5,9 +5,13 @@
     {% block body %}
         Usuario:{{ user.username }}<br>
         Email:{{  user.email }}<br>
-        Nº de textos escritos: {{ user.numTextos }}<br>
+
 
         <a href="{{ path('app_texto_index') }}">Volver</a> <br>
+        <p>"{{ user.descripcion  }}"</p>
+        <img src="{{ asset("images/upload/" ~user.image) }}" class="img-responsive, img-circle" width="304" height="236" >
+
+
 
         {% for texto in textos %}
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}<a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>

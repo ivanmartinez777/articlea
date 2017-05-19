@@ -4,6 +4,11 @@
 
     {% block body %}
         <a href="{{ path('app_texto_index')}}">Volver</a> <br>
+    <form action="{{ path('app_usuario_buscarUsuario') }}" method="post">
+        Nombre: <input type="text" name="busquedaUsuario">
+        <input type="submit">
+    </form>
+
 
         {% for usuario in usuarios %}
             {% if usuario.image == null %}
