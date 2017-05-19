@@ -313,33 +313,6 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\Column(name="textosLeidos", type="simple_array")
-     */
-    private $textosLeidos;
-
-
-    /**
-     * @param Texto $texto
-     */
-    public function setTextosLeidos($texto)
-    {
-
-        if(!in_array($texto,$this->textosLeidos))
-        {
-            array_push($this->textosLeidos,$texto->getId());
-        }
-
-    }
-
-    /**
-     *
-     */
-    public function getTextosLeidos()
-    {
-        return $this->textosLeidos;
-    }
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @var string
      */
@@ -408,7 +381,7 @@ class User extends BaseUser
         $this->suscriptores = new ArrayCollection();
         $this->suscripciones = new ArrayCollection();
         $this->textosPagPrincipal = new ArrayCollection();
-        $this->textosLeidos = array();
+
     }
 
 

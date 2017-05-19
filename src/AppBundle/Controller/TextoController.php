@@ -48,11 +48,10 @@ class TextoController extends Controller
         if ($this->isGranted('ROLE_USER'))
         {
             $user = $this->getUser();
-            $user->setTextosLeidos($texto);
-            $m->flush($user);
+
         }
        $texto->setNumVisitas();
-        $m->flush($texto);
+        $m->flush();
         return $this->render(':texto:textoInd.html.twig',
             [
                 'texto' => $texto,
@@ -177,9 +176,6 @@ class TextoController extends Controller
         $texto->addTag($tag3);
         $texto->addTag($tag4);
         $texto->addTag($tag5);
-
-
-
         $form = $this->createForm(TextoType::class, $texto);
 
         return $this->render(':texto:form.html.twig',

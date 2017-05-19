@@ -7,13 +7,10 @@
         <a href="{{ path('fos_user_profile_edit') }}">Actualizar perfil</a> <br>
 
         {% for texto in textos %}
-            {% if texto.id not in app.user().getTextosLeidos() %}
-                <div>NUEVO</div>
-            {% endif %}
+
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}
             <a href="{{ path('app_texto_eliminar_texto',{'texto': texto.id}) }}">Quitar de pagina principal</a> <br>
         {% endfor %}
-
 
     {% endblock %}
 
