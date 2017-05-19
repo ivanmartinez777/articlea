@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Texto;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +21,7 @@ class TextoType extends AbstractType
     {
         $builder
             ->add('titulo', TextType::class)
-            ->add('cuerpo', TextType::class)
+            ->add('cuerpo', TextareaType::class)
             ->add('tags', CollectionType::class, array(
                 'entry_type' => TagType::class
             ))

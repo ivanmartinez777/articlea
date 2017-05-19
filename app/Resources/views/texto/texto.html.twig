@@ -26,7 +26,11 @@
 <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
     {{ texto.cuerpo }}<br>
     {{ texto.numVisitas }}<br>
-    <img src="{{ asset("images/upload/" ~texto.image) }}">
+    {% if texto.image == null %}
+    <img src="{{ asset("images/texto.jpg") }}" class="img-responsive" width="304" height="236">
+    {% else %}
+    <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" width="304" height="236">
+    {% endif %}
     <a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
 
 </div>

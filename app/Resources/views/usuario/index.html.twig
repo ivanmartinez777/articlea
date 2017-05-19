@@ -6,7 +6,11 @@
         <a href="{{ path('app_texto_index')}}">Volver</a> <br>
 
         {% for usuario in usuarios %}
-           <img src="{{ asset("images/upload/" ~usuario.image) }}">
+            {% if usuario.image == null %}
+            <img src="{{ asset("images/profile.jpg") }}" class="img-responsive" width="304" height="236">
+            {% else %}
+           <img src="{{ asset("images/upload/" ~usuario.image) }}" class="img-responsive" width="304" height="236" >
+                {% endif %}
            <h4>{{ usuario.id }}.{{ usuario.username }}</h4>
             {% if usuario.hasRole('ROLE_ADMIN') %}
                 <p>Administrador</p>

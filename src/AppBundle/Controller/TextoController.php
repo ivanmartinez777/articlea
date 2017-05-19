@@ -283,6 +283,27 @@ class TextoController extends Controller
     }
 
     /**
+     * @Route("/pruebaEliminar/{texto}", name="app_texto_eliminar_texto")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function eliminarTextoPaginaPrincipal($texto, Request $request)
+    {
+        $user = $this->getUser();
+        $m = $this->getDoctrine()->getManager();
+        $repositorio = $m->getRepository('AppBundle:Texto');
+        $textoEliminar = $repositorio->findOneBy(array('id'=>$texto));
+        $user->removeTextosPagPrincipal($textoEliminar);
+        $m->flush();
+
+        return $this->redirectToRoute('app_texto_prueba');
+
+
+    }
+
+
+
+    /**
      * @Route("/update/{id}", name="app_texto_update")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
