@@ -372,6 +372,41 @@ class User extends BaseUser
         return $this->descripcion;
     }
 
+    //Visualizaciones
+
+
+    /**
+     * @var ArrayCollection $textosLeidos
+     *
+    *  @ORM\ManyToMany(targetEntity="AppBundle\Entity\Texto")
+     * @ORM\JoinTable(name="users_textosLeidos",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="texto_id", referencedColumnName="id")}
+     *      )
+     */
+    private $textosLeidos;
+
+    /**
+     * @param Texto $texto
+     */
+    public function addTextoLeido(Texto $texto)
+    {
+        if (!$this->textosLeidos->contains($texto)) {
+            $this->textosLeidos->add($texto);
+
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getTextosLeidos()
+    {
+        return $this->textosLeidos->toArray();
+    }
+
+
+
     public function __construct()
     {
         parent::__construct();
@@ -381,6 +416,7 @@ class User extends BaseUser
         $this->suscriptores = new ArrayCollection();
         $this->suscripciones = new ArrayCollection();
         $this->textosPagPrincipal = new ArrayCollection();
+        $this->textosLeidos = new ArrayCollection();
 
     }
 

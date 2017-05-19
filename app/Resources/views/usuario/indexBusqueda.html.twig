@@ -12,9 +12,9 @@
                 {% if app.user == usuario.username %}
                 {% elseif  usuario.username in app.user.getSuscripciones() %}
 
-                    <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario.id}) }}"><button>Eliminar suscripcion</button></a><br>
+                    <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario.username}) }}"><button>Eliminar suscripcion</button></a><br>
                 {% else %}
-                    <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario.id}) }}"><button>Suscribirse</button></a><br>
+                    <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario.username}) }}"><button>Suscribirse</button></a><br>
                 {% endif %}
             {% endif %}
         {% endfor %}

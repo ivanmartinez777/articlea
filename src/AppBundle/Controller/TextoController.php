@@ -51,6 +51,10 @@ class TextoController extends Controller
 
         }
        $texto->setNumVisitas();
+        $user= $this->getUser();
+        $user->addTextoLeido($texto);
+        $m->persist($texto);
+        $m->persist($user);
         $m->flush();
         return $this->render(':texto:textoInd.html.twig',
             [
@@ -213,7 +217,6 @@ class TextoController extends Controller
                 $texto->setAuthor($user);
                 $texto->setCategoria($user->getCategoria());
                 $m = $this->getDoctrine()->getManager();
-
                 $m->persist($texto);
                 $m->flush();
                 $this->enviarSuscriptor();

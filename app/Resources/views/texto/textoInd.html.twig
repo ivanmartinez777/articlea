@@ -13,10 +13,14 @@
             <a href="{{ path('app_texto_remove', {'id': texto.id}) }}">remove</a> <br>
             <a href="{{ path('app_texto_update', {'id': texto.id}) }}">Editar texto</a> <br>
         {% endif %}
+        {% if (app.user == texto.author) or (app.user.hasRole('ROLE_ADMIN')) %}
+            <a href="{{ path('app_texto_remove', {'id': texto.id}) }}">remove</a> <br>
+            <a href="{{ path('app_texto_update', {'id': texto.id}) }}">Editar texto</a> <br>
+        {% endif %}
         {% if app.user  %}
-        <h3>Comentarios</h3>
-        {{ render(controller('AppBundle:Comentario:index', {'id': texto.id})) }}
-        {{ render(controller('AppBundle:Comentario:create', {'id': texto.id})) }}
+            <h3>Comentarios</h3>
+            {{ render(controller('AppBundle:Comentario:index', {'id': texto.id})) }}
+            {{ render(controller('AppBundle:Comentario:create', {'id': texto.id})) }}
         {% endif %}
 
     {% endblock %}
