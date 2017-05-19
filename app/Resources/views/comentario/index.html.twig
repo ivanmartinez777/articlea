@@ -14,7 +14,7 @@
             {% if comentario.createdAt != comentario.updatedAt %}
                 Editado: {{ comentario.updatedAt | date("d/m/Y H:i:s") }}<br>
             {% endif %}
-            {% if (app.user == texto.author) or (app.user.hasRole('ROLE_ADMIN')) %}
+            {% if (app.user == comentario.texto.author) or (app.user.hasRole('ROLE_ADMIN')) %}
                 <a href="{{ path('app_comentario_remove', {'id': comentario.id})}}">remove</a> <br>
                 <a href="{{ path('app_comentario_update', {'id': comentario.id}) }}">Editar comentario</a> <br>
             {% endif %}

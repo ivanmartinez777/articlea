@@ -313,13 +313,13 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="images_upload", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="images_upload", fileNameProperty="image" ,nullable=true)
      * @var File
      */
     private $imageFile;
@@ -356,7 +356,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=255)
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=true)
      */
     private $descripcion;
 

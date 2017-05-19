@@ -20,7 +20,7 @@ class ComentarioController extends Controller
     {
         $m = $this->getDoctrine()->getManager();
         $repo = $m->getRepository('AppBundle:Comentario');
-        $comentarios = $repo->findByTexto($id);
+        $comentarios = $repo->findBy(array('texto'=>$id));
         return $this->render(':comentario:index.html.twig',
             [
                 'comentarios' => $comentarios,
