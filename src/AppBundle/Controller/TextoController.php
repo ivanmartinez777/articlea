@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\RevistaTexto;
 use AppBundle\Entity\Texto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,9 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Form\TextoType;
 use AppBundle\Entity\Tag;
-use AppBundle\Entity\Image;
-use AppBundle\Form\ImageType;
-use Uploadable\Fixture\Entity\File;
+
 
 
 class TextoController extends Controller
@@ -23,8 +22,8 @@ class TextoController extends Controller
     */
     public function indexAction()
     {
-        $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Texto');
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Texto');
 
         $textos = $repo->findBy(array(), array('id' => 'DESC'));
         return $this->render(':texto:index.html.twig',
@@ -41,21 +40,29 @@ class TextoController extends Controller
      */
     public function individualAction($id)
     {
-        $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Texto');
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Texto');
 
         $texto = $repo->find($id);
         if ($this->isGranted('ROLE_USER'))
         {
             $user = $this->getUser();
+            $revista = $user->getRevista();
+            $repositoryRevista = $em->getRepository('AppBundle:RevistaTexto');
+            $textoRevistas = $repositoryRevista->buscarPorRevistaTexto($revista,$texto);
+            if($textoRevistas != null)
+            {
+                foreach ($textoRevistas as $textoRevista)
+                {
+                $textoRevista->setVisto(true);
+                $em->persist($textoRevista);
+             }
+            }
 
         }
-       $texto->setNumVisitas();
-        $user= $this->getUser();
-        $user->addTextoLeido($texto);
-        $m->persist($texto);
-        $m->persist($user);
-        $m->flush();
+        $texto->setNumVisitas();
+        $em->persist($texto);
+        $em->flush();
         return $this->render(':texto:textoInd.html.twig',
             [
                 'texto' => $texto,
@@ -72,9 +79,9 @@ class TextoController extends Controller
      */
     public function showAction($author, Request $request)
     {
-        $m = $this->getDoctrine()->getManager();
-        $repo2 = $m->getRepository('UserBundle:User');
-        $repo = $m->getRepository('AppBundle:Texto');
+        $em = $this->getDoctrine()->getManager();
+        $repo2 = $em->getRepository('UserBundle:User');
+        $repo = $em->getRepository('AppBundle:Texto');
 
         $user = $repo2->myFindOneByUsernameOrEmail($author);
         //como la variable "author" me viene como username y no como id
@@ -103,8 +110,8 @@ class TextoController extends Controller
 
     public function textoCategoriaAction($categoria, Request $request)
     {
-        $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Texto');
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Texto');
         $textos = $repo->findBy(['categoria' => $categoria]);
 
         return $this->render(':texto:textosPorCategoria.html.twig',
@@ -181,7 +188,6 @@ class TextoController extends Controller
         $texto->addTag($tag4);
         $texto->addTag($tag5);
         $form = $this->createForm(TextoType::class, $texto);
-
         return $this->render(':texto:form.html.twig',
             [
                 'form'      => $form->createView(),
@@ -209,19 +215,16 @@ class TextoController extends Controller
             $texto->addTag($tag3);
             $texto->addTag($tag4);
             $texto->addTag($tag5);
-
             $form = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $user = $this->getUser();
                 $texto->setAuthor($user);
                 $texto->setCategoria($user->getCategoria());
-                $m = $this->getDoctrine()->getManager();
-                $m->persist($texto);
-                $m->flush();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($texto);
+                $em->flush();
                 $this->enviarSuscriptor();
-
-
 
                 return $this->redirectToRoute('app_texto_index');
             }
@@ -237,85 +240,18 @@ class TextoController extends Controller
     }
 
     /**
-     * @Route("/prueba", name="app_texto_prueba")
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
-
-    public function enviarSuscriptor()
-    {
-        $user = $this->getUser();
-        $m = $this->getDoctrine()->getManager();
-        $repositorio= $m->getRepository('AppBundle:Texto');
-        $texto = $repositorio->findOneBy(array('author'=> $user),
-            array('id'=> 'DESC'));
-        $repo = $m->getRepository('UserBundle:User');
-        $usuarios = $repo->findBy(array('id'=>$user->getSuscriptores()));
-        foreach ($usuarios as $usuario)
-            $usuario->addTextoPag($texto);
-        $m->flush();
-
-        return $this->addFlash('messages', 'Review your form data');
-
-    }
-
-
-    /**
-     * @Route("/prueba", name="app_texto_prueba")
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function paginaPrincipal()
-    {
-        $user = $this->getUser();
-        $m = $this->getDoctrine()->getManager();
-        $repositorio = $m->getRepository('AppBundle:Texto');
-        $textos = $repositorio->findBy(array('id'=>$user->getTextosPag()),
-                                        array('id'=> 'DESC'));
-        return $this->render('texto/prueba.html.twig',
-            [
-                'textos' => $textos,
-                'usuario'=> $user->getUsername(),
-            ]
-        );
-
-    }
-
-    /**
-     * @Route("/pruebaEliminar/{texto}", name="app_texto_eliminar_texto")
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function eliminarTextoPaginaPrincipal($texto, Request $request)
-    {
-        $user = $this->getUser();
-        $m = $this->getDoctrine()->getManager();
-        $repositorio = $m->getRepository('AppBundle:Texto');
-        $textoEliminar = $repositorio->findOneBy(array('id'=>$texto));
-        $user->removeTextosPagPrincipal($textoEliminar);
-        $m->flush();
-
-        return $this->redirectToRoute('app_texto_prueba');
-
-
-    }
-
-
-
-    /**
      * @Route("/update/{id}", name="app_texto_update")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
      */
     public function updateAction($id)
     {
-
-        $m = $this->getDoctrine()->getManager();
-        $repository = $m->getRepository('AppBundle:Texto');
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Texto');
         $texto = $repository->find($id);
         $user = $this->getUser();
         $textoUser= $texto->getAuthor();
-        if($user->getId() === $textoUser->getId() or ($user->getRoles() === "ROLE_ADMIN")){
+        if($user->getId() === $textoUser->getId() or ($user->hasRole("ROLE_ADMIN"))){
             $form = $this->createForm(TextoType::class, $texto);
 
             return $this->render(':texto:form.html.twig',
@@ -336,8 +272,8 @@ class TextoController extends Controller
     public function doUpdateAction($id, Request $request)
     {
 
-        $m          = $this->getDoctrine()->getManager();
-        $repository = $m->getRepository('AppBundle:Texto');
+        $em          = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Texto');
         $texto = $repository->find($id);
         $user = $this->getUser();
         $textoUser= $texto->getAuthor();
@@ -345,7 +281,7 @@ class TextoController extends Controller
             $form       = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $m->flush();
+                $em->flush();
                 $this->addFlash('messages', 'texto actualizado');
                 return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
             }
@@ -368,15 +304,11 @@ class TextoController extends Controller
      */
     public function removeAction( $id)
     {
-        $m = $this->getDoctrine()->getManager();
-        $repository = $m->getRepository('AppBundle:Texto');
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Texto');
         $texto = $repository->find($id);
-        $repositoryUser= $m->getRepository('UserBundle:User');
-        $usuarios = $repositoryUser->findBy(array('id' => $texto->getTPag()));
-        foreach ($usuarios as $usuario)
-            $usuario->removeTextosPagPrincipal($texto);
-        $m->remove($texto);
-        $m->flush();
+        $em->remove($texto);
+        $em->flush();
 
         return $this->redirectToRoute('app_texto_index');
     }
@@ -397,8 +329,94 @@ class TextoController extends Controller
             case "tag":
                 return $this->redirectToRoute('app_textoTag_show', ['tag' => $busqueda]);
         }
+        return $this->addFlash('messages', 'Elija una opcion');
+    }
 
 
+    /**
+     * @Route("/enviarTexto", name="app_texto_enviarTexto")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function enviarSuscriptor()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $repositorioTexto= $em->getRepository('AppBundle:Texto');
+        $texto = $repositorioTexto->findOneBy(array('author'=> $user),
+            array('id'=> 'DESC'));
+        $repositorioUsuario = $em->getRepository('UserBundle:User');
+        $usuarios = $repositorioUsuario->findBy(array('id'=>$user->getSuscriptores()));
+        if( $usuarios == null){
+            return $this->redirectToRoute('app_texto_index');
+        }else {
+            foreach ($usuarios as $usuario)
+                $revistaTexto = new RevistaTexto();
+                 $revistaTexto->setRevista($usuario->getRevista());
+                 $revistaTexto->setTexto($texto);
+                  $em->persist($revistaTexto);
+                  $em->flush();
+
+            return $this->addFlash('messages', 'Texto añadido a tus suscriptores');
+        }
+    }
+
+    /**
+     * @Route("/revista", name="app_texto_revista")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function textoRevistaAction( Request $request)
+    {
+        $user = $this->getUser();
+        $revista = $user->getRevista();
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:RevistaTexto');
+        $revistaTextos = $repo->findBy(array('revista'=>$revista));
+
+        return $this->render(':texto:revista.html.twig',
+            [
+                'revistaTextos' => $revistaTextos,
+
+            ]
+        );
+
+    }
+
+    /**
+     * @Route("/addToRevista/{id}", name="app_texto_addTorevista")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function addToRevistaAction($id)
+    {
+        $user = $this->getUser();
+        $revista = $user->getRevista();
+        $em = $this->getDoctrine()->getManager();
+        $repositorioTexto = $em->getRepository('AppBundle:Texto');
+        $texto = $repositorioTexto->findOneBy(array('id'=>$id));
+        $repositorioRevistaTexto = $em->getRepository('AppBundle:RevistaTexto');
+        $revistaTexto = $repositorioRevistaTexto->buscarPorRevistaTexto($revista,$texto);
+        if($revistaTexto == null)
+        {
+            $revistaTexto = new RevistaTexto();
+            $revistaTexto->setRevista($revista);
+            $revistaTexto->setTexto($texto);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($revistaTexto);
+            $em->flush();
+            $this->addFlash('messages', 'Texto añadido a tu revista');
+            return $this->redirectToRoute('app_texto_index');
+
+        }else{
+
+             $this->addFlash('messages', 'Este texto ya está actualmente en tu Revista');
+            return $this->redirectToRoute('app_texto_index');
+
+        }
 
     }
 

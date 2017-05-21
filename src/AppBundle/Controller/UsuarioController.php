@@ -3,14 +3,13 @@
 namespace AppBundle\Controller;
 
 
-use Trascastro\UserBundle\Entity;
-use AppBundle\Form\ImageType;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Texto;
-use AppBundle\Controller\TextoController;
+
 
 
 
@@ -25,8 +24,8 @@ class UsuarioController extends Controller
     public function suscribeAction($usuario)
     {
         $user = $this->getUser();
-        $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('UserBundle:User');
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('UserBundle:User');
         $suscripcion = $repo->myFindOneByUsernameOrEmail($usuario);
         $estadoSuscripcion = "realizado la suscripcion de ";
 
@@ -37,7 +36,7 @@ class UsuarioController extends Controller
         }else {
             $user->addSuscripcion($suscripcion);
         }
-        $m->flush();
+        $em->flush();
         $this->addFlash('messages', $user->getUsername() . " ha ".$estadoSuscripcion . " a " . $suscripcion->getUsername());
         return $this->redirectToRoute('app_texto_index');
     }
@@ -50,8 +49,8 @@ class UsuarioController extends Controller
     public function indexAction()
     {
         if ($this->isGranted('ROLE_ADMIN')) {
-            $m = $this->getDoctrine()->getManager();
-            $repo = $m->getRepository('UserBundle:User');
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('UserBundle:User');
 
             $usuarios = $repo->findBy(array(), array('id' => 'DESC'));
             return $this->render(':usuario:index.html.twig',
@@ -71,8 +70,8 @@ class UsuarioController extends Controller
     public function cambiarRoleAction($id)
 
     {
-        $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('UserBundle:User');
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('UserBundle:User');
         $user = $repo->findOneBy(array('id'=>$id));
         $role = "administrador";
 
@@ -83,7 +82,7 @@ class UsuarioController extends Controller
        }else{
            $user->addRole('ROLE_ADMIN');
        }
-        $m->flush();
+        $em->flush();
         $this->addFlash('messages', 'el usuario ' . $user->getUsername() . "ahora tiene el rol de " . $role);
         return $this->redirectToRoute('app_usuarios_index');
     }

@@ -237,58 +237,6 @@ class Texto
 
 
 
-
-    //PagPrincipales
-
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="textosPagPrincipal", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="textos_usuarios",
-     *      joinColumns={@ORM\JoinColumn(name="texto_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="usuario_id", referencedColumnName="id")}
-     *      )
-     */
-    private $pagPrincipales;
-
-    /**
-     * @param User $user
-     */
-    public function addPag(User $user)
-    {
-        if (!$this->pagPrincipales->contains($user)) {
-            $this->pagPrincipales->add($user);
-            $user->addTextoPag($this);
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getTPag()
-    {
-        return $this->pagPrincipales->toArray();
-    }
-
-    /**
-     * @param User $user
-     */
-    public function removePagPrincipal(User $user)
-    {
-        if (!$this->pagPrincipales->contains($user)) {
-            return;
-        }
-        $this->pagPrincipales->removeElement($user);
-        $user->removeTextosPagPrincipal($this);
-    }
-
-    /**
-     *
-     */
-    public function removeAllPagPrincipal()
-    {
-        $this->pagPrincipales->clear();
-    }
-
     //Tags
 
     /**
@@ -298,6 +246,13 @@ class Texto
      *          inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
      **/
     private $tags;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RevistaTexto", mappedBy="texto", cascade={"all"})
+     */
+
+    private $revistaTexto;
 
     /**
      * @return array
@@ -332,11 +287,7 @@ class Texto
         $tag->removeTextosTag($this);
     }
 
-    public function subsTag($pos)
-    {
-       $tag = $this->getTags()[$pos];
-        $this->removeTag($tag);
-    }
+
 
 
     //Numero de visitas
@@ -402,7 +353,6 @@ class Texto
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
-        $this->pagPrincipales = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->numVisitas = 0;
 

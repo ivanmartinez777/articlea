@@ -13,7 +13,7 @@
             <input type="radio" name="tipo" value="tag" checked> Tag
             <input type="submit">
         </form>
-        <a href="{{ path('app_texto_prueba') }}">Pagina principal del usuario</a><br>
+
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('app_categoria_index') }}">Categorias</a> <br>
                 <a href="{{ path('app_usuarios_index') }}">Usuarios</a> <br>
@@ -21,11 +21,14 @@
 
         {% if is_granted('ROLE_USER') %}
             Logeado como  <a href="{{ path('app_texto_show', {'author': app.user}) }}">{{ app.user.username }}</a> <br>
+            <a href="{{ path('app_texto_revista') }}">Pagina principal del usuario</a><br>
             <a href="{{ path('app_texto_create') }}"><button> Introducir nuevo texto</button></a>
         {% endif %}
         {% for texto in textos %}
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}
             <a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
+            <a href="{{ path('app_texto_addTorevista', {'id': texto.id}) }}"><button>Añadir Texto</button></a><br>
+
 
         {% endfor %}
         <br>

@@ -5,11 +5,14 @@
     {% block body %}
         <a href="{{ path('app_texto_index') }}">Volver</a> <br>
         <a href="{{ path('fos_user_profile_edit') }}">Actualizar perfil</a> <br>
-
         {% for texto in textos %}
-
+                       {% if texto not in app.user().getTextosLeidos() %}
+                           <div>NUEVO</div>
+                       {% endif %}
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}
+            <a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
             <a href="{{ path('app_texto_eliminar_texto',{'texto': texto.id}) }}">Quitar de pagina principal</a> <br>
+
         {% endfor %}
 
     {% endblock %}

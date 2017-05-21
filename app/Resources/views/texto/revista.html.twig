@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+    {% block tittle %}{% endblock %}
+
+    {% block body %}
+        <a href="{{ path('app_texto_index') }}">Volver</a> <br>
+        <a href="{{ path('fos_user_profile_edit') }}">Actualizar perfil</a> <br>
+        {% for revistaTexto in revistaTextos %}
+            {% if revistaTexto.visto == false %}
+                <div>NUEVO</div>
+            {% endif %}
+            {{ include('texto/texto.html.twig', { 'texto': revistaTexto.texto }) }}
+            <a href="{{ path('app_texto_individual', {'id': revistaTexto.texto.id}) }}"><button>Seguir leyendo</button></a><br>
+
+        {% endfor %}
+
+    {% endblock %}
+

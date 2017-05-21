@@ -12,6 +12,7 @@
 
 namespace Trascastro\UserBundle\Entity;
 
+use AppBundle\Entity\Revista;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -103,7 +104,7 @@ class User extends BaseUser
     //Textos
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="author", cascade={"all"});
      */
 
     private $textos;
@@ -238,51 +239,6 @@ class User extends BaseUser
         $this->suscripciones->clear();
     }
 
-    //Textos En la Página principal
-
-    /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="pagPrincipales", cascade={"persist", "remove"})
-     */
-    private $textosPagPrincipal;
-
-    /**
-     * @param Texto $texto
-     */
-    public function addTextoPag(Texto $texto)
-    {
-        if (!$this->textosPagPrincipal->contains($texto)) {
-            $this->textosPagPrincipal->add($texto);
-            $texto->addPag($this);
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getTextosPag()
-    {
-        return $this->textosPagPrincipal->toArray();
-    }
-
-    /**
-     * @param Texto $texto
-     */
-    public function removeTextosPagPrincipal(Texto $texto)
-    {
-        if (!$this->textosPagPrincipal->contains($texto)) {
-            return;
-        }
-        $this->textosPagPrincipal->removeElement($texto);
-        $texto->removePagPrincipal($this);
-    }
-
-    /**
-     *
-     */
-    public function removeAllTextosPagPrincipal()
-    {
-        $this->textosPagPrincipal->clear();
-    }
 
 
 
@@ -372,38 +328,29 @@ class User extends BaseUser
         return $this->descripcion;
     }
 
-    //Visualizaciones
-
-
     /**
-     * @var ArrayCollection $textosLeidos
-     *
-    *  @ORM\ManyToMany(targetEntity="AppBundle\Entity\Texto")
-     * @ORM\JoinTable(name="users_textosLeidos",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="texto_id", referencedColumnName="id")}
-     *      )
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Revista", mappedBy="dueño", cascade={"all"})
      */
-    private $textosLeidos;
 
-    /**
-     * @param Texto $texto
-     */
-    public function addTextoLeido(Texto $texto)
+    private $revista;
+
+    public function setRevista(Revista $revista)
     {
-        if (!$this->textosLeidos->contains($texto)) {
-            $this->textosLeidos->add($texto);
+        $this->revista = $revista;
+        $revista->setDueño($this);
 
-        }
+
+        return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getTextosLeidos()
+    public function getRevista()
     {
-        return $this->textosLeidos->toArray();
+        return $this->revista;
     }
+
+
+
+
 
 
 
@@ -415,9 +362,6 @@ class User extends BaseUser
         $this->updatedAt    = $this->createdAt;
         $this->suscriptores = new ArrayCollection();
         $this->suscripciones = new ArrayCollection();
-        $this->textosPagPrincipal = new ArrayCollection();
-        $this->textosLeidos = new ArrayCollection();
-
     }
 
 
