@@ -37,13 +37,13 @@ class RevistaTexto
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Revista", inversedBy="revistaTexto", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Revista", inversedBy="revistaTexto")
      */
     private $revista;
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Texto", inversedBy="revistaTexto", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Texto", inversedBy="revistaTexto")
      */
     private $texto;
 

@@ -17,7 +17,8 @@ class RevistaTextoRepository extends \Doctrine\ORM\EntityRepository
             ->createQuery("SELECT rt 
                                   from AppBundle:RevistaTexto rt 
                                    WHERE rt.texto = :texto
-                                   and rt.revista = :revista")
+                                   and rt.revista = :revista
+                                   ")
 
 
             ->setParameters(array(
@@ -25,6 +26,6 @@ class RevistaTextoRepository extends \Doctrine\ORM\EntityRepository
                 'revista' => $revista,
             ))
 
-            ->getResult();
+            ->getOneOrNullResult() ;
     }
 }

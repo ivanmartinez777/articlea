@@ -8,6 +8,8 @@
 
 
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}<br>
+        <a href="{{ path('app_texto_removeFromRevista', {'id': texto.id}) }}"><button>Quitar Texto</button></a><br>
+        <a href="{{ path('app_texto_favRevista', {'id': texto.id}) }}"><button>FAV</button></a><br>
 
         {% if (app.user == texto.author) or (app.user.hasRole('ROLE_ADMIN')) %}
             <a href="{{ path('app_texto_remove', {'id': texto.id}) }}">remove</a> <br>

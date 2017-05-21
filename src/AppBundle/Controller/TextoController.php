@@ -49,14 +49,13 @@ class TextoController extends Controller
             $user = $this->getUser();
             $revista = $user->getRevista();
             $repositoryRevista = $em->getRepository('AppBundle:RevistaTexto');
-            $textoRevistas = $repositoryRevista->buscarPorRevistaTexto($revista,$texto);
-            if($textoRevistas != null)
+            $textoRevista = $repositoryRevista->buscarPorRevistaTexto($revista,$texto);
+            if($textoRevista != null)
             {
-                foreach ($textoRevistas as $textoRevista)
-                {
+
                 $textoRevista->setVisto(true);
                 $em->persist($textoRevista);
-             }
+
             }
 
         }
@@ -419,6 +418,86 @@ class TextoController extends Controller
         }
 
     }
+
+    /**
+     * @Route("/removeFromRevista/{id}", name="app_texto_removeFromRevista")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function removeFromRevistaAction($id)
+    {
+        $user = $this->getUser();
+        $revista = $user->getRevista();
+        $em = $this->getDoctrine()->getManager();
+        $repositorioTexto = $em->getRepository('AppBundle:Texto');
+        $texto = $repositorioTexto->findOneBy(array('id'=>$id));
+        $repositorioRevistaTexto = $em->getRepository('AppBundle:RevistaTexto');
+        $revistaTexto = $repositorioRevistaTexto->buscarPorRevistaTexto($revista,$texto);
+        foreach ($revistaTexto as $revistaTexto)
+        {
+            $em->remove($revistaTexto);
+            $em->flush();
+        }
+
+
+        $this->addFlash('messages', 'Texto eliminado de la revista');
+        return $this->redirectToRoute('app_texto_revista');
+
+    }
+
+    /**
+     * @Route("/FavRevista/{id}", name="app_texto_favRevista")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function favRevistaAction($id)
+    {
+        $user = $this->getUser();
+        $revista = $user->getRevista();
+        $em = $this->getDoctrine()->getManager();
+        $repositorioTexto = $em->getRepository('AppBundle:Texto');
+        $texto = $repositorioTexto->findOneBy(array('id'=>$id));
+        $repositorioRevistaTexto = $em->getRepository('AppBundle:RevistaTexto');
+        $revistaTexto = $repositorioRevistaTexto->buscarPorRevistaTexto($revista,$texto);
+
+
+
+            if ($revistaTexto == null) {
+                $revistaTexto = new RevistaTexto();
+                $revistaTexto->setRevista($revista);
+                $revistaTexto->setTexto($texto);
+                $revistaTexto->setFav(true);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($revistaTexto);
+                $em->flush();
+                $this->addFlash('messages', 'Texto añadido a tu revista y añadido a favoritos');
+                return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
+
+            } elseif ($revistaTexto->getFav() == true) {
+                $revistaTexto->setFav(false);
+                $em->persist($revistaTexto);
+                $em->flush();
+                $this->addFlash('messages', 'Este texto ha dejado de ser de sus favoritos');
+                return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
+
+            } else {
+
+                $revistaTexto->setFav(true);
+                $em->persist($revistaTexto);
+                $em->flush();
+                $this->addFlash('messages', 'Este texto ha sido añadido a tus favoritos');
+                return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
+
+            }
+
+        return $this->redirectToRoute('app_texto_revista');
+
+    }
+
+
+
 
 
 }
