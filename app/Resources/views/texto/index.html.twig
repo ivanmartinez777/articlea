@@ -26,6 +26,7 @@
         {% endif %}
         {% for texto in textos %}
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}
+                {{ texto.ejemplo }}
             <a href="{{ path('app_texto_individual', {'id': texto.id}) }}"><button>Seguir leyendo</button></a><br>
             <a href="{{ path('app_texto_addTorevista', {'id': texto.id}) }}"><button>Añadir Texto</button></a><br>
 

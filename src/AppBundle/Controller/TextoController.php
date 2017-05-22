@@ -224,6 +224,7 @@ class TextoController extends Controller
                 $em->persist($texto);
                 $em->flush();
                 $this->enviarSuscriptor();
+                $this->setEjemploAction();
 
                 return $this->redirectToRoute('app_texto_index');
             }
@@ -280,6 +281,8 @@ class TextoController extends Controller
             $form       = $this->createForm(TextoType::class, $texto);
             $form->handleRequest($request);
             if ($form->isValid()) {
+                $em->flush();
+                $texto->setEjemplo($texto->getCuerpo());
                 $em->flush();
                 $this->addFlash('messages', 'texto actualizado');
                 return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
@@ -345,6 +348,7 @@ class TextoController extends Controller
         $repositorioTexto= $em->getRepository('AppBundle:Texto');
         $texto = $repositorioTexto->findOneBy(array('author'=> $user),
             array('id'=> 'DESC'));
+
         $repositorioUsuario = $em->getRepository('UserBundle:User');
         $usuarios = $repositorioUsuario->findBy(array('id'=>$user->getSuscriptores()));
         if( $usuarios == null){
@@ -494,6 +498,27 @@ class TextoController extends Controller
 
         return $this->redirectToRoute('app_texto_revista');
 
+    }
+
+    /**
+     * @Route("/setEjemplo/{id}", name="app_texto_setEjemplo")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
+
+    public function setEjemploAction()
+
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user= $this->getUser();
+        $repositorioTexto= $em->getRepository('AppBundle:Texto');
+        $texto = $repositorioTexto->findOneBy(array('author'=> $user),
+            array('id'=> 'DESC'));
+        $texto->setEjemplo($texto->getCuerpo());
+        $em->persist($texto);
+        $em->flush();
+
+        return $this->redirectToRoute('app_texto_individual', ['id'=>$texto->getId()]);
     }
 
 

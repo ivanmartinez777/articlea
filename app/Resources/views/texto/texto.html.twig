@@ -24,7 +24,6 @@
         {% endif %}
     {% endfor %}
 <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
-    {{ texto.cuerpo }}<br>
     {{ texto.numVisitas }}<br>
     {% if texto.image == null %}
     <img src="{{ asset("images/texto.jpg") }}" class="img-responsive" width="304" height="236">

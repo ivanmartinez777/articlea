@@ -7,7 +7,8 @@
         <a href="{{ path('app_texto_index') }}">Volver</a> <br>
 
 
-            {{ include('texto/texto.html.twig', { 'texto': texto }) }}<br>
+            {{ include('texto/texto.html.twig', { 'texto': texto }) }}
+        {{ texto.cuerpo }}<br>
         <a href="{{ path('app_texto_removeFromRevista', {'id': texto.id}) }}"><button>Quitar Texto</button></a><br>
         <a href="{{ path('app_texto_favRevista', {'id': texto.id}) }}"><button>FAV</button></a><br>
 
@@ -19,6 +20,7 @@
             <h3>Comentarios</h3>
             {{ render(controller('AppBundle:Comentario:index', {'id': texto.id})) }}
             {{ render(controller('AppBundle:Comentario:create', {'id': texto.id})) }}
+
         {% endif %}
 
     {% endblock %}

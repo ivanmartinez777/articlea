@@ -16,7 +16,7 @@
             {% endif %}
             {% if (app.user == comentario.texto.author) or (app.user.hasRole('ROLE_ADMIN')) %}
                 <a href="{{ path('app_comentario_remove', {'id': comentario.id})}}">remove</a> <br>
-                <a href="{{ path('app_comentario_update', {'id': comentario.id}) }}">Editar comentario</a> <br>
+                <a href="{{ path('app_comentario_doUpdate', {'id': comentario.id}) }}">Editar comentario</a> <br>
             {% endif %}
 
 

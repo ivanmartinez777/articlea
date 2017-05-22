@@ -80,9 +80,20 @@ class Texto
     /**
      * @var string
      * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 700,
+     *      minMessage = "El texto debe contener como mínimo {{ limit }} caracteres"
+     * )
      * @ORM\Column(name="cuerpo", type="text")
+     *
      */
     private $cuerpo;
+
+    /**
+     * @var string
+     * @ORM\Column(name="ejemplo", type="text")
+     */
+    private $ejemplo;
 
     /**
      * Set cuerpo
@@ -349,12 +360,43 @@ class Texto
     }
 
 
+
+    public function setEjemplo($string)
+    {
+
+       $ejemploTexto = strtok($string, ' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
+           strtok(' ').' '.strtok(' ').' '.strtok(' '). '...';
+        $this->ejemplo = $ejemploTexto;
+        return $this;
+    }
+
+    public function getEjemplo()
+    {
+        return $this->ejemplo;
+    }
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
         $this->tags = new ArrayCollection();
         $this->numVisitas = 0;
+        $this->ejemplo = "";
+
+
 
     }
 
