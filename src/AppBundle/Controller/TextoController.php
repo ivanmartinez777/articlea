@@ -438,11 +438,11 @@ class TextoController extends Controller
         $texto = $repositorioTexto->findOneBy(array('id'=>$id));
         $repositorioRevistaTexto = $em->getRepository('AppBundle:RevistaTexto');
         $revistaTexto = $repositorioRevistaTexto->buscarPorRevistaTexto($revista,$texto);
-        foreach ($revistaTexto as $revistaTexto)
-        {
+
+
             $em->remove($revistaTexto);
             $em->flush();
-        }
+
 
 
         $this->addFlash('messages', 'Texto eliminado de la revista');
