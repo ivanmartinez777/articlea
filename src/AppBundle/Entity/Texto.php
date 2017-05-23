@@ -377,7 +377,7 @@ class Texto
            strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
            strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
            strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.strtok(' ').' '.
-           strtok(' ').' '.strtok(' ').' '.strtok(' '). '...';
+           strtok(' ').' '.strtok(' ').' '.strtok(' '). ' ...';
         $this->ejemplo = $ejemploTexto;
         return $this;
     }

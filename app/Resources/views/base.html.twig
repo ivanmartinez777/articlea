@@ -26,16 +26,12 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" id="barra-superior" >
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('app_index_index') }}">Symfony Project</a>
+        <div class="navbar-header" >
+            <a class="navbar-brand" href="{{ path('app_texto_index') }}"> <img src="{{ asset("images/logo2.jpg") }}" class="img-responsive" width="152" height="118"></a>
+            <a class="navbar-brand" id ="buscar" href=" {{ path('app_texto_index') }}"><span class="glyphicon glyphicon-book"></span> ENTRAR</a>
+            <a class="navbar-brand" id ="buscar" href=" {{ path('app_texto_buscar') }}"><span class="glyphicon glyphicon-search"></span> BUSCAR</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +42,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <div class="navbar-form navbar-right">
+                <div class="navbar-form navbar-right" id="login">
                     {{ render_esi(controller('UserBundle:HoritzontalLogin:horitzontalLogin', {'route': app.request.get('_route')})) }}
                 </div>
             </ul>
@@ -66,7 +62,7 @@
 <div class="container">
     <div class="margin-bottom-md"></div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             {% block body %}{% endblock %}
         </div>
        

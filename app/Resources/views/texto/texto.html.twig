@@ -1,37 +1,31 @@
 
 {% block body %}
-    <h2>{{ texto.id }}.{{ texto.titulo }}</h2><br>
-<div>
-    Creado por: <a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{ texto.author }}</a>
-    {% if app.user %}
-      {% if app.user == texto.author %}
-      {% elseif  texto.author in app.user.getSuscripciones() %}
-
-    <a href="{{ path('app_usuario_suscripcion', {'usuario': texto.author}) }}"><button>Eliminar suscripcion</button></a><br>
-    {% else %}
-    <a href="{{ path('app_usuario_suscripcion', {'usuario': texto.author}) }}"><button>Suscribirse</button></a><br>
-    {% endif %}
-    {% endif %}
-    {{ texto.createdAt | date}}<br>
-    {% if texto.createdAt != texto.updatedAt %}
-        Editado: {{ texto.updatedAt | date("d/m/Y H:i:s") }}<br>
-    {% endif %}
-    {% for tag in texto.tags %}
-        {% if tag.getNombre()=="" %}
-        {% else %}
-            <a href="{{ path('app_textoTag_show', {'tag': tag.nombre()}) }}">{{ tag.getNombre() }}</a>
-
-        {% endif %}
-    {% endfor %}
-<a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a><br>
-    {{ texto.numVisitas }}<br>
-    {% if texto.image == null %}
-    <img src="{{ asset("images/texto.jpg") }}" class="img-responsive" width="304" height="236">
-    {% else %}
-    <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" width="304" height="236">
-    {% endif %}
 
 
-</div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"  style="margin-top: 2%">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="button" class="btn btn-warning col-xs-12 col-sm-12 col-md-12 col-lg-12"><a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a></button>
+                        </div>
+                        <div class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            {% if texto.image == null %}
+                                <img src="{{ asset("images/texto.jpg") }}" class="img-responsive" alt="siu">
+                            {% else %}
+                                <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" alt="siu">
+                            {% endif %}
+                        </div>
+                        <div class="panel-body">
+                            <em>{{ texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{ texto.author }}</a></strong>
+                            <h3>{{ texto.titulo }}</h3>
+                            {{texto.ejemplo}}
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" ><label>Lecturas: {{ texto.numVisitas }}</label></div>
+                        <button type="button" class="btn btn-default  col-xs-2 col-sm-2 col-md-2 col-lg-2"><a href="{{ path('app_texto_addTorevista', {'id': texto.id}) }}"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span></a></button>
+                        <button type="button" class="btn btn-success col-xs-5 col-sm-5 col-md-5 col-lg-5"><a href="{{ path('app_texto_individual', {'id': texto.id}) }}">Seguir leyendo</a></button>
+                    </div>
+                </div>
+            </div>
+
 
 {% endblock %}
