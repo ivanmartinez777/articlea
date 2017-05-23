@@ -6,7 +6,11 @@
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <button type="button" class="btn btn-warning col-xs-12 col-sm-12 col-md-12 col-lg-12"><a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}">{{ texto.categoria }}</a></button>
+                            <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }}"  style="color: white; text-decoration: none">
+                                <button type="button" class="btn btn-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    {{ texto.categoria }}
+                                </button>
+                            </a>
                         </div>
                         <div class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             {% if texto.image == null %}
@@ -15,14 +19,21 @@
                                 <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" alt="siu">
                             {% endif %}
                         </div>
-                        <div class="panel-body">
-                            <em>{{ texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{ texto.author }}</a></strong>
+                        <div class="panel-body ">
+                            <em>{{ texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': texto.author}) }}"><strong>{{ texto.author }}</strong></a></strong>
                             <h3>{{ texto.titulo }}</h3>
                             {{texto.ejemplo}}
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" ><label>Lecturas: {{ texto.numVisitas }}</label></div>
-                        <button type="button" class="btn btn-default  col-xs-2 col-sm-2 col-md-2 col-lg-2"><a href="{{ path('app_texto_addTorevista', {'id': texto.id}) }}"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span></a></button>
-                        <button type="button" class="btn btn-success col-xs-5 col-sm-5 col-md-5 col-lg-5"><a href="{{ path('app_texto_individual', {'id': texto.id}) }}">Seguir leyendo</a></button>
+                        <a href="{{ path('app_texto_addTorevista', {'id': texto.id}) }}">
+                            <button type="button" class="btn btn-default  col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                            </button>
+                        </a>
+                        <a href="{{ path('app_texto_individual', {'id': texto.id}) }}" style="color: white; text-decoration: none">
+                            <button type="button" class="btn btn-success col-xs-5 col-sm-5 col-md-5 col-lg-5">Seguir leyendo
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
