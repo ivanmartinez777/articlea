@@ -39,3 +39,20 @@
     margin-top: 3%;
     margin-left: -40%;
 }
+
+#cajaTexto {
+ height: 525px;
+
+
+
+}
+
+@media(max-width:780px){
+    #cajaTexto {
+    height: 725px;
+     
+
+
+    }
+
+}
