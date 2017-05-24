@@ -44,6 +44,9 @@ class TextoController extends Controller
         $repo = $em->getRepository('AppBundle:Texto');
 
         $texto = $repo->find($id);
+
+        $textoCategoria = $repo->sugerenciaCategoria($texto->getCategoria());
+        $textoAutor = $repo->sugerenciaAutor($texto->getAuthor());
         if ($this->isGranted('ROLE_USER'))
         {
             $user = $this->getUser();
@@ -65,6 +68,8 @@ class TextoController extends Controller
         return $this->render(':texto:textoInd.html.twig',
             [
                 'texto' => $texto,
+                'textoCategoria' => $textoCategoria,
+                'textoAutor' => $textoAutor,
             ]
         );
     }

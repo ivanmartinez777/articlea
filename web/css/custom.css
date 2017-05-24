@@ -41,7 +41,7 @@
 }
 
 #cajaTexto {
- height: 525px;
+ height: 550px;
 
 
 
@@ -50,7 +50,7 @@
 @media(max-width:780px){
     #cajaTexto {
     height: 725px;
-     
+
 
 
     }

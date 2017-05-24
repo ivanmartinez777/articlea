@@ -33,4 +33,35 @@ class TextoRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    public function sugerenciaCategoria($categoria)
+    {
+        return $this->getEntityManager()
+
+            ->createQuery("SELECT te 
+                                  from AppBundle:Texto te 
+                                   WHERE te.categoria = :categoria
+                                   order by te.numVisitas DESC")
+            ->setParameter('categoria', $categoria )
+            ->setMaxResults(2)
+
+            ->getResult();
+    }
+
+    public function sugerenciaAutor($author)
+    {
+        return $this->getEntityManager()
+
+            ->createQuery("SELECT te 
+                                  from AppBundle:Texto te 
+                                   WHERE te.author = :author
+                                    order by te.numVisitas DESC")
+            ->setParameter('author', $author )
+            ->setMaxResults(1)
+
+
+            ->getSingleResult();
+    }
+
+
+
 }
