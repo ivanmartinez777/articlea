@@ -20,7 +20,6 @@
             {% endif %}
 
         {% if is_granted('ROLE_USER') %}
-            Logeado como  <a href="{{ path('app_texto_show', {'author': app.user}) }}">{{ app.user.username }}</a> <br>
             {{ render(controller('AppBundle:RevistaTexto:textosNuevosRevista')) }}
             <a href="{{ path('app_texto_create') }}"><button> Introducir nuevo texto</button></a>
 

@@ -6,10 +6,59 @@
         <a href="{{ path('app_texto_index') }}">Volver</a> <br>
         <a href="{{ path('fos_user_profile_edit') }}">Actualizar perfil</a> <br>
         {% for revistaTexto in revistaTextos %}
-            {% if revistaTexto.visto == false %}
-                <h4><span class="label label-danger">Nuevo</span></h4>
-            {% endif %}
-            {{ include('texto/texto.html.twig', { 'texto': revistaTexto.texto }) }}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"   style="margin-top: 2%; ">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height:40px; ">
+                                {% if revistaTexto.visto == false %}
+                                    <h3>
+                                        <span class="label label-info  col-xs-6  col-sm-4  col-md-4  col-lg-4" style="margin-top:-20px;">Nuevo</span>
+                                    </h3>
+                                     <a href="{{ path('app_texto_removeFromRevista', {'id': revistaTexto.texto.id}) }}">
+                                        <button type="button" class="btn btn-danger  col-xs-6 col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4" style="margin-top:-20px;">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true">
+
+                                            </span>
+                                        </button>
+                                     </a>
+                                {% else %}
+                                  <a href="{{ path('app_texto_removeFromRevista', {'id': revistaTexto.texto.id}) }}">
+                                    <button type="button" class="btn btn-danger col-xs-offset-6 col-xs-6 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4" >
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                  </a>
+
+                                {% endif %}
+
+                        </div>
+                        <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <a href="{{ path('app_textoCategoria_show', {'categoria': revistaTexto.texto.categoria}) }}"  style="color: white; text-decoration: none">
+                                <button type="button" class="btn btn-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    {{ revistaTexto.texto.categoria }}
+                                </button>
+                            </a>
+                        </div>
+                        <div class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            {% if revistaTexto.texto.image == null %}
+                                <img src="{{ asset("images/texto.jpg") }}" class="img-responsive" alt="siu">
+                            {% else %}
+                                <img src="{{ asset("images/upload/" ~revistaTexto.texto.image) }}" class="img-responsive" alt="siu">
+                            {% endif %}
+                        </div>
+                        <div class="panel-body " id="cajaTexto">
+                            <em>{{ revistaTexto.texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': revistaTexto.texto.author}) }}"><strong>{{ revistaTexto.texto.author }}</strong></a></strong>
+                            <h3>{{ revistaTexto.texto.titulo }}</h3>
+                            {{revistaTexto.texto.ejemplo}}
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" ><label>Lecturas: {{ revistaTexto.texto.numVisitas }}</label></div>
+
+                        <a href="{{ path('app_texto_individual', {'id': revistaTexto.texto.id}) }}" style="color: white; text-decoration: none">
+                            <button type="button" class="btn btn-success col-xs-7 col-sm-7 col-md-7 col-lg-7">Seguir leyendo
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
 
         {% endfor %}

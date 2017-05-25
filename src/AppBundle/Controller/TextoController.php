@@ -53,6 +53,7 @@ class TextoController extends Controller
             $revista = $user->getRevista();
             $repositoryRevista = $em->getRepository('AppBundle:RevistaTexto');
             $textoRevista = $repositoryRevista->buscarPorRevistaTexto($revista,$texto);
+
             if($textoRevista != null)
             {
 
