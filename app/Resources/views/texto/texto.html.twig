@@ -2,7 +2,7 @@
 {% block body %}
 
 
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="cajaTexto"  style="margin-top: 2%; ">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"   style="margin-top: 2%; ">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -19,7 +19,7 @@
                                 <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" alt="siu">
                             {% endif %}
                         </div>
-                        <div class="panel-body ">
+                        <div class="panel-body " id="cajaTexto">
                             <em>{{ texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': texto.author}) }}"><strong>{{ texto.author }}</strong></a></strong>
                             <h3>{{ texto.titulo }}</h3>
                             {{texto.ejemplo}}

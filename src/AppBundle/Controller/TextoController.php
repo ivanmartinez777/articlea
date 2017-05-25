@@ -24,11 +24,11 @@ class TextoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Texto');
-
         $textos = $repo->findBy(array(), array('id' => 'DESC'));
         return $this->render(':texto:index.html.twig',
         [
             'textos' => $textos,
+
         ]
         );
     }
@@ -42,10 +42,10 @@ class TextoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Texto');
-
+        $repo2 =$em->getRepository('UserBundle:User');
         $texto = $repo->find($id);
-
-        $textoCategoria = $repo->sugerenciaCategoria($texto->getCategoria());
+        $usuario = $repo2->findOneBy(array('id'=>$texto->getAuthor()));
+        $textosCategoria = $repo->sugerenciaCategoria($texto->getCategoria());
         $textoAutor = $repo->sugerenciaAutor($texto->getAuthor());
         if ($this->isGranted('ROLE_USER'))
         {
@@ -68,8 +68,9 @@ class TextoController extends Controller
         return $this->render(':texto:textoInd.html.twig',
             [
                 'texto' => $texto,
-                'textoCategoria' => $textoCategoria,
+                'textosCategoria' => $textosCategoria,
                 'textoAutor' => $textoAutor,
+                'usuario'=> $usuario,
             ]
         );
     }
@@ -421,7 +422,7 @@ class TextoController extends Controller
 
         }else{
 
-             $this->addFlash('messages', 'Este texto ya está actualmente en tu Revista');
+            $this->addFlash('messages', 'Este texto ya está actualmente en tu Revista');
             return $this->redirectToRoute('app_texto_index');
 
         }
@@ -445,8 +446,8 @@ class TextoController extends Controller
         $revistaTexto = $repositorioRevistaTexto->buscarPorRevistaTexto($revista,$texto);
 
 
-            $em->remove($revistaTexto);
-            $em->flush();
+        $em->remove($revistaTexto);
+        $em->flush();
 
 
 
@@ -473,33 +474,33 @@ class TextoController extends Controller
 
 
 
-            if ($revistaTexto == null) {
-                $revistaTexto = new RevistaTexto();
-                $revistaTexto->setRevista($revista);
-                $revistaTexto->setTexto($texto);
-                $revistaTexto->setFav(true);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($revistaTexto);
-                $em->flush();
-                $this->addFlash('messages', 'Texto añadido a tu revista y añadido a favoritos');
-                return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
+        if ($revistaTexto == null) {
+            $revistaTexto = new RevistaTexto();
+            $revistaTexto->setRevista($revista);
+            $revistaTexto->setTexto($texto);
+            $revistaTexto->setFav(true);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($revistaTexto);
+            $em->flush();
+            $this->addFlash('messages', 'Texto añadido a tu revista y añadido a favoritos');
+            return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
 
-            } elseif ($revistaTexto->getFav() == true) {
-                $revistaTexto->setFav(false);
-                $em->persist($revistaTexto);
-                $em->flush();
-                $this->addFlash('messages', 'Este texto ha dejado de ser de sus favoritos');
-                return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
+        } elseif ($revistaTexto->getFav() == true) {
+            $revistaTexto->setFav(false);
+            $em->persist($revistaTexto);
+            $em->flush();
+            $this->addFlash('messages', 'Este texto ha dejado de ser de sus favoritos');
+            return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
 
-            } else {
+        } else {
 
-                $revistaTexto->setFav(true);
-                $em->persist($revistaTexto);
-                $em->flush();
-                $this->addFlash('messages', 'Este texto ha sido añadido a tus favoritos');
-                return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
+            $revistaTexto->setFav(true);
+            $em->persist($revistaTexto);
+            $em->flush();
+            $this->addFlash('messages', 'Este texto ha sido añadido a tus favoritos');
+            return $this->redirectToRoute('app_texto_individual', ['id' => $id]);
 
-            }
+        }
 
         return $this->redirectToRoute('app_texto_revista');
 

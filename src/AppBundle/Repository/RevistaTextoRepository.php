@@ -28,4 +28,23 @@ class RevistaTextoRepository extends \Doctrine\ORM\EntityRepository
 
             ->getOneOrNullResult() ;
     }
+
+    public function numeroNuevosTexto($revista)
+    {
+        return $this->getEntityManager()
+
+            ->createQuery("SELECT count(rt) 
+                                  from AppBundle:RevistaTexto rt 
+                                   WHERE rt.visto = FALSE 
+                                   and rt.revista = :revista
+                                   ")
+
+
+            ->setParameters(array(
+
+                'revista' => $revista,
+            ))
+
+            ->getSingleScalarResult();
+    }
 }

@@ -21,8 +21,9 @@
 
         {% if is_granted('ROLE_USER') %}
             Logeado como  <a href="{{ path('app_texto_show', {'author': app.user}) }}">{{ app.user.username }}</a> <br>
-            <a href="{{ path('app_texto_revista') }}">Pagina principal del usuario</a><br>
+            {{ render(controller('AppBundle:RevistaTexto:textosNuevosRevista')) }}
             <a href="{{ path('app_texto_create') }}"><button> Introducir nuevo texto</button></a>
+
         {% endif %}
 <div class= "container-fluid">
     <div class= "row">

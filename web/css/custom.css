@@ -47,10 +47,71 @@
 
 }
 
+
+p {
+    font-size:1.5em;
+}
+
+.tag{
+    float: left;
+    margin-right:1%;
+    background-color: #FF9900;
+    padding: 2%;
+    border-radius: 5%;
+    margin-top: 2%;
+    font-size: 1.4em;
+}
+
+a .tag{
+    text-decoration: none;
+    color: white;
+    text-align:center;
+}
+
+
+#titulo{
+    text-align: center;
+
+}
+
+#imagenPerfil img{
+    max-height: 200px;
+    margin: 0 auto;
+}
+
+#cajaTexto {
+    height:600px;
+}
+
+#cuerpoIndividual{
+    min-height:850px;
+
+}
+
+
+
+
 @media(max-width:780px){
     #cajaTexto {
-    height: 725px;
+    height: 900px;
+    }
 
+
+    #usuarioDatos{
+        text-align: center;
+
+
+    }
+
+}
+
+@media(max-width:580px){
+    #cajaTexto {
+        height:650px;
+    }
+
+    #usuarioDatos{
+        text-align: center;
 
 
     }

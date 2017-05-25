@@ -81,7 +81,7 @@ class Texto
      * @var string
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 700,
+     *      min = 1000,
      *      minMessage = "El texto debe contener como mínimo {{ limit }} caracteres"
      * )
      * @ORM\Column(name="cuerpo", type="text")

@@ -63,7 +63,9 @@
     <div class="margin-bottom-md"></div>
     <div class="row">
         <div class="col-md-12">
-            {% block body %}{% endblock %}
+            {% block body %}
+                {% include var ~ 'index/index.html.twig' %}
+            {% endblock %}
         </div>
        
     </div>

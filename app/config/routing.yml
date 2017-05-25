@@ -24,3 +24,8 @@ app.usuario:
     type:     annotation
     prefix: /textos
 
+app.revista:
+    resource: "@AppBundle/Controller/RevistaTextoController.php"
+    type:     annotation
+    prefix: /texto
+
