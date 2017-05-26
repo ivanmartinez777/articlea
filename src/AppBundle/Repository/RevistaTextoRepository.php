@@ -63,20 +63,6 @@ class RevistaTextoRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function devolverTextosRevista($revista)
-    {
-        return $this->getEntityManager()
 
-            ->createQuery("SELECT teRe 
-                                  from AppBundle:RevistaTexto teRe 
-                                  JOIN teRe.texto te
-                                  WHERE teRe.revista = :revista
-                                  order by te.createdAt  DESC")
-
-            ->setParameter('revista', $revista )
-
-
-            ->getResult();
-    }
 
 }

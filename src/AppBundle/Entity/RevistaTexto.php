@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="revista_texto")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RevistaTextoRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class RevistaTexto
 {
@@ -46,6 +47,38 @@ class RevistaTexto
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Texto", inversedBy="revistaTexto")
      */
     private $texto;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return RevistaTexto
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
 
     /**
      * Get id
@@ -133,6 +166,7 @@ class RevistaTexto
     {
         $this->setFav(false);
         $this->setVisto(false);
+        $this->createdAt = new \DateTime();
 
     }
 }

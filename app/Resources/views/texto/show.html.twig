@@ -10,7 +10,7 @@
         <a href="{{ path('app_texto_index') }}">Volver</a> <br>
         <p>"{{ user.descripcion  }}"</p>
         {% if user.image == null %}
-            <img src="{{ asset("images/profile.png") }}" class="img-responsive" >
+            <img src="{{ asset("images/profile.jpg") }}" class="img-responsive" >
         {% else %}
             <img src="{{ asset("images/upload/" ~usuario.image) }}" class="img-responsive"  >
         {% endif %}

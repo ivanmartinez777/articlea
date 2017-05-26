@@ -384,7 +384,8 @@ class TextoController extends Controller
         $revista = $user->getRevista();
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:RevistaTexto');
-        $revistaTextos = $repo->devolverTextosRevista($revista);
+        $revistaTextos = $repo->findBy(array('revista'=>$revista),
+            array('createdAt'=>'DESC'));
 
         return $this->render(':texto:revista.html.twig',
             [

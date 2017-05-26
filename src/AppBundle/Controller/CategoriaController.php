@@ -19,10 +19,12 @@ class CategoriaController extends Controller
     * @Route("/categoria/", name="app_categoria_index")
     * @return \Symfony\Component\HttpFoundation\Response
     *
+    *
     */
     public function indexAction()
     {
-        if ($this->isGranted('ROLE_ADMIN')) {
+        $user= $this->getUser();
+        if ($user->hasRole('ROLE_ADMIN')) {
             $m = $this->getDoctrine()->getManager();
             $repo = $m->getRepository('AppBundle:Categoria');
 
