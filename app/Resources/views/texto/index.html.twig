@@ -6,13 +6,7 @@
 
 
     {% block body %}
-        <form action="{{ path('app_texto_buscar') }}" method="post">
-            Name: <input type="text" name="busqueda"><br>
-            <input type="radio" name="tipo" value="texto">Texto
-            <input type="radio" name="tipo" value="usuario">Usuarios
-            <input type="radio" name="tipo" value="tag" checked> Tag
-            <input type="submit">
-        </form>
+
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('app_categoria_index') }}">Categorias</a> <br>
@@ -20,7 +14,6 @@
             {% endif %}
 
         {% if is_granted('ROLE_USER') %}
-            {{ render(controller('AppBundle:RevistaTexto:textosNuevosRevista')) }}
             <a href="{{ path('app_texto_create') }}"><button> Introducir nuevo texto</button></a>
 
         {% endif %}
@@ -28,8 +21,6 @@
     <div class= "row">
         {% for texto in textos %}
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}
-
-
 
         {% endfor %}
 </div>

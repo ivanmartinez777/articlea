@@ -1,6 +1,6 @@
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    <a class="btn btn-success" href="{{ path('fos_user_security_logout') }}">Sign out</a>
-    <a class="btn btn-danger" href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a>
+    <a class="btn btn-success" href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-in"></span> Sign out</a>
+    <a href="{{ path('app_texto_revista') }}">{{ render(controller('AppBundle:RevistaTexto:textosNuevosRevista')) }}</a>
 {% elseif route != 'fos_user_security_login' and route != 'fos_user_registration_register' %}
     <form action="{{ path("fos_user_security_check") }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -10,7 +10,7 @@
         <div class="form-group">
             <input class="form-control" placeholder="Password" type="password" id="password" name="_password" required="required" />
         </div>
-        <button type="submit" class="btn btn-success">Sign in</button>
-        <a class="btn btn-danger" href="{{ path('fos_user_registration_register') }}">Sign up</a>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+        <a class="btn btn-danger" href="{{ path('fos_user_registration_register') }}"><span class="glyphicon glyphicon-user"></span> Sign up</a>
     </form>
 {% endif %}

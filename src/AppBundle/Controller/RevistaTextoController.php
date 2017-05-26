@@ -197,26 +197,8 @@ class RevistaTextoController extends Controller
 
     }
 
-    /**
-     * @Route("/setEjemplo/{id}", name="app_texto_setEjemplo")
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
 
-    public function setEjemploAction()
 
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user= $this->getUser();
-        $repositorioTexto= $em->getRepository('AppBundle:Texto');
-        $texto = $repositorioTexto->findOneBy(array('author'=> $user),
-            array('id'=> 'DESC'));
-        $texto->setEjemplo($texto->getCuerpo());
-        $em->persist($texto);
-        $em->flush();
-
-        return $this->redirectToRoute('app_texto_individual', ['id'=>$texto->getId()]);
-    }
 
 
 

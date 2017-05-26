@@ -47,4 +47,36 @@ class RevistaTextoRepository extends \Doctrine\ORM\EntityRepository
 
             ->getSingleScalarResult();
     }
+
+    public function buscarFavs($revista)
+    {
+        return $this->getEntityManager()
+
+            ->createQuery("SELECT teRe 
+                                  from AppBundle:RevistaTexto teRe 
+                                  WHERE teRe.fav = TRUE 
+                                   and teRe.revista = :revista
+                                   ")
+            ->setParameter('revista', $revista )
+
+
+            ->getResult();
+    }
+
+    public function devolverTextosRevista($revista)
+    {
+        return $this->getEntityManager()
+
+            ->createQuery("SELECT teRe 
+                                  from AppBundle:RevistaTexto teRe 
+                                  JOIN teRe.texto te
+                                  WHERE teRe.revista = :revista
+                                  order by te.createdAt  DESC")
+
+            ->setParameter('revista', $revista )
+
+
+            ->getResult();
+    }
+
 }

@@ -27,9 +27,16 @@
     background-color: white ;
 }
 
+
+#logoBarra{
+    margin-top: -5%;
+}
+
 #buscar{
     margin-top: 3%;
 }
+
+
 
 #buscar:hover{
     background-color: lightgrey;
@@ -96,6 +103,9 @@ a .tag{
     height: 900px;
     }
 
+    #logoBarra{
+        margin-top: -10px;
+    }
 
     #usuarioDatos{
         text-align: center;
