@@ -1,6 +1,5 @@
 {% block body %}
 
-    <div class="panel panel-default">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md8 col-md-offset-2 col-lg-8 col-lg-offset-2" style="color:white; background-color:#2A578E; border-radius:2%;">
             <h3><em>COMENTARIOS</em></h3>
         </div>
@@ -31,7 +30,7 @@
                 {{ render(controller('AppBundle:Comentario:create', {'id': texto})) }}
             {% endif %}
         </div>
-    </div>
+
     <div class="navigation text-center  col-xs-12 col-sm-12 col-md-12 col-lg-12">
         {{ knp_pagination_render(comentarios) }}
     </div>
