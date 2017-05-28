@@ -18,3 +18,7 @@ services:
                 class: AppBundle\Form\TextoType
                 tags:
                      - { name: form.type, alias: app_bundle_text_type }
+
+    authentication.handler.login_success_handler:
+            class:  Trascastro\UserBundle\Security\LoginSuccessHandler
+            arguments:  ['@router', '@security.authorization_checker']
