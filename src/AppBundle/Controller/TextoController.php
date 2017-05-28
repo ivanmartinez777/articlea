@@ -367,8 +367,16 @@ class TextoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Texto');
         $texto = $repository->find($id);
-        $em->remove($texto);
-        $em->flush();
+        $user = $this->getUser();
+        if($user == $texto->getAuthor() || $user->hasRole('ROLE_ADMIN')) {
+            $em->remove($texto);
+            $em->flush();
+        }else{
+
+        $this->addFlash('messages', 'Este texto no es suyo');
+
+        }
+
 
         return $this->redirectToRoute('app_texto_index');
     }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Assetic\Exception\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Comentario;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -166,8 +167,15 @@ class ComentarioController extends Controller
         $m = $this->getDoctrine()->getManager();
         $repository = $m->getRepository('AppBundle:Comentario');
         $comentario = $repository->find($id);
-        $m->remove($comentario);
-        $m->flush();
+        $user = $this->getUser();
+        if($user == $comentario->getAuthor() || $user->hasRole('ROLE_ADMIN')){
+
+            $m->remove($comentario);
+            $m->flush();
+        }else{
+            $this->addFlash('messages', 'Este comentario no es suyo');
+        }
+
 
         return $this->redirectToRoute('app_texto_individual', ['id' => $comentario->getTexto()->getId()]);
     }
