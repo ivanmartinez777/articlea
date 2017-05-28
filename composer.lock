@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cbd4b497690f62bf0df44b58983f3364",
-    "content-hash": "139c0bf8a889b2700c17e7c2163a3f43",
+    "hash": "7afaa8c0810ca673f7be39cda510c840",
+    "content-hash": "dfd98a955fb307432cfcaf36cdb9b6fb",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1226,16 +1226,16 @@
         },
         {
             "name": "knplabs/knp-paginator-bundle",
-            "version": "2.5.1",
+            "version": "2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "5147740faff4d32e6f42acf64475314c35320fa4"
+                "reference": "1618a19a871ba1245dc68e462b35e7df07dcfcc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/5147740faff4d32e6f42acf64475314c35320fa4",
-                "reference": "5147740faff4d32e6f42acf64475314c35320fa4",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/1618a19a871ba1245dc68e462b35e7df07dcfcc3",
+                "reference": "1618a19a871ba1245dc68e462b35e7df07dcfcc3",
                 "shasum": ""
             },
             "require": {
@@ -1245,12 +1245,13 @@
                 "twig/twig": "~1.12|~2"
             },
             "require-dev": {
+                "phpunit/phpunit": "~4.8",
                 "symfony/expression-language": "~2.4|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -1283,7 +1284,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2015-11-23 17:51:40"
+            "time": "2017-03-21 09:45:46"
         },
         {
             "name": "kriswallsmith/assetic",

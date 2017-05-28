@@ -46,16 +46,26 @@ class UsuarioController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         if ($this->isGranted('ROLE_ADMIN')) {
             $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository('UserBundle:User');
 
             $usuarios = $repo->findBy(array(), array('id' => 'DESC'));
+
+            /**
+             * @var $paginator \knp\Component\Pager\Paginator
+             */
+            $paginator = $this->get('knp_paginator');
+            $usuariospaginados = $paginator->paginate(
+                $usuarios,
+                $request->query->getInt('page',1),
+                6
+            );
             return $this->render(':usuario:index.html.twig',
                 [
-                    'usuarios' => $usuarios,
+                    'usuarios' => $usuariospaginados,
                 ]
             );
        }return $this->redirectToRoute('app_texto_index');
@@ -127,9 +137,19 @@ class UsuarioController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $usuarios =$em->getRepository('UserBundle:User')->buscarPorNombre($palabra);
+
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $usuariospaginados = $paginator->paginate(
+            $usuarios,
+            $request->query->getInt('page',1),
+            6
+        );
         return $this->render(':usuario:indexBusqueda.html.twig',
             [
-                'usuarios' => $usuarios,
+                'usuarios' => $usuariospaginados,
 
             ]
         );
@@ -147,9 +167,19 @@ class UsuarioController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $usuarios =$em->getRepository('UserBundle:User')->buscarPorNombre($palabra);
+
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $usuariospaginados = $paginator->paginate(
+            $usuarios,
+            $request->query->getInt('page',1),
+            6
+        );
         return $this->render(':usuario:index.html.twig',
             [
-                'usuarios' => $usuarios,
+                'usuarios' => $usuariospaginados,
 
             ]
         );

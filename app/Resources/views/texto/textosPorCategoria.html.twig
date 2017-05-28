@@ -3,11 +3,13 @@
     {% block tittle %}{% endblock %}
 
     {% block body %}
-        <a href="{{ path('app_texto_index') }}">Volver</a> <br>
+
 
         {% for texto in textos %}
             {{ include('texto/texto.html.twig', { 'texto': texto }) }}
 
         {% endfor %}
-
+        <div class="navigation text-center  col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {{ knp_pagination_render(textos) }}
+        </div>
     {% endblock %}

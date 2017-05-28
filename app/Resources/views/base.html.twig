@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation" >
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:white;" >
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -38,7 +38,7 @@
                 <span class="icon-bar"></span>
                 <!--Son las tres rayas que aparecen en el boton para desplegar en mobiles-->
             </button>
-            <a class="navbar-brand" href="{{ path('app_texto_index') }}" id="logoBarra">
+            <a class="navbar-brand" href="{{ path('app_index_index') }}" id="logoBarra">
                 <img src="{{ asset("images/logo2.jpg") }}" class="img-responsive" width="152" height="118" >
             </a>
         </div>
@@ -47,7 +47,7 @@
         otro elemento que se pueda ocultar al minimizar la barra -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Comenzar</a></li>
+                <li class="active"><a  href="{{ path('app_texto_index') }}" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Articulos</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar<b class="caret"></b>
@@ -72,7 +72,7 @@
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 1}) }}">Historia y creencias</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 2}) }}">Deporte</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 3}) }}">Ciencia y cultura</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 4}) }}">Ocio</a></li>
+                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 9}) }}">Ocio</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 5}) }}">Actualidad y sociedad</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 6}) }}">Musica</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 7}) }}">Bienestar y familia</a></li>

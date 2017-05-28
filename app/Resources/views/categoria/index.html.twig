@@ -3,21 +3,73 @@
 
 
     {% block body %}
-        <a href="{{ path('app_texto_index')}}">Volver</a> <br>
+
         {% if categorias is empty %}
-           <h2>Aun no hay categorias. Inserte la primera</h2>
-            <a href="{{ path('app_categoria_create')}}">Create</a> <br>
+           <<div class= "container-fluid">
+    <div class= "row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-bottom: 2%;" >
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: #F9BD5C;" >
+                        <div class="panel-heading col-xs-8 col-sm-8 col-md-8 col-lg-8" style="background-color: #F9BD5C; color: white;">
+                            <h3>Aún no hay categorias</h3>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <a href="{{ path('app_categoria_create')}}">
+                <button type="button" class="btn col-xs-12  col-sm-offset-10  col-sm-12   col-md-offset-10  col-md-12 col-lg-offset-10 col-lg-2 " style="background-color: #2A578E; color: white;  margin-bottom: 5%;" ><span class="glyphicon glyphicon-plus" aria-hidden="true">
+                                </span>
+                </button>
+            </a>
         {% else %}
 
+            <a href="{{ path('app_categoria_create')}}">
+        <button type="button" class="btn col-xs-12  col-sm-offset-10  col-sm-12   col-md-offset-10  col-md-12 col-lg-offset-10 col-lg-2 " style="background-color: #2A578E; color: white;  margin-bottom: 5%;" ><span class="glyphicon glyphicon-plus" aria-hidden="true">
+                                </span>
+        </button>
+             </a>
         {% for categoria in categorias %}
-           <h4>{{ categoria.id }}.{{ categoria.nombre }}</h4>
-            <p>{{ categoria.descripcion }}</p>
 
-                <a href="{{ path('app_categoria_remove', {'id': categoria.id})}}">remove</a> <br>
-                <a href="{{ path('app_categoria_update', {'id': categoria.id}) }}">Editar categoria</a> <br>
+            <div class= "container-fluid">
+                <div class= "row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-bottom: 2%;" >
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: #F9BD5C;" >
+                                    <div class="panel-heading col-xs-8 col-sm-8 col-md-8 col-lg-8" style="background-color: #F9BD5C; color: white;">
+                                        <h3>{{ categoria.id }}.{{ categoria.nombre }}</h3>
+                                    </div>
+                                    <a href="{{ path('app_categoria_remove', {'id': categoria.id})}}">
+                                        <button type="button" class="btn col-xs-4  col-sm-4 col-md-2 col-md-2   col-lg-offset-2  col-lg-2" style="background-color: #C66937; color: white;" >
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                                </span>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="panel-body col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: white;">
+                                    <p>{{ categoria.descripcion }}</p>
+                                </div>
+                                <a href="{{ path('app_categoria_update', {'id': categoria.id}) }}">
+                                    <button type="button" class="btn col-xs-12  col-sm-12 col-md-12 col-lg-12" style="background-color: #2A578E; color: white;" ><span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                                </span>
+                                    </button>
+                                </a>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-            <a href="{{ path('app_categoria_create')}}">Create</a> <br>
+
 
         {% endif %}
+
+
+
+
     {% endblock %}

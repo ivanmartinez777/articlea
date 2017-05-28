@@ -22,7 +22,7 @@
                         <div class="panel-body " id="cajaTexto">
                             <em>{{ texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': texto.author}) }}"><strong>{{ texto.author }}</strong></a></strong>
                             <h3>{{ texto.titulo }}</h3>
-                            {{texto.ejemplo}}
+                            {{texto.ejemplo | nl2br}}
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" ><label>Lecturas: {{ texto.numVisitas }}</label></div>
                         <a href="{{ path('app_texto_addTorevista', {'id': texto.id}) }}">

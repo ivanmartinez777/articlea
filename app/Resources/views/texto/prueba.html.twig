@@ -4,8 +4,8 @@
 
     {% block body %}
 
-        <a href="{{ path('app_texto_index') }}">Volver</a> <br>
-        <a href="{{ path('fos_user_profile_edit') }}">Actualizar perfil</a> <br>
+
+
 
         {% for revistaTexto in revistaTextos %}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"   style="margin-top: 2%; ">
@@ -21,7 +21,7 @@
                         </div>
                         <div class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             {% if revistaTexto.texto.image == null %}
-                                <img src="{{ asset("images/maquinapequeña.jpg.jpg") }}" class="img-responsive" alt="siu">
+                                <img src="{{ asset("images/maquinapequeña.jpg") }}" class="img-responsive" alt="siu">
                             {% else %}
                                 <img src="{{ asset("images/upload/" ~revistaTexto.texto.image) }}" class="img-responsive" alt="siu">
                             {% endif %}
@@ -29,7 +29,7 @@
                         <div class="panel-body " id="cajaTexto">
                             <em>{{ revistaTexto.texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': revistaTexto.texto.author}) }}"><strong>{{ revistaTexto.texto.author }}</strong></a></strong>
                             <h3>{{ revistaTexto.texto.titulo }}</h3>
-                            {{revistaTexto.texto.ejemplo}}
+                            {{revistaTexto.texto.ejemplo | nl2br}}
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" ><label>Lecturas: {{ revistaTexto.texto.numVisitas }}</label></div>
 
@@ -43,6 +43,8 @@
 
 
         {% endfor %}
-
+        <div class="navigation text-center  col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {{ knp_pagination_render(revistaTextos) }}
+        </div>
     {% endblock %}
 

@@ -25,5 +25,7 @@
             <a href="{{ path('app_usuario_remove', {'id': usuario.id}) }}">Eliminar</a> <br>
 
         {% endfor %}
-
+        <div class="navigation text-center">
+            {{ knp_pagination_render(usuarios) }}
+        </div>
     {% endblock %}

@@ -36,8 +36,6 @@
     margin-top: 3%;
 }
 
-
-
 #buscar:hover{
     background-color: lightgrey;
 }
@@ -95,6 +93,15 @@ a .tag{
 
 }
 
+#usuarioDatos{
+
+    margin-top: 2%;
+    text-align : center;
+}
+
+.btn-success{
+    background-color: #3D918E;
+}
 
 
 
@@ -109,8 +116,6 @@ a .tag{
 
     #usuarioDatos{
         text-align: center;
-
-
     }
 
 }

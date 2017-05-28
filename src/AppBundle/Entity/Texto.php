@@ -393,6 +393,7 @@ class Texto
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
         $this->tags = new ArrayCollection();
+        $this->comentarios = new ArrayCollection();
         $this->numVisitas = 0;
         $this->ejemplo = "";
 

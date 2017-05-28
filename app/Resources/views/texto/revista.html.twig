@@ -4,12 +4,28 @@
 
     {% block body %}
 
+        <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <a href="{{ path('app_texto_revistaTextosFav') }}">
+                <button type="button" class="btn btn-warning  col-xs-12 col-sm-12 col-md-offset-9 col-md-1 col-lg-offset-9 col-lg-1" style="margin-top:-20px;">
+                                            <span class="glyphicon glyphicon-bookmark" aria-hidden="true">
+                                                </span>
+                </button>
 
-        <a href="{{ path('app_texto_revistaTextosFav') }}">favs</a>
+                <a href="{{ path('fos_user_profile_edit') }}">
+                <button type="button" class="btn btn-success  col-xs-12 col-sm-12 col- col-md-1 col-lg-1" style="margin-top:-20px;">
+                                            <span class="glyphicon glyphicon-user" aria-hidden="true">
+                                                </span>
+                </button>
+            </a>
+            <a href="{{ path('app_texto_create') }}">
+                <button type="button" class="btn btn-info   col-xs-12 col-sm-12 col-md-1  col-lg-1" style="margin-top:-20px;">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true">
+                                                </span>
+                    </button>
+            </a>
+          </div>
 
 
-        <a href="{{ path('app_texto_index') }}">Volver</a> <br>
-        <a href="{{ path('fos_user_profile_edit') }}">Actualizar perfil</a> <br>
         {% for revistaTexto in revistaTextos %}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"   style="margin-top: 2%; ">
                 <div class="panel-group">
@@ -53,7 +69,7 @@
                         <div class="panel-body " id="cajaTexto">
                             <em>{{ revistaTexto.texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': revistaTexto.texto.author}) }}"><strong>{{ revistaTexto.texto.author }}</strong></a></strong>
                             <h3>{{ revistaTexto.texto.titulo }}</h3>
-                            {{revistaTexto.texto.ejemplo}}
+                            {{revistaTexto.texto.ejemplo | nl2br}}
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" ><label>Lecturas: {{ revistaTexto.texto.numVisitas }}</label></div>
 
@@ -67,6 +83,8 @@
 
 
         {% endfor %}
-
+        <div class="navigation text-center  col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {{ knp_pagination_render(revistaTextos) }}
+        </div>
     {% endblock %}
 

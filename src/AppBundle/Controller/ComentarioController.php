@@ -16,14 +16,24 @@ class ComentarioController extends Controller
      * @Route("/show/{id}", name="app_comentario_index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($id)
+    public function indexAction($id, Request $request)
     {
         $m = $this->getDoctrine()->getManager();
         $repo = $m->getRepository('AppBundle:Comentario');
         $comentarios = $repo->findBy(array('texto'=>$id));
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $comentariospaginados = $paginator->paginate(
+            $comentarios,
+            $request->query->getInt('page',1),
+            10
+        );
         return $this->render(':comentario:index.html.twig',
             [
-                'comentarios' => $comentarios,
+                'comentarios' => $comentariospaginados,
+                'texto'=>$id,
             ]
         );
     }

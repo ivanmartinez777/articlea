@@ -21,7 +21,7 @@
                         <em>{{ texto.createdAt | date}}</em> by <strong>{{texto.author}}</strong>
                         <br>
                         <br>
-                        <p  style="text-align : justify;">{{texto.cuerpo}}</p>
+                        <p  style="text-align : justify;">{{texto.cuerpo | nl2br}}</p>
 
                     </div>
                     <!--Barra de me gusta y enviar a revita-->
@@ -39,6 +39,7 @@
 
 
                     <!--Editar y Borrar texto-->
+                    {% if app.user %}
                     {% if (app.user == texto.author) or (app.user.hasRole('ROLE_ADMIN')) %}
                         <div name="Edicion y eliminacion">
                             <a href="{{ path('app_texto_update', {'id': texto.id}) }}">
@@ -48,6 +49,7 @@
                                  <button type="button" class="btn btn-danger col-xs-6 col-sm-5 col-md-5   col-lg-5"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
                             </a>
                         </div>
+                    {% endif %}
                     {% endif %}
                     <!--Tags-->
 
@@ -123,6 +125,7 @@
                     <br>
                     <br>
                     {{ render(controller('AppBundle:Comentario:index', {'id': texto.id})) }}
+
 
 
                 </div>

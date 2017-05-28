@@ -1,24 +1,72 @@
 {% extends '::base.html.twig' %}
 
-    {% block tittle %}Textos{% endblock %}
+    {% block tittle %}{% endblock %}
 
     {% block body %}
-        Usuario:{{ user.username }}<br>
-        Email:{{  user.email }}<br>
-
-
-        <a href="{{ path('app_texto_index') }}">Volver</a> <br>
-        <p>"{{ user.descripcion  }}"</p>
-        {% if user.image == null %}
-            <img src="{{ asset("images/profile.jpg") }}" class="img-responsive" >
-        {% else %}
-            <img src="{{ asset("images/upload/" ~usuario.image) }}" class="img-responsive"  >
-        {% endif %}
 
 
 
-        {% for texto in textos %}
-            {{ include('texto/texto.html.twig', { 'texto': texto }) }}
-        {% endfor %}
+        <div class="col-xs-12   col-sm-12  col-md-offset-2  col-md8 col-md-offset-2 col-lg-offset-2 col-lg-8 col-lg-offset-2" style="background-color:#FBFCFC   ;">
+            <div class="panel-group">
 
+                    <div class="panel-body col-xs-12 col-sm-3 col-md-3 col-lg-3 " id="imagenPerfil">
+                        {% if usuario.image == null %}
+                            <img src="{{ asset("images/profile.jpg") }}" class="img-responsive" >
+                        {% else %}
+                            <img src="{{ asset("images/upload/" ~usuario.image) }}" class="img-responsive"  >
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" id="usuarioDatos">
+
+                            <h2>{{usuario.username}}</h2>
+
+                        </div>
+
+
+
+                        {% if app.user %}
+                            {% if app.user == usuario %}
+
+                            {% elseif  usuario in app.user.getSuscripciones() %}
+
+                                <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario}) }}">
+                                    <button class=" btn btn-danger col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 2%">Quitar suscripcion
+                                    </button>
+                                </a>
+                                <br>
+                            {% else %}
+                                <a href="{{ path('app_usuario_suscripcion', {'usuario': usuario}) }}">
+                                    <button class=" btn btn-danger col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 2%">Suscripcion
+                                    </button>
+                                </a>
+                                <br>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+                    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" id="usuarioDatos">
+                        <em>"{{usuario.descripcion}}" </em>
+
+                    </div>
+
+                </div>
+
+
+        </div>
+
+
+
+        <div class= "container-fluid">
+            <div class= "row">
+                {% for texto in textos %}
+                    {{ include('texto/texto.html.twig', { 'texto': texto }) }}
+
+                {% endfor %}
+            </div>
+        </div>
+        <div class="navigation text-center  col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {{ knp_pagination_render(textos) }}
+        </div>
     {% endblock %}

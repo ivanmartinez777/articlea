@@ -23,5 +23,7 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-
+        <div class="navigation text-center">
+            {{ knp_pagination_render(usuarios) }}
+        </div>
     {% endblock %}

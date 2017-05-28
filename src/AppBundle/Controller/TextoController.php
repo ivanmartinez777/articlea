@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Form\TextoType;
 use AppBundle\Entity\Tag;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 
@@ -18,16 +19,26 @@ class TextoController extends Controller
 {
    /**
     * @Route("/", name="app_texto_index")
+    *
     * @return \Symfony\Component\HttpFoundation\Response
     */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Texto');
         $textos = $repo->findBy(array(), array('id' => 'DESC'));
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $textospaginados = $paginator->paginate(
+            $textos,
+            $request->query->getInt('page',1),
+            6
+        );
         return $this->render(':texto:index.html.twig',
         [
-            'textos' => $textos,
+            'textos' => $textospaginados,
 
         ]
         );
@@ -36,7 +47,7 @@ class TextoController extends Controller
     /**
      * @Route("/soloTexto/{id}", name="app_texto_individual")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
+     *
      */
     public function individualAction($id)
     {
@@ -66,6 +77,7 @@ class TextoController extends Controller
         $texto->setNumVisitas();
         $em->persist($texto);
         $em->flush();
+
         return $this->render(':texto:textoInd.html.twig',
             [
                 'texto' => $texto,
@@ -81,7 +93,7 @@ class TextoController extends Controller
     /**
      * @Route("/show_{author}", name="app_texto_show")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
+     *
      */
     public function showAction($author, Request $request)
     {
@@ -98,10 +110,20 @@ class TextoController extends Controller
 
         $textos = $repo->findBy(['author' => $idAuthor]);
         //busco los textos que tengan como autor esa id
+
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $textospaginados = $paginator->paginate(
+            $textos,
+            $request->query->getInt('page',1),
+            6
+        );
         return $this->render(':texto:show.html.twig',
             [
-                'textos' => $textos,
-                'user' => $user,
+                'textos' => $textospaginados,
+                'usuario' => $user,
             ]
         );
 
@@ -111,7 +133,7 @@ class TextoController extends Controller
     /**
      * @Route("/textoPorCategoria/{categoria}", name="app_textoCategoria_show")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
+     *
      */
 
     public function textoCategoriaAction($categoria, Request $request)
@@ -120,9 +142,19 @@ class TextoController extends Controller
         $repo = $em->getRepository('AppBundle:Texto');
         $textos = $repo->findBy(['categoria' => $categoria]);
 
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $textospaginados = $paginator->paginate(
+            $textos,
+            $request->query->getInt('page',1),
+            6
+        );
+
         return $this->render(':texto:textosPorCategoria.html.twig',
             [
-                'textos' => $textos,
+                'textos' => $textospaginados,
                 'nomCategoria' => $categoria,
             ]
         );
@@ -132,7 +164,7 @@ class TextoController extends Controller
     /**
      * @Route("/textoPorTag/{tag}", name="app_textoTag_show")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
+     *
      */
 
     public function textoTagAction($tag, Request $request)
@@ -140,9 +172,18 @@ class TextoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $textos =$em->getRepository('AppBundle:Texto')->buscarPorTag($tag);
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $textospaginados = $paginator->paginate(
+            $textos,
+            $request->query->getInt('page',1),
+            6
+        );
         return $this->render(':texto:textosPorCategoria.html.twig',
             [
-                'textos' => $textos,
+                'textos' => $textospaginados,
 
             ]
         );
@@ -152,7 +193,7 @@ class TextoController extends Controller
     /**
      * @Route("/textoPorTitulo/{palabra}", name="app_textoTitulo_show")
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
+     *
      */
 
     public function textoPalabraAction($palabra, Request $request)
@@ -160,6 +201,16 @@ class TextoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $textos =$em->getRepository('AppBundle:Texto')->buscarPorTitulo($palabra);
+
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $textospaginados = $paginator->paginate(
+            $textos,
+            $request->query->getInt('page',1),
+            6
+        );
         return $this->render(':texto:textosPorCategoria.html.twig',
             [
                 'textos' => $textos,
@@ -387,9 +438,19 @@ class TextoController extends Controller
         $revistaTextos = $repo->findBy(array('revista'=>$revista),
             array('createdAt'=>'DESC'));
 
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $textospaginados = $paginator->paginate(
+            $revistaTextos,
+            $request->query->getInt('page',1),
+            6
+        );
+
         return $this->render(':texto:revista.html.twig',
             [
-                'revistaTextos' => $revistaTextos,
+                'revistaTextos' => $textospaginados,
 
             ]
         );
@@ -410,9 +471,19 @@ class TextoController extends Controller
         $repo = $em->getRepository('AppBundle:RevistaTexto');
        $revistaTextos = $repo->buscarFavs($revista);
 
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $textospaginados = $paginator->paginate(
+            $revistaTextos,
+            $request->query->getInt('page',1),
+            6
+        );
+
         return $this->render(':texto:prueba.html.twig',
             [
-                'revistaTextos' => $revistaTextos,
+                'revistaTextos' => $textospaginados,
 
 
             ]

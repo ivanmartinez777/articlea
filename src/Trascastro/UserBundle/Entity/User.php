@@ -362,6 +362,7 @@ class User extends BaseUser
         $this->updatedAt    = $this->createdAt;
         $this->suscriptores = new ArrayCollection();
         $this->suscripciones = new ArrayCollection();
+        $this->setDescripcion("Articulista en Mygazine");
     }
 
 
