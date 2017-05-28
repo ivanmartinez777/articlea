@@ -1,38 +1,37 @@
 {% block body %}
 
-                    <div class="panel panel-default">
-                        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-
-                        {% if comentarios is empty %}
-                            <h2>Aun no hay comentarios, se el primero en hacerlo</h2>
-                        {% else %}
-                            {% for comentario in comentarios %}
-                                <div class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        {% if comentario.author.image == null %}
-                                            <img src="{{ asset("images/maquinapequeña.jpg") }}" class="img-responsive" alt="siu">
-                                        {% else %}
-                                            <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" alt="siu">
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                                        <div  class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12" ><b>{{ comentario.author }}</b><br><em>{{ comentario.createdAt | date}}</em></div>
-
-                                    </div>
-                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
-                                        <h1 style="text-align:center;">#{{ comentario.id }}</h1>
-                                    </div>
-                                </div>
-                                <div class="panel-body col-xs-12  col-sm-12 col-md-12 col-lg-12">
-                                    {{ comentario.cuerpo }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        {%  if app.user%}
-                        {{ render(controller('AppBundle:Comentario:create', {'id': texto})) }}
+    <div class="panel panel-default">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md8 col-md-offset-2 col-lg-8 col-lg-offset-2" style="color:white; background-color:#2A578E; border-radius:2%;">
+            <h3><em>COMENTARIOS</em></h3>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+            {% if comentarios is empty %}
+                <h2>Aun no hay comentarios, se el primero en hacerlo</h2>
+            {% else %}
+                {% for comentario in comentarios %}
+                    <div class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            {% if comentario.author.image == null %}
+                                <img src="{{ asset("images/maquinapequeña.jpg") }}" class="img-responsive" alt="siu">
+                            {% else %}
+                                <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" alt="siu">
                             {% endif %}
                         </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <div  class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12" ><b>{{ comentario.author }}</b><br><em>{{ comentario.createdAt | date}}</em></div>
+                        </div>
+
                     </div>
+                    <div class="panel-body col-xs-12  col-sm-12 col-md-12 col-lg-12" style="font-size:1.2em;">
+                        {{ comentario.cuerpo }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {%  if app.user%}
+                {{ render(controller('AppBundle:Comentario:create', {'id': texto})) }}
+            {% endif %}
+        </div>
+    </div>
     <div class="navigation text-center  col-xs-12 col-sm-12 col-md-12 col-lg-12">
         {{ knp_pagination_render(comentarios) }}
     </div>
