@@ -60,7 +60,7 @@ p {
 .tag{
     float: left;
     margin-right:1%;
-    background-color: #FF9900;
+    background-color: #F9BD5C;
     padding: 2%;
     border-radius: 5%;
     margin-top: 2%;
@@ -103,6 +103,32 @@ a .tag{
     text-decoration: none;
     color: black;
 }
+
+.btn-success{
+    background-color: #3D918E !important;
+
+}
+
+.btn-danger{
+    background-color: #C66937 !important;
+
+}
+
+.btn-warning{
+    background-color: #F9BD5C !important;
+
+}
+.btn-info{
+    background-color: #2A578E !important;
+
+}
+
+.btn-default{
+    background-color: #F4FFFD !important;
+}
+
+
+
 
 .botonesRevista{
     margin-bottom: 10px;
