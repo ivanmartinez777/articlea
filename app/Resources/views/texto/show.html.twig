@@ -4,7 +4,8 @@
 
     {% block body %}
 
-
+    {% if app.user %}
+        {% if  app.user != usuario %}
 
         <div class="col-xs-12   col-sm-12  col-md-offset-2  col-md8 col-md-offset-2 col-lg-offset-2 col-lg-8 col-lg-offset-2" style="background-color:#FBFCFC   ;">
             <div class="panel-group">
@@ -55,7 +56,8 @@
 
 
         </div>
-
+        {% endif %}
+    {% endif %}
 
 
         <div class= "container-fluid">

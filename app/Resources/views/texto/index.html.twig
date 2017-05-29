@@ -8,13 +8,6 @@
     {% block body %}
 
 
-            {% if app.user %}
-                {% if app.user.hasRole('ROLE_ADMIN') %}
-                    <a href="{{ path('app_categoria_index') }}" style="margin-top: 10%;">Categorias</a> <br>
-                    <a href="{{ path('app_usuarios_index') }}">Usuarios</a> <br>
-                {% endif %}
-            {% endif %}
-
 <div class= "container-fluid">
     <div class= "row">
         {% for texto in textos %}

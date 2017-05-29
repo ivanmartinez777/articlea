@@ -2,6 +2,7 @@
 
 namespace Trascastro\UserBundle\Form;
 
+use AppBundle\Form\RevistaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,6 +25,8 @@ class UserProfileType extends AbstractType
                 'download_link'=>false,
             ])
             ->add('descripcion', TextType::class)
+
+            ->add('revista', RevistaType::class);
 
         ;
 

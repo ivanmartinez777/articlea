@@ -99,10 +99,14 @@ a .tag{
 
 }
 
-.btn-success{
-    background-color: #3D918E;
+#usuarioDatos a{
+    text-decoration: none;
+    color: black;
 }
 
+.botonesRevista{
+    margin-bottom: 10px;
+}
 
 
 @media(max-width:780px){
@@ -116,6 +120,10 @@ a .tag{
 
     #usuarioDatos{
         text-align: center;
+    }
+
+    .botonesRevista{
+        margin-top: 0;
     }
 
 }

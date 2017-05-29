@@ -489,7 +489,7 @@ class TextoController extends Controller
             6
         );
 
-        return $this->render(':texto:prueba.html.twig',
+        return $this->render(':texto:favoritos.html.twig',
             [
                 'revistaTextos' => $textospaginados,
 

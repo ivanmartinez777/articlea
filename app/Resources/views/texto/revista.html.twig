@@ -4,25 +4,34 @@
 
     {% block body %}
 
-        <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-            <a href="{{ path('app_texto_revistaTextosFav') }}">
-                <button type="button" class="btn btn-warning  col-xs-12 col-sm-12 col-md-offset-9 col-md-1 col-lg-offset-9 col-lg-1" style="margin-top:-20px;">
+        <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12 botonesRevista" >
+            <a href="{{ path('app_texto_show', {'author': app.user}) }}">
+                <button type="button" class="btn btn-default  col-xs-12 col-sm-12 col-md-offset-8 col-md-1 col-lg-offset-8 col-lg-1" >
+                                           Mis articulos
+                </button>
+            </a>
+
+                <a href="{{ path('app_texto_revistaTextosFav') }}">
+                <button type="button" class="btn btn-warning  col-xs-12 col-sm-12 9 col-md-1  col-lg-1 botonesRevista">
                                             <span class="glyphicon glyphicon-bookmark" aria-hidden="true">
                                                 </span>
                 </button>
 
+                    </a>
+
                 <a href="{{ path('fos_user_profile_edit') }}">
-                <button type="button" class="btn btn-success  col-xs-12 col-sm-12 col- col-md-1 col-lg-1" style="margin-top:-20px;">
+                <button type="button" class="btn btn-success  col-xs-12 col-sm-12 col- col-md-1 col-lg-1 botonesRevista" >
                                             <span class="glyphicon glyphicon-user" aria-hidden="true">
                                                 </span>
                 </button>
             </a>
             <a href="{{ path('app_texto_create') }}">
-                <button type="button" class="btn btn-info   col-xs-12 col-sm-12 col-md-1  col-lg-1" style="margin-top:-20px;">
+                <button type="button" class="btn btn-info   col-xs-12 col-sm-12 col-md-1  col-lg-1 botonesRevista" >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true">
                                                 </span>
                     </button>
             </a>
+
           </div>
 
 

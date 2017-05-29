@@ -18,7 +18,7 @@ class RevistaTextoRepository extends \Doctrine\ORM\EntityRepository
                                   from AppBundle:RevistaTexto rt 
                                    WHERE rt.texto = :texto
                                    and rt.revista = :revista
-                                   ")
+                                   order by rt.createdAt DESC")
 
 
             ->setParameters(array(
@@ -56,7 +56,7 @@ class RevistaTextoRepository extends \Doctrine\ORM\EntityRepository
                                   from AppBundle:RevistaTexto teRe 
                                   WHERE teRe.fav = TRUE 
                                    and teRe.revista = :revista
-                                   ")
+                                    order by teRe.createdAt DESC")
             ->setParameter('revista', $revista )
 
 

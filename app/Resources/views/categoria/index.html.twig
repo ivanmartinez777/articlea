@@ -3,6 +3,14 @@
 
 
     {% block body %}
+<div class="raw">
+    <a href="{{ path('app_usuarios_index') }}">
+        <button type="button" class="btn btn-default  col-xs-12 col-sm-12 col-md-offset-11 col-md-1 col-lg-offset-11 col-lg-1" style="margin-bottom: 3%;" >
+            Usuarios
+        </button>
+    </a>
+
+</div>
 
         {% if categorias is empty %}
            <<div class= "container-fluid">

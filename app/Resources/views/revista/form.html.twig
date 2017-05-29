@@ -1,0 +1,14 @@
+
+
+{% block body %}
+    <!-- http://stackoverflow.com/questions/18848870/how-to-display-all-form-error-at-one-place -->
+    <div>
+        <form method="post" action="{{ action }}" novalidate="novalidate">
+
+            <div>Nombre de tu revista: {{ form_errors(form.nombre) }} {{ form_widget(form.nombre)}}</div>
+
+            {{ form_rest(form) }} <!-- prints hidden fields and others -->
+            <div><input type="submit" value="Ok"></div>
+        </form>
+    </div>
+{% endblock %}

@@ -3,29 +3,70 @@
 
 
     {% block body %}
-        <a href="{{ path('app_texto_index')}}">Volver</a> <br>
+        <div class="raw">
+        <a href="{{ path('app_categoria_index') }}">
+            <button type="button" class="btn btn-default  col-xs-12 col-sm-12 col-md-offset-11 col-md-1 col-lg-offset-11 col-lg-1" style="margin-bottom: 3%;" >
+                categorias
+            </button>
+        </a>
+
+        </div>
+<div class="raw"></div>
     <form action="{{ path('app_usuario_buscarUsuario') }}" method="post">
-        Nombre: <input type="text" name="busquedaUsuario">
+
+       <label class=" label-default col-xs-12 col-sm-12 col-md-1 col-lg-1 " style="color:white; border-radius:5%;"> <h4>Nombre</h4></label>
+       <input  type="text"  class="form-control"  name="busquedaUsuario">
         <input type="submit">
     </form>
+        </div>
 
 
         {% for usuario in usuarios %}
+            <div class="col-xs-12 col-sm-offset-1  col-sm-10 col-sm-offset-1  col-md-offset-1  col-md-10 col-md-offset-1 col-lg-offset-1 col-lg-10 col-lg-offset-1" style="background-color:#FBFCFC; margin-bottom: 5%">
+                <div class="panel-group">
 
-            {% if usuario.image == null %}
-            <img src="{{ asset("images/profile.png") }}" class="img-responsive" width="304" height="236">
-            {% else %}
-           <img src="{{ asset("images/upload/" ~usuario.image) }}" class="img-responsive" width="304" height="236" >
-                {% endif %}
-           <h4>{{ usuario.id }}.{{ usuario.username }}</h4>
-            {% if usuario.hasRole('ROLE_ADMIN') %}
-                <p>Administrador</p>
-            {% endif %}
-                <a href="{{ path('app_usuario_cambiarRole', {'id': usuario.id}) }}">Cambiar rol</a> <br>
-            <a href="{{ path('app_usuario_remove', {'id': usuario.id}) }}">Eliminar</a> <br>
+                    <div class="panel-body col-xs-12 col-sm-2 col-md-2 col-lg-2 " id="imagenPerfil">
+                        {% if usuario.image == null %}
+                            <img src="{{ asset("images/profile.jpg") }}" class="img-responsive" >
+                        {% else %}
+                            <img src="{{ asset("images/upload/" ~usuario.image) }}" class="img-responsive"  >
+                        {% endif %}
+                    </div>
 
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" id="usuarioDatos">
+                            <a href="{{ path('app_texto_show', {'author': usuario}) }}">
+                                <h2>{{usuario.username}}</h2>
+                            </a>
+
+                        </div>
+
+                        {% if usuario.hasRole('ROLE_ADMIN') %}
+                            <a href="{{ path('app_usuario_cambiarRole', {'id': usuario.id}) }}">
+                                <button class=" btn btn-info col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 2%">Administrador
+                                </button>
+                            </a>
+                            <br>
+                        {% else%}
+                            <a href="{{ path('app_usuario_cambiarRole', {'id': usuario.id}) }}">
+                                <button class=" btn btn-success col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 2%">user
+                                </button>
+                            </a>
+                            <br>
+                        {% endif %}
+                        <a href="{{ path('app_usuario_remove', {'id': usuario.id}) }}">
+                            <button class=" btn btn-danger col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 2%">Eliminar Usuario
+                            </button>
+                        </a>
+                        <br>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
         {% endfor %}
-        <div class="navigation text-center">
-            {{ knp_pagination_render(usuarios) }}
-        </div>
     {% endblock %}

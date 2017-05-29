@@ -11,7 +11,17 @@
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"   style="margin-top: 2%; ">
                 <div class="panel-group">
                     <div class="panel panel-default">
+                        <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height:40px; ">
 
+                            <a href="{{ path('app_texto_favRevista', {'id': revistaTexto.texto.id}) }}">
+                                <button type="button" class="btn btn-danger col-xs-offset-6 col-xs-6 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4" >
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                            </a>
+
+
+
+                        </div>
                         <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <a href="{{ path('app_textoCategoria_show', {'categoria': revistaTexto.texto.categoria}) }}"  style="color: white; text-decoration: none">
                                 <button type="button" class="btn btn-warning col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -40,6 +50,8 @@
                     </div>
                 </div>
             </div>
+
+
 
 
         {% endfor %}
