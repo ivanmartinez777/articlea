@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Form\TextoType;
 use AppBundle\Entity\Tag;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 
@@ -21,6 +20,9 @@ class TextoController extends Controller
     * @Route("/", name="app_texto_index")
     *
     * @return \Symfony\Component\HttpFoundation\Response
+    *
+    *
+    * Esta función es la que sirve para mandar todos los textos a la página de textos
     */
     public function indexAction(Request $request)
     {
@@ -48,6 +50,10 @@ class TextoController extends Controller
      * @Route("/soloTexto/{id}", name="app_texto_individual")
      * @return \Symfony\Component\HttpFoundation\Response
      *
+     * Esta es la función que se utiliza cuando se lee un texto en particular. Envía cuatro tipos de datos
+     * el texto que se va a leer, los dos textos más leidos de esa categoria, el texto más leido del autor
+     * y por ultimo el propio usuario. Esta función, añade 1 a las visualizaciones del texto, además de
+     * pasar a ser leido el texto en la revista del usuario.
      */
     public function individualAction($id)
     {
@@ -94,6 +100,8 @@ class TextoController extends Controller
      * @Route("/show_{author}", name="app_texto_show")
      * @return \Symfony\Component\HttpFoundation\Response
      *
+     * Esta es la función encargada de mostrar todos los textos de un usuario.
+     *
      */
     public function showAction($author, Request $request)
     {
@@ -134,6 +142,8 @@ class TextoController extends Controller
      * @Route("/textoPorCategoria/{categoria}", name="app_textoCategoria_show")
      * @return \Symfony\Component\HttpFoundation\Response
      *
+     * Esta es la función que devuelve todos los textos de una categoria
+     *
      */
 
     public function textoCategoriaAction($categoria, Request $request)
@@ -152,10 +162,10 @@ class TextoController extends Controller
             6
         );
 
-        return $this->render(':texto:textosPorCategoria.html.twig',
+        return $this->render(':texto:index.html.twig',
             [
                 'textos' => $textospaginados,
-                'nomCategoria' => $categoria,
+
             ]
         );
 
@@ -164,6 +174,8 @@ class TextoController extends Controller
     /**
      * @Route("/textoPorTag/{tag}", name="app_textoTag_show")
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * Devuelve todos los textos por tag
      *
      */
 
@@ -181,7 +193,7 @@ class TextoController extends Controller
             $request->query->getInt('page',1),
             6
         );
-        return $this->render(':texto:textosPorCategoria.html.twig',
+        return $this->render(':texto:index.html.twig',
             [
                 'textos' => $textospaginados,
 
@@ -193,6 +205,8 @@ class TextoController extends Controller
     /**
      * @Route("/textoPorTitulo/{palabra}", name="app_textoTitulo_show")
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * Devuelve todos los textos por la busqueda de una palabra en el titulo
      *
      */
 
@@ -211,9 +225,9 @@ class TextoController extends Controller
             $request->query->getInt('page',1),
             6
         );
-        return $this->render(':texto:textosPorCategoria.html.twig',
+        return $this->render(':texto:index.html.twig',
             [
-                'textos' => $textos,
+                'textos' => $textospaginados,
 
             ]
         );
@@ -225,7 +239,10 @@ class TextoController extends Controller
     /**
      * @Route("/create", name="app_texto_create")
      *@return \Symfony\Component\HttpFoundation\Response
-     *  @Security("has_role('ROLE_USER')")
+     * @Security("has_role('ROLE_USER')")
+     *
+     * Función usada para crear los textos
+     *
      */
     public function createAction()
 
@@ -301,6 +318,8 @@ class TextoController extends Controller
      * @Route("/update/{id}", name="app_texto_update")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Funcion creada para actualizar los textos
      */
     public function updateAction($id)
     {
@@ -361,6 +380,8 @@ class TextoController extends Controller
      * @Route("/remove/{id}", name="app_texto_remove")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función utilizada para eliminar los textos
      */
     public function removeAction( $id)
     {
@@ -384,6 +405,8 @@ class TextoController extends Controller
     /**
      * @Route("/buscar", name="app_texto_buscar")
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * Recibe la palabra que se busca y el entorno en que buscar
      */
     public function buscarAction(Request $request)
     {
@@ -405,6 +428,8 @@ class TextoController extends Controller
      * @Route("/enviarTexto", name="app_texto_enviarTexto")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Esta funcion es la encargada de enviar los textos nuevos a los suscriptores
      */
 
     public function enviarSuscriptor()
@@ -435,6 +460,8 @@ class TextoController extends Controller
      * @Route("/revista", name="app_texto_revista")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función encargada de mandar los textos guardados en la revista
      */
 
     public function textoRevistaAction( Request $request)
@@ -469,6 +496,8 @@ class TextoController extends Controller
      * @Route("/revistaTextosFav", name="app_texto_revistaTextosFav")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función encargada de mandar los textos guardados en favoritos
      */
 
     public function revistaTextoFavAction( Request $request)
@@ -506,6 +535,8 @@ class TextoController extends Controller
      * @Route("/setEjemplo/{id}", name="app_texto_setEjemplo")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * función encargada de establecer el texto de ejemplo del texto
      */
 
     public function setEjemploAction()

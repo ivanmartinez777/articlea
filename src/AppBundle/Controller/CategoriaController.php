@@ -19,7 +19,7 @@ class CategoriaController extends Controller
     * @Route("/categoria/", name="app_categoria_index")
     * @return \Symfony\Component\HttpFoundation\Response
     *
-    *
+    *Función que devuelve todas las categorias
     */
     public function indexAction()
     {
@@ -42,6 +42,7 @@ class CategoriaController extends Controller
      * @Route("/categoriaCreate", name="app_categoria_create")
      * @return \Symfony\Component\HttpFoundation\Response
      *
+     * Función que crea categorias
      */
     public function createAction()
 
@@ -96,6 +97,8 @@ class CategoriaController extends Controller
      * @Route("/categoriaUpdate/{id}", name="app_categoria_update")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_ADMIN')")
+     *
+     * Función que actualiza categorias
      */
     public function updateAction($id)
     {
@@ -120,6 +123,8 @@ class CategoriaController extends Controller
      * @Route("/categoriaDoUpdate/{id}", name="app_categoria_doUpdate")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_ADMIN')")
+     *
+     *
      */
     public function doUpdateAction($id, Request $request)
     {
@@ -154,6 +159,8 @@ class CategoriaController extends Controller
      * @Route("/categoriaRemove/{id}", name="app_categoria_remove")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_ADMIN')")
+     *
+     * Función que elimina categorias
      */
     public function removeAction( $id)
     {

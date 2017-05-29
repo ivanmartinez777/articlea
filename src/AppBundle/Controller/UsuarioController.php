@@ -20,6 +20,8 @@ class UsuarioController extends Controller
     /**
      * @Route("/suscripcion/{usuario}", name="app_usuario_suscripcion")
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * Función encargada de suscribir o eliminar suscripcion
      */
     public function suscribeAction($usuario)
     {
@@ -32,7 +34,7 @@ class UsuarioController extends Controller
         if(in_array($suscripcion,$user->getSuscripciones()))
         {
             $user->removeSuscripcion($suscripcion);
-            $estadoSuscripcion = "eliminado la suscripcion de " ;
+            $estadoSuscripcion = "has eliminado la suscripción de " ;
         }else {
             $user->addSuscripcion($suscripcion);
         }
@@ -44,6 +46,8 @@ class UsuarioController extends Controller
     /**
      * @Route("/usuarios", name="app_usuarios_index")
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * Funcion que se encarga de enviar los usuarios a la vista para que el admin pueda trabajar con ellos
      *
      */
     public function indexAction(Request $request)
@@ -76,6 +80,8 @@ class UsuarioController extends Controller
      * @Route("/cambiarRole/{id}", name="app_usuario_cambiarRole")
      * @return \Symfony\Component\HttpFoundation\Response
      *@Security("has_role('ROLE_ADMIN')")
+     *
+     * Función encargada de cambiar el role
      */
     public function cambiarRoleAction($id)
 
@@ -101,6 +107,8 @@ class UsuarioController extends Controller
      * @Route("/removeUser/{id}", name="app_usuario_remove")
      *@return \Symfony\Component\HttpFoundation\Response
      *@Security("has_role('ROLE_ADMIN')")
+     *
+     * Función encargada de eliminar a un usuario
      */
     public function removeUserAction( $id)
     {
@@ -130,6 +138,8 @@ class UsuarioController extends Controller
      * @Route("/usuarioPorUsername/{palabra}", name="app_usuariosUsername_show")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función utilizada para enviar usuarios a la vista cuando se busca por su nombre
      */
 
     public function usuariosUsernameAction($palabra, Request $request)
@@ -160,6 +170,8 @@ class UsuarioController extends Controller
      * @Route("/usuariosPorUsername/{palabra}", name="app_usuariosUsername_index")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_ADMIN')")
+     *
+     * Función que ayuda en la vista a buscar usuarios por el username para trabajar con ellos
      */
 
     public function usuariosIndexAction($palabra, Request $request)

@@ -16,6 +16,8 @@ class ComentarioController extends Controller
     /**
      * @Route("/show/{id}", name="app_comentario_index")
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * Función que devuelve todos los comentarios de un texto
      */
     public function indexAction($id, Request $request)
     {
@@ -43,6 +45,8 @@ class ComentarioController extends Controller
      * @Route("/create/{id}", name="app_comentario_create")
      *@return \Symfony\Component\HttpFoundation\Response
      *  @Security("has_role('ROLE_USER')")
+     *
+     * Función que crea comentarios en un texto
      */
     public function createAction($id)
     {
@@ -100,6 +104,8 @@ class ComentarioController extends Controller
      * @Route("/updateComentario/{id}", name="app_comentario_update")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función que actualiza un comentario de un texto
      */
     public function updateAction($id)
     {
@@ -161,6 +167,8 @@ class ComentarioController extends Controller
      * @Route("/removeComment/{id}", name="app_comentario_remove")
      *@return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función que elimina un comentario
      */
     public function removeAction($id)
     {

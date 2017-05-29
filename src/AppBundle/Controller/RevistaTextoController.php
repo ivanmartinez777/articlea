@@ -21,6 +21,8 @@ class RevistaTextoController extends Controller
      * @Route("textosNuevos", name="app_RevistaTexto_textosNuevos")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función que envía el numero de textos no leídos en la revista  al botón de revista
      */
 
     public function textosNuevosRevistaAction()
@@ -50,6 +52,8 @@ class RevistaTextoController extends Controller
      * @Route("addRemove/{id}", name="app_texto_addRemoveRevista")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función que elimina o añade un texto de la revista
      */
 
     public function addRemoveRevistaAction($id)
@@ -89,6 +93,8 @@ class RevistaTextoController extends Controller
      * @Route("/addToRevista/{id}", name="app_texto_addTorevista")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * Función que añade un texto a la revista
      */
 
     public function addToRevistaAction($id)
@@ -151,6 +157,8 @@ class RevistaTextoController extends Controller
      * @Route("/FavRevista/{id}", name="app_texto_favRevista")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
+     *
+     * función que añade un texto a favoritos
      */
 
     public function favRevistaAction($id)
