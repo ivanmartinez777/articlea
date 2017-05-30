@@ -17,7 +17,8 @@ class TextoRepository extends \Doctrine\ORM\EntityRepository
         ->createQuery("SELECT te 
                                   from AppBundle:Texto te 
                                   JOIN te.tags ta
-                                   WHERE ta.nombre LIKE :tag")->setParameter('tag', '%'.$tag.'%' )
+                                   WHERE ta.nombre LIKE :tag
+                                   order by te.createdAt DESC")->setParameter('tag', '%'.$tag.'%' )
 
         ->getResult();
     }
@@ -28,7 +29,8 @@ class TextoRepository extends \Doctrine\ORM\EntityRepository
 
             ->createQuery("SELECT te 
                                   from AppBundle:Texto te 
-                                   WHERE te.titulo LIKE :palabra")->setParameter('palabra', '%'.$palabra.'%' )
+                                   WHERE te.titulo LIKE :palabra
+                                   order by te.createdAt DESC")->setParameter('palabra', '%'.$palabra.'%' )
 
             ->getResult();
     }
