@@ -1,0 +1,4 @@
+
+{% for categoria in categorias %}
+    <li><a href="{{path('app_textoCategoria_show', {'categoria': categoria})}}">{{ categoria.nombre }}</a></li>
+{% endfor %}

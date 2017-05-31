@@ -37,6 +37,28 @@ class CategoriaController extends Controller
         }return $this->redirectToRoute('app_texto_index');
     }
 
+    /**
+     * @Route("/categoriaBase/", name="app_categoria_indexBase")
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     *Función que devuelve todas las categorias
+     */
+    public function indexBaseAction()
+    {
+
+            $m = $this->getDoctrine()->getManager();
+            $repo = $m->getRepository('AppBundle:Categoria');
+
+            $categorias = $repo->findBy(array(), array('nombre' => 'ASC'));
+            return $this->render(':categoria:base.html.twig',
+                [
+                    'categorias' => $categorias,
+                ]
+            );
+
+    }
+
+
 
     /**
      * @Route("/categoriaCreate", name="app_categoria_create")

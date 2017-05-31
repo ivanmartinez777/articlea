@@ -67,16 +67,7 @@
                             </form>
                         </li>
                         <li class="divider"></li>
-                        <li><label>Categorias</label></li>
-                        <li class="divider"></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 44}) }}">Historia y creencias</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 24}) }}">Deporte</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 54}) }}">Ciencia y cultura</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 64}) }}">Ocio</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 74}) }}">Actualidad y sociedad</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 34}) }}">Bienestar y familia</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 84}) }}">Empresa y tecnologia</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 14}) }}">Miscelanea</a></li>
+                        {{ render(controller('AppBundle:Categoria:indexBase')) }}
 
                     </ul>
                 </li>

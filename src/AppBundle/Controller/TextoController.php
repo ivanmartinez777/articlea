@@ -152,7 +152,8 @@ class TextoController extends Controller
         $repository = $em->getRepository('AppBundle:Categoria');
         $cate = $repository->findOneBy(array('nombre'=>$categoria));
         $repo = $em->getRepository('AppBundle:Texto');
-        $textos = $repo->findBy(array('categoria'=>$cate));
+        $textos = $repo->findBy(array('categoria'=>$cate),
+            array('id' => 'DESC'));
 
         /**
          * @var $paginator \knp\Component\Pager\Paginator
