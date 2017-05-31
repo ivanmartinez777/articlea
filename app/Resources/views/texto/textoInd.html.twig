@@ -18,7 +18,7 @@
                         <a href="{{ path('app_textoCategoria_show', {'categoria': texto.categoria}) }} "><div class="col-xs-offset-5 col-xs-7  col-sm-offset-7 col-sm-5 col-md-offset-7 col-md-5  col-lg-offset-7 col-lg-5 tag ">{{texto.categoria}}</div></a>
                         <br>
                         <h1><strong>{{texto.titulo}}</strong></h1>
-                        <em>{{ texto.createdAt | date}}</em> by <strong>{{texto.author}}</strong>
+                        <em>{{ texto.createdAt | date}}</em> by <strong><a href="{{ path('app_texto_show', {'author': texto.author}) }}">{{texto.author}}</strong></a>
                         <br>
                         <br>
                         <p  style="text-align : justify;">{{texto.cuerpo | nl2br}}</p>

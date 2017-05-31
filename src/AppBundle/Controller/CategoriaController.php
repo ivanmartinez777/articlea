@@ -164,11 +164,28 @@ class CategoriaController extends Controller
      */
     public function removeAction( $id)
     {
-        $m = $this->getDoctrine()->getManager();
-        $repository = $m->getRepository('AppBundle:Categoria');
-        $categoria = $repository->find($id);
-        $m->remove($categoria);
-        $m->flush();
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Categoria');
+        $miscelanea = $repository->findOneBy(array('nombre'=>'miscelanea'));
+        $repositoryUsers = $em->getRepository('UserBundle:User');
+        $categoria = $repository->findOneBy(array('id'=>$id));
+        $users = $repositoryUsers->findBy(array('categoria'=>$categoria));
+        $textos = $categoria->getTexto();
+        if ($textos != null){
+            foreach ($textos as $texto)
+                $texto->setCategoria($miscelanea);
+            $em->persist($texto);
+            $em->flush();
+        }
+
+        if ($users != null){
+            foreach ($users as $user)
+               $user->setCategoria($miscelanea);
+            $em->persist($user);
+            $em->flush();
+        }
+        $em->remove($categoria);
+        $em->flush();
 
         return $this->redirectToRoute('app_categoria_index');
     }

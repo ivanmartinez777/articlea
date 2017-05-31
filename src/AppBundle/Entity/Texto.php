@@ -124,9 +124,9 @@ class Texto
     //Categoria
 
     /**
-     * @var mixed
-     * @ORM\Column(name="categoria", type="text")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categoria", inversedBy="textos")
      */
+
     private $categoria;
 
     /**

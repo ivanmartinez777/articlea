@@ -15,4 +15,4 @@
 !var/sessions/.gitkeep
 /vendor/
 /web/bundles/
-/web/images/upload/*
+

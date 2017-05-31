@@ -38,7 +38,7 @@
                 <span class="icon-bar"></span>
                 <!--Son las tres rayas que aparecen en el boton para desplegar en mobiles-->
             </button>
-            <a class="navbar-brand" href="{{ path('app_index_index') }}" id="logoBarra">
+            <a class="navbar-brand" href="{{ path('app_texto_index') }}" id="logoBarra">
                 <img src="{{ asset("images/logo2.jpg") }}" class="img-responsive" width="152" height="118" >
             </a>
         </div>
@@ -70,13 +70,14 @@
                         <li><label>Categorias</label></li>
                         <li class="divider"></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 1}) }}">Historia y creencias</a></li>
-                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 2}) }}">Deporte</a></li>
+                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 10}) }}">Deporte</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 3}) }}">Ciencia y cultura</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 9}) }}">Ocio</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 5}) }}">Actualidad y sociedad</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 6}) }}">Musica</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 7}) }}">Bienestar y familia</a></li>
                         <li><a href="{{ path('app_textoCategoria_show', {'categoria': 8}) }}">Empresa y tecnologia</a></li>
+                        <li><a href="{{ path('app_textoCategoria_show', {'categoria': 11}) }}">Miscelanea</a></li>
 
                     </ul>
                 </li>

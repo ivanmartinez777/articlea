@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Trascastro\UserBundle\Entity\User;
 
 /**
  * Categoria
@@ -36,10 +37,16 @@ class Categoria
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="categoria" ,cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="categoria" ,cascade={"persist", "refresh"})
      */
 
     private $usuarios;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Texto", mappedBy="categoria" ,cascade={"persist", "refresh"})
+     */
+
+    private $textos;
 
     /**
      * Get id
@@ -109,6 +116,7 @@ class Categoria
     public function __construct()
     {
         $this->usuarios = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->textos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -118,7 +126,7 @@ class Categoria
      *
      * @return Categoria
      */
-    public function addUsuario(\Trascastro\UserBundle\Entity\User $usuario)
+    public function addUsuario(User $usuario)
     {
         $this->usuarios[] = $usuario;
 
@@ -130,7 +138,7 @@ class Categoria
      *
      * @param \Trascastro\UserBundle\Entity\User $usuario
      */
-    public function removeUsuario(\Trascastro\UserBundle\Entity\User $usuario)
+    public function removeUsuario(User $usuario)
     {
         $this->usuarios->removeElement($usuario);
     }
@@ -143,5 +151,39 @@ class Categoria
     public function getUsuarios()
     {
         return $this->usuarios;
+    }
+
+    /**
+     * Add texto
+     *
+     * @param Texto $texto
+     *
+     * @return Categoria
+     */
+    public function addTexto(Texto $texto)
+    {
+        $this->textos[] = $texto;
+
+        return $this;
+    }
+
+    /**
+     * Remove Texto
+     *
+     * @param Texto $texto
+     */
+    public function removeTexto(Texto $texto)
+    {
+        $this->usuarios->removeElement($texto);
+    }
+
+    /**
+     * Get textos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTexto()
+    {
+        return $this->textos;
     }
 }

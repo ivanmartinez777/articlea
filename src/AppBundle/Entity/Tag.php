@@ -67,9 +67,7 @@ class Tag
         return $this->nombre;
     }
 
-    public function setId($num){
-        $this->id= $num;
-    }
+
 
     /**
      * @ORM\ManyToMany(targetEntity="Texto", mappedBy="tags", cascade={"persist"})
