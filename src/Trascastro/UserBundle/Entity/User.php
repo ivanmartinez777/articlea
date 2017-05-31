@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Texto;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -275,6 +276,14 @@ class User extends BaseUser
     private $image;
 
     /**
+     *
+     * @Assert\File(
+     *  maxSize = "1024k",
+     *  mimeTypes={"images/png", "image/jpeg", "image/jpg"},
+     *  maxSizeMessage ="Su imagen es demasiado pesado, por favor introduzca una imagen más ligera",
+     *  mimeTypesMessage = "Introduzca una archivo png jpg o jpeg"
+     * )
+     *
      * @Vich\UploadableField(mapping="images_upload", fileNameProperty="image" ,nullable=true)
      * @var File
      */

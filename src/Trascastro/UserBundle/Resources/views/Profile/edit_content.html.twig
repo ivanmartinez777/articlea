@@ -4,6 +4,7 @@
     {{ form_widget(form) }}
     {{ form_widget(form.descripcion) }}
 {{ form_errors(form.categoria) }}{{ form_widget(form.categoria, { 'separator': '=====' }) }}
+
 {{ form_widget(form.imageFile) }}
     <div>
         <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />

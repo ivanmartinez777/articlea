@@ -137,7 +137,7 @@ class UsuarioController extends Controller
     /**
      * @Route("/usuarioPorUsername/{palabra}", name="app_usuariosUsername_show")
      * @return \Symfony\Component\HttpFoundation\Response
-     * 
+     *
      *
      * Función utilizada para enviar usuarios a la vista cuando se busca por su nombre
      */

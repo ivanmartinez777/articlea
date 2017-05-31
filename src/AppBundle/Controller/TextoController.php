@@ -307,6 +307,8 @@ class TextoController extends Controller
                 return $this->redirectToRoute('app_texto_index');
             }
             $this->addFlash('messages', 'Review your form data');
+
+
             return $this->render(':texto:form.html.twig',
                 [
                     'form' => $form->createView(),

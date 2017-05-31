@@ -16,6 +16,7 @@
                     <li>{{ form_row(tag.nombre) }}</li>
                 {% endfor %}
             </ul>
+           <p> La imagen no puede superar los 1024K y sólo se pueden subir archivos .png .jpg .jpeg</p>
             {{ form_widget(form.imageFile) }}
             {{ form_rest(form) }} <!-- prints hidden fields and others -->
             <div><input type="submit" value="Ok"></div>

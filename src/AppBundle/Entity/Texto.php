@@ -325,8 +325,17 @@ class Texto
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="images_upload", fileNameProperty="image",nullable=true)
+     *
      * @var File
+     *
+     * @Assert\File(
+     *  maxSize = "1024k",
+     *  mimeTypes={"images/png", "image/jpeg", "image/jpg"},
+     *  maxSizeMessage ="Su imagen es demasiado pesado, por favor introduzca una imagen más ligera",
+     *  mimeTypesMessage = "Introduzca una archivo png jpg o jpeg"
+     * )
+     * @var File
+     * @Vich\UploadableField(mapping="images_upload", fileNameProperty="image",nullable=true)
      */
     private $imageFile;
 
