@@ -149,8 +149,10 @@ class TextoController extends Controller
     public function textoCategoriaAction($categoria, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Categoria');
+        $cate = $repository->findOneBy(array('nombre'=>$categoria));
         $repo = $em->getRepository('AppBundle:Texto');
-        $textos = $repo->findBy(['categoria' => $categoria]);
+        $textos = $repo->findBy(array('categoria'=>$cate));
 
         /**
          * @var $paginator \knp\Component\Pager\Paginator
