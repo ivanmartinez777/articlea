@@ -172,17 +172,21 @@ class CategoriaController extends Controller
         $users = $repositoryUsers->findBy(array('categoria'=>$categoria));
         $textos = $categoria->getTexto();
         if ($textos != null){
-            foreach ($textos as $texto)
+            foreach ($textos as $texto){
                 $texto->setCategoria($miscelanea);
-            $em->persist($texto);
-            $em->flush();
+                $em->persist($texto);
+                $em->flush();
+            }
+
         }
 
         if ($users != null){
-            foreach ($users as $user)
-               $user->setCategoria($miscelanea);
-            $em->persist($user);
-            $em->flush();
+            foreach ($users as $user){
+                $user->setCategoria($miscelanea);
+                $em->persist($user);
+                $em->flush();
+            }
+
         }
         $em->remove($categoria);
         $em->flush();
