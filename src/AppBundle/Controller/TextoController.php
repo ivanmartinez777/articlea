@@ -450,13 +450,13 @@ class TextoController extends Controller
         if( $usuarios == null){
             return $this->redirectToRoute('app_texto_index');
         }else {
-            foreach ($usuarios as $usuario)
+            foreach ($usuarios as $usuario){
                 $revistaTexto = new RevistaTexto();
                  $revistaTexto->setRevista($usuario->getRevista());
                  $revistaTexto->setTexto($texto);
                   $em->persist($revistaTexto);
                   $em->flush();
-
+                }
             return $this->addFlash('messages', 'Texto añadido a tus suscriptores');
         }
     }
