@@ -52,7 +52,7 @@
                                         </button>
                                      </a>
                                 {% else %}
-                                  <a href="{{ path('app_texto_removeFromRevista', {'id': revistaTexto.texto.id}) }}">
+                                  <a href="{{ path('app_texto_removeFromRevista', {'id': revistaTexto.texto.id}) }}" onclick="return confirm('¿Está seguro de que quiere eliminar el siguiente texto de su revista?')">
                                     <button type="button" class="btn btn-danger col-xs-offset-6 col-xs-6 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4" >
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>

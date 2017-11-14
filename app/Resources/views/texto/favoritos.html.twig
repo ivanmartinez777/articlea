@@ -13,7 +13,7 @@
                     <div class="panel panel-default">
                         <div class="panel-warning col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height:40px; ">
 
-                            <a href="{{ path('app_texto_favRevista', {'id': revistaTexto.texto.id}) }}">
+                            <a href="{{ path('app_texto_favRevista', {'id': revistaTexto.texto.id}) }}" onclick="return confirm('Este texto dejará de estar en sus favoritos')">
                                 <button type="button" class="btn btn-danger col-xs-offset-6 col-xs-6 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4" >
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button>

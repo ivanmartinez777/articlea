@@ -45,7 +45,7 @@
                                     <div class="panel-heading col-xs-8 col-sm-8 col-md-8 col-lg-8" style="background-color: #F9BD5C; color: white;">
                                         <h3>{{ categoria.id }}.{{ categoria.nombre }}</h3>
                                     </div>
-                                    <a href="{{ path('app_categoria_remove', {'id': categoria.id})}}">
+                                    <a href="{{ path('app_categoria_remove', {'id': categoria.id})}}" onclick="return confirm('¿Está seguro de que quiere eliminar la siguiente categoría?')">
                                         <button type="button" class="btn col-xs-4  col-sm-4 col-md-offset-2 col-md-2   col-lg-offset-2  col-lg-2" style="background-color: #C66937; color: white;" >
                                             <span class="glyphicon glyphicon-remove" aria-hidden="true">
                                             </span>

@@ -54,7 +54,7 @@
                             </a>
                             <br>
                         {% endif %}
-                        <a href="{{ path('app_usuario_remove', {'id': usuario.id}) }}">
+                        <a href="{{ path('app_usuario_remove', {'id': usuario.id}) }}" onclick="return confirm('¿Está seguro de que quiere eliminar este usuario?')">
                             <button class=" btn btn-danger col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 2%">Eliminar Usuario
                             </button>
                         </a>

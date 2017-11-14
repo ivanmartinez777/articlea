@@ -22,7 +22,7 @@
                             <div  class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12" ><b>{{ comentario.author }}</b><br><em>{{ comentario.createdAt | date}}</em></div>
                         </div>
 
-                        <a href="{{ path('app_comentario_remove', {'id': comentario.id})}}">
+                        <a href="{{ path('app_comentario_remove', {'id': comentario.id})}}" onclick="return confirm('¿Está seguro de que quiere eliminar este comentario?')">
                             <button type="button" class="btn  col-xs-1 col-sm-1  col-md-1 col-lg-1" style="background-color: #C66937; color: white;" >
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true">
                                 </span>
