@@ -11,9 +11,9 @@
                     <div class="panel-heading col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             {% if comentario.author.image == null %}
-                                <img src="{{ asset("images/maquinapequeña.jpg") }}" class="img-responsive" alt="siu">
+                                <img src="{{ asset("images/profile.jpg") }}" class="img-responsive" alt="siu">
                             {% else %}
-                                <img src="{{ asset("images/upload/" ~texto.image) }}" class="img-responsive" alt="siu">
+                                <img src="{{ asset("images/upload/" ~comentario.author.image) }}" class="img-responsive" alt="siu">
                             {% endif %}
                         </div>
                         {% if app.user %}

@@ -12,10 +12,10 @@
 
         </div>
 <div class="raw"></div>
-    <form action="{{ path('app_usuario_buscarUsuario') }}" method="post">
+    <form action="{{ path('app_usuario_buscarUsuario') }}" method="post" id="buscarUsuario">
 
        <label class=" label-default col-xs-12 col-sm-12 col-md-1 col-lg-1 " style="color:white; border-radius:5%;"> <h4>Nombre</h4></label>
-       <input  type="text"  class="form-control"  name="busquedaUsuario">
+       <input  type="text"  class="form-control"  name="busquedaUsuario" >
         <input type="submit">
     </form>
         </div>
@@ -68,5 +68,17 @@
 
 
             </div>
+
         {% endfor %}
+        <script>
+
+            $(document).ready(function(){
+                $("#buscarUsuario").on('submit', function(e){
+                    if($("input[name='busquedaUsuario']").val()=== "") {
+                        e.preventDefault();
+                        alert("Por favor, escriba algo en la barra de busqueda");
+                    }
+                })
+            })
+        </script>
     {% endblock %}

@@ -8,6 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+
     <title>{% block title %}Mygazine{% endblock %}</title>
 
     {% block stylesheets %}
@@ -53,7 +58,7 @@
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><form class="navbar-form navbar-left" role="search" action="{{ path('app_texto_buscar') }}" method="post">
+                        <li><form class="navbar-form navbar-left" role="search" action="{{ path('app_texto_buscar') }}" method="post" id="buscar">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Buscar" name="busqueda">
                                     <select name="tipo" class="form-control col-xs-12 col-sm12 col-md-12 col-lg-12">
@@ -106,6 +111,18 @@
         <p class="text-right">&copy; 2017 Iván Martínez</p>
     </footer>
 </div> <!-- /container -->
+
+<script>
+
+    $(document).ready(function(){
+        $("#buscar").on('submit', function(e){
+            if($("input[name='busqueda']").val()=== "") {
+                e.preventDefault();
+                alert("Por favor, escriba algo en la barra de busqueda");
+            }
+        })
+    })
+</script>
 
 {% block javascripts %}
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>

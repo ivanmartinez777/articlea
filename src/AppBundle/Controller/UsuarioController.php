@@ -117,6 +117,7 @@ class UsuarioController extends Controller
         $repository = $m->getRepository('UserBundle:User');
         $user = $repository->find($id);
         $repositoryTexto= $m->getRepository('AppBundle:Texto');
+        $repositoryComentario = $m->getRepository('AppBundle:Comentario');
         $textos = $repositoryTexto->findBy(array('author'=>$user));
         foreach ($textos as $texto)
         {
@@ -124,6 +125,12 @@ class UsuarioController extends Controller
                    'id'=>$texto
                ));
 
+        }
+        $comentarios = $repositoryComentario->findBy(array('author'=>$user));
+        foreach ($comentarios as $comentario){
+            $this->forward('AppBundle:Comentario:remove', array(
+                'id'=>$comentario
+            ));
         }
         $m->remove($user);
         $m->flush();
