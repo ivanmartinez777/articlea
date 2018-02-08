@@ -4,11 +4,11 @@
 	<div class="container">
 
 			<div id="bienvenida">
-				<h1><strong>Bienvenidos a Mygazine</strong></h1>
+				<h1><strong>Bienvenidos a Articlea</strong></h1>
 				<h3><em>La comunidad donde los usuarios se convierten en articulistas y lectores</em></h3>
 			</div>
 
-			<div id="myCarousel" class="carousel slide " data-ride="carousel">
+			<div id="myCarousel" class="carousel slide estiloPC " data-ride="carousel">
 		  <!-- Indicators -->
 			  <ol class="carousel-indicators">
 
@@ -32,7 +32,7 @@
 						   		 <h1><em><strong>"Lee articulos originales"</strong></em></h1>
 						   		 
 							</div>
-							<button class="btn saberMas" id="botonSaber1" data-valueBox="1">Saber más</button>
+							<button class="btn saberMas botonSaber1" >Saber más</button>
 				  	  </div>
 			  	</div>
 
@@ -43,7 +43,7 @@
 						   		 <h1><em><strong>"Escribe sobre lo que te apasiona"</strong></em></h1>
 						   		 
 							</div>
-							<button class="btn saberMas" id="botonSaber2" data-valueBox="2">Saber más</button>	
+							<button class="btn saberMas botonSaber2">Saber más</button>	
 				  	  </div>
 			    </div>
 
@@ -54,7 +54,7 @@
 						   		 <h1><em><strong>"Crea tu revista personalizada"</strong></em></h1>
 						   		
 							</div>
-						    <button class="btn saberMas" id="botonSaber3" data-valueBox="3">Saber más</button>
+						    <button class="btn saberMas botonSaber3" >Saber más</button>
 				  	  </div>
 			    </div>
 
@@ -69,62 +69,136 @@
 			  	 </a>
 			 </div>
 		</div>
+
+
+		<div id="myCarousel2" class="carousel slide estiloMov " data-ride="carousel">
+
+			  <!-- Wrapper for slides -->
+			  <div class="carousel-inner">
+
+		    	<div class="item active">
+
+				      <img src="{{ asset("images/reading.jpg") }}" alt="Lectura">
+
+				       <div class="carousel-caption d-none d-md-block cajaMovil">
+				       		<div class="cajaCarousel">
+						   		 <h4><em><strong>"Lee articulos originales"</strong></em></h4>
+							</div>
+				  	  </div>
+				  	  <button class="btn saberMas botonSaber1">Saber más</button>
+			  	</div>
+
+			    <div class="item">
+			      	  <img src="{{ asset("images/textoEscribir.jpg") }}" alt="Escribir">
+			      	   <div class="carousel-caption d-none d-md-block cajaMovil">
+						    <div class="cajaCarousel">
+						   		 <h4><em><strong>"Escribe sobre lo que te apasiona"</strong></em></h4>
+						   		 
+							</div>
+								
+				  	  </div>
+				  	  <button class="btn saberMas botonSaber2">Saber más</button>
+			    </div>
+
+			    <div class="item">
+			      	  <img src="{{ asset("images/textoConfeccion.jpg") }}" alt="Revista">
+			      	   <div class="carousel-caption d-none d-md-block cajaMovil">
+						    <div class="cajaCarousel">
+						   		 <h4><em><strong>"Crea tu revista personalizada"</strong></em></h4>
+							</div>
+				  	  </div>
+				  	  <button class="btn saberMas botonSaber3" >Saber más</button>
+			    </div>
+
+				  <!-- Left and right controls -->
+				  <a class="left carousel-control" href="#myCarousel2" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#myCarousel2" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right"></span>
+				    <span class="sr-only">Next</span>
+			  	 </a>
+			 </div>
+		</div>
+
+
 		<button id="botonRegistro" class="btn col-lg-12 col-md-12 col-sm-12 col-xs-12" ><strong>Registrate gratis</strong></button>
 
 		<div id="explicacionLeer" class="explicacionBox">
-			<h1>Lorem Ipsum</h1>
+			<h1>Lee artículos</h1>
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt velit nec dolor ultricies, nec blandit nulla vehicula. Vestibulum accumsan magna non lorem efficitur, quis accumsan eros egestas. Vestibulum eros mi, fermentum quis orci vitae, interdum pharetra magna. Donec semper odio eu bibendum consequat. Maecenas convallis purus at purus malesuada, non elementum mi pellentesque. Suspendisse potenti. Donec ante libero, interdum ut tellus in, lobortis blandit leo. Nullam imperdiet, augue ut mattis facilisis, eros elit tempor urna, eget ornare ex massa quis mauris.</p>
+			<p>Puedes leer todos los artículos de articlea sin necesidad de registrarte, pero registrarse tiene sus ventajas.</p>
 
-			<p>Maecenas semper, ligula quis finibus dictum, eros justo consequat diam, non consectetur lacus metus a quam. Nulla ligula ex, tincidunt in volutpat eget, porta eu tortor. Quisque imperdiet consectetur consectetur. Integer viverra nec risus at dapibus. Aliquam eu ipsum a libero dapibus fermentum. Nam quis nulla augue. Donec eget massa et dolor ornare efficitur. Nulla interdum, eros ut dapibus ullamcorper, dui ligula vestibulum odio, aliquam molestie eros magna eu urna.</p>
+			<p>Una vez registrado no sólo podrás leer los artículos sino que además podrás enviarlos a tu página principal y/o marcarlos como favoritos para tenerlos a tu alcance siempre que quieras releerlos.</p>
+			
+			<p>Además puedes suscribirte a otros usuarios para que siempre que escriban un nuevo artículo puedas recibirlo en tu página principal.</p>
 
-			<p>Vestibulum at sapien id mauris auctor molestie. Sed ut sapien malesuada, efficitur leo quis, congue nibh. Donec quis lobortis erat, id consectetur augue. Aliquam pharetra dui sed metus aliquet aliquam. Vivamus velit tortor, sodales nec nisi a, gravida rutrum lectus. Suspendisse auctor urna vitae rutrum fringilla. Cras tincidunt finibus ante, eget placerat ex imperdiet at.</p>
+			<p>Dentro del artículo encontrarás el texto, los tags que le a puesto el autor, una descripción del autor y un botón por si deseas suscribirte a sus artículos. Por supuesto tambíen podrás dejar algún comentario.</p>
+
+			<p>Haz click en la categoría y te mostraremos más artículos de la misma. Lo mismo puedes hacer con los tags.</p>
+
+			<p>Por último verás que también te recomendaremos los dos artículos más leídos de esa categoría y el artículo más leído de ese autor.</p>
+
+			<button class="btn botonSubir center-block"><span class="glyphicon glyphicon-upload"></span></button>
+			
 		</div>
 
 		<div id="explicacionEscribir" class="explicacionBox">
-			<h1>Chiquifistro</h1>
+			<h1>Escribe sobre lo que te apasiona</h1>
 
-			<p>Lorem fistrum pecador papaar papaar sexuarl tiene musho peligro quietooor tiene musho peligro. Me cago en tus muelas te voy a borrar el cerito fistro apetecan llevame al sircoo mamaar torpedo ese que llega ahorarr a gramenawer. Por la gloria de mi madre pecador a wan al ataquerl ese pedazo de te voy a borrar el cerito caballo blanco caballo negroorl. No puedor qué dise usteer sexuarl sexuarl no te digo trigo por no llamarte Rodrigor te va a hasé pupitaa al ataquerl. Va usté muy cargadoo quietooor caballo blanco caballo negroorl quietooor de la pradera ese hombree de la pradera apetecan.</p>
+			<p>Desde Articlea creemos que nadie puede transmitir algo mejor que aquel que lo siente y disfruta con pasión.</p>
 
-			<p>Pupita benemeritaar hasta luego Lucas tiene musho peligro. Diodenoo a gramenawer va usté muy cargadoo pecador. Te va a hasé pupitaa amatomaa diodenoo te voy a borrar el cerito a peich. Qué dise usteer mamaar diodenoo tiene musho peligro pupita te va a hasé pupitaa. Apetecan está la cosa muy malar la caidita por la gloria de mi madre tiene musho peligro. Llevame al sircoo jarl diodenoo sexuarl ahorarr ahorarr. No puedor ahorarr ese pedazo de sexuarl te voy a borrar el cerito a peich fistro ese pedazo de a peich. Tiene musho peligro papaar papaar mamaar por la gloria de mi madre.</p>
+			<p>Escribe artículos sobre lo que más te guste: deporte, historia, naturaleza... sobre lo que quieras. Al registrarte debes indicar la categoría sobre la que escribirías si deseases hacerlo, pero no te preocupes puedes cambiar de categoría cuando quieras.</p>
 
-			<p>Vestibulum at sapien id mauris auctor molestie. Sed ut sapien malesuada, efficitur leo quis, congue nibh. Donec quis lobortis erat, id consectetur augue. Aliquam pharetra dui sed metus aliquet aliquam. Vivamus velit tortor, sodales nec nisi a, gravida rutrum lectus. Suspendisse auctor urna vitae rutrum fringilla. Cras tincidunt finibus ante, eget placerat ex imperdiet at.</p>
+			<p>Siempre que escribas un artículo podrás ponerle hasta cinco tags para concretar más la temática de tu artículo. De esta manera, mediante los tags y la categoría, será más fácil que los lectores puedan encontrar tu artículo y disfrutar de él.</p>
+
+			<p>Como equivocarse es humano, podrás editar tu artículo o eliminarlo cuando quieras. Sólo tendrás que entrar en tu artículo y debajo de la barra de favoritos y de "enviar a mi revista" encontrarás los comandos necesarios.</p>
+
+			<button class="btn botonSubir center-block"><span class="glyphicon glyphicon-upload"></span></button>
+
 		</div>
 
 		<div id="explicacionConfeccionar" class="explicacionBox">
-			<h1>Cupcake</h1>
+			<h1>Crea tu propia revista personalizada</h1>
 
-			<p>Pudding candy canes cake candy canes macaroon liquorice cake brownie sesame snaps. Cookie tart dragée brownie marshmallow jelly beans chocolate bar jelly halvah. Cookie halvah cheesecake dessert dessert. Pie chocolate cake cupcake muffin apple pie. Tart jelly-o bear claw candy cake candy bear claw chocolate fruitcake. Gummi bears sugar plum oat cake candy canes danish. Cupcake macaroon donut cupcake fruitcake jujubes chocolate bar. Lemon drops cheesecake tiramisu tiramisu. Powder candy pudding. Tiramisu ice cream lemon drops candy toffee. Cookie cake candy marzipan gummies cake jujubes cake. Cake sugar plum danish tart. Ice cream candy canes chocolate chocolate bar halvah cookie pie chocolate cake jelly beans.</p>
+			<p>"Revista" es como llamamos en Articlea a las páginas de inicio de cada usuario. En tu revista recibirás los artículos de los usuarios a los que te hayas suscrito, además podrás enviar a tu revista cualquier artículo que leas y que desees conservar. </p>
 
-			<p>Pudding candy canes cake candy canes macaroon liquorice cake brownie sesame snaps. Cookie tart dragée brownie marshmallow jelly beans chocolate bar jelly halvah. Cookie halvah cheesecake dessert dessert. Pie chocolate cake cupcake muffin apple pie. Tart jelly-o bear claw candy cake candy bear claw chocolate fruitcake. Gummi bears sugar plum oat cake candy canes danish. Cupcake macaroon donut cupcake fruitcake jujubes chocolate bar. Lemon drops cheesecake tiramisu tiramisu. Powder candy pudding. Tiramisu ice cream lemon drops candy toffee. Cookie cake candy marzipan gummies cake jujubes cake. Cake sugar plum danish tart. Ice cream candy canes chocolate chocolate bar halvah cookie pie chocolate cake jelly beans.</p>
+			<p>Los artículos que hayas recibido a tu revista y que no hayas leído estarán marcados en la previa de este para que puedas identificarlo. Además en la barra superior te indicará si tienes artículos por leer y cuantos son. Si no deseas conservar algún artículo podrás eliminarlo facilmente de tu revista, quedandote así con los que más te interesen.</p>
 
-			<p>Pudding candy canes cake candy canes macaroon liquorice cake brownie sesame snaps. Cookie tart dragée brownie marshmallow jelly beans chocolate bar jelly halvah. Cookie halvah cheesecake dessert dessert. Pie chocolate cake cupcake muffin apple pie. Tart jelly-o bear claw candy cake candy bear claw chocolate fruitcake. Gummi bears sugar plum oat cake candy canes danish. Cupcake macaroon donut cupcake fruitcake jujubes chocolate bar. Lemon drops cheesecake tiramisu tiramisu. Powder candy pudding. Tiramisu ice cream lemon drops candy toffee. Cookie cake candy marzipan gummies cake jujubes cake. Cake sugar plum danish tart. Ice cream candy canes chocolate chocolate bar halvah cookie pie chocolate cake jelly beans.</p>
+			<p>Desde tu revista podrás acceder a los artículos que hayas escrito, los que hayas marcado como favoritos, a tu perfil y a la pantalla de creación de artículos.</p>
+
+			<button class="btn botonSubir center-block"><span class="glyphicon glyphicon-upload"></span></button>
+
 		</div>
+
 		
 		<script>
 			$( document ).ready(function() {
-    			$("#botonSaber1").click(function(){
+    			$(".botonSaber1").click(function(){
     				
     				$("#explicacionLeer").css("display", "block");
     				$("#explicacionEscribir").css("display", "none");
     				$("#explicacionConfeccionar").css("display", "none");
+    				
     				 $('html, body').animate({
                     scrollTop: $("#explicacionLeer").offset().top
                		 }, 1000);
     			});
 
-    			$("#botonSaber2").click(function(){
+    			$(".botonSaber2").click(function(){
     				
     				$("#explicacionLeer").css("display", "none");
     				$("#explicacionEscribir").css("display", "block");
     				$("#explicacionConfeccionar").css("display", "none");
+    				
     				$('html, body').animate({
                     scrollTop: $("#explicacionEscribir").offset().top
                		 }, 1000);
 
     			});
 
-    			$("#botonSaber3").click(function(){
+    			$(".botonSaber3").click(function(){
     				
     				$("#explicacionLeer").css("display", "none");
     				$("#explicacionEscribir").css("display", "none");
@@ -133,10 +207,15 @@
                     scrollTop: $("#explicacionConfeccionar").offset().top
                		 }, 1000);
     			});
+
+    			$(".botonSubir").click(function(){
+    				$('html, body').animate({
+                    scrollTop: $("#bienvenida").offset().top
+               		 }, 1000);
+    			});
 			});
 
 		</script>
-
    
 
 

@@ -130,14 +130,14 @@ a .tag{
 /*index*/
 
 #bienvenida{
-    background-color: #81DAF5;
+    background-color: white;
     border-radius: 15px;
     width: 100%;
     height: 150px;
-    margin-top: 30px;
+    margin-top: 5px;
     text-align: center;
-    padding-top: 10px;
-    color: #0489B1;
+    padding-top: 5px;
+    color: black;
 }
 
 #bienvenida h1{
@@ -149,7 +149,15 @@ a .tag{
 }
 
 #myCarousel{
-    margin-top:30px;
+    margin-top: 7px;
+}
+
+.estiloMov{
+    display: none;
+}
+
+.estiloPC{
+    display: block;
 }
 
 #botonRegistro{
@@ -158,12 +166,26 @@ a .tag{
     margin-bottom: 30px;
     color:white;
     font-size: 1.5em;
+    text-decoration: none;
 
 }
 
 .saberMas{
     background-color:#58ACFA;
     margin-bottom: 10px;
+    color: white;
+    
+}
+
+.saberMas:hover {
+    background-color: #2E64FE;
+    transition-duration: 0.4s;
+    color: white !important;
+}
+
+.saberMas:focus {
+    background-color: #2E64FE;
+    color: white !important;
 }
 
 .cajaCarousel h1{   
@@ -202,6 +224,10 @@ a .tag{
     font-family: 'Cantarell';
 }
 
+.botonSubir{
+    visibility: hidden;
+}
+
 
 @media(max-width:780px){
     #cajaTexto {
@@ -218,6 +244,43 @@ a .tag{
 
     .botonesRevista{
         margin-top: 0;
+    }
+
+    .estiloPC{
+        display: none;
+    }
+
+    .estiloMov{
+        display: block;
+    }
+
+    .cajaMovil{
+        position: absolute;
+        bottom: 5px;
+    }
+
+    .saberMas{
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .explicacionBox{
+    font-size: 1.2em;
+    }
+
+    .botonSubir, .botonSubir:hover, .botonSubir:focus{
+        width: 15%;
+        color: white !important;
+        background-color: #424242;
+        margin-right: 42.5%;
+        margin-bottom: 50px;
+        display:block;
+        border: white;
+        visibility: visible;
+    }
+
+    .botonSubir span{
+        font-size: 1.7em;
     }
 
 }
