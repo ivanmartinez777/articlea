@@ -207,7 +207,21 @@ a .tag{
 
 .explicacionBox h1{
     margin-top: 20px;
-    font-family: 'Fjalla One';
+}
+
+.explicacionLeer h1{
+    font-family: 'Loved by the King';
+    color: #2E0854;
+}
+
+.explicacionEscribir h1{
+    font-family: 'Alex Brush';
+    color: #3f003f;
+}
+
+.explicacionConfeccionar h1{
+    font-family: 'Amatic SC';
+    color: #008b8b;
 }
 
 .explicacionBox p{
