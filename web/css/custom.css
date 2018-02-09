@@ -225,6 +225,7 @@ a .tag{
     right:7%;
     border-radius: 15px;
     display:none;
+    margin-bottom: 50px;
 }
 
 #botonSubir span{
@@ -277,6 +278,10 @@ a .tag{
 
     #botonSubir span{
         font-size: 1.3em;
+    }
+
+    #botonSubir{
+        right: 3%;
     }
 
 }
