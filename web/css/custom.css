@@ -202,6 +202,7 @@ a .tag{
     font-size: 1.5em;
     text-align:justify;  
     text-justify:distribute;
+    margin-bottom: 50px;
 
 }
 
@@ -209,17 +210,17 @@ a .tag{
     margin-top: 20px;
 }
 
-.explicacionLeer h1{
+#explicacionLeer h1{
     font-family: 'Loved by the King';
     color: #2E0854;
 }
 
-.explicacionEscribir h1{
+#explicacionEscribir h1{
     font-family: 'Alex Brush';
     color: #3f003f;
 }
 
-.explicacionConfeccionar h1{
+#explicacionConfeccionar h1{
     font-family: 'Amatic SC';
     color: #008b8b;
 }
