@@ -198,18 +198,6 @@ a .tag{
     border-radius: 25px;
 }
 
-#explicacionLeer{
-    display: none;
-}
-
-#explicacionEscribir{
-    display: none;
-}
-
-#explicacionConfeccionar{
-    display: none;
-}
-
 .explicacionBox{
     font-size: 1.5em;
     text-align:justify;  
@@ -227,8 +215,20 @@ a .tag{
     font-family: 'Cantarell';
 }
 
-.botonSubir{
-    visibility: hidden;
+#botonSubir{
+    padding:2%;
+    background-color: #424242;
+    color:white;
+    cursor:pointer;
+    position: fixed;
+    bottom:5px;
+    right:7%;
+    border-radius: 15px;
+    display:none;
+}
+
+#botonSubir span{
+        font-size: 2em;
 }
 
 
@@ -273,19 +273,10 @@ a .tag{
     text-justify:distribute;
     }
 
-    .botonSubir, .botonSubir:hover, .botonSubir:focus{
-        width: 15%;
-        color: white !important;
-        background-color: #424242;
-        margin-right: 42.5%;
-        margin-bottom: 50px;
-        display:block;
-        border: white;
-        visibility: visible;
-    }
+   
 
-    .botonSubir span{
-        font-size: 1.7em;
+    #botonSubir span{
+        font-size: 1.3em;
     }
 
 }

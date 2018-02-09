@@ -130,7 +130,7 @@
 		</div>
 
 		<div class="row">
-			<div id="explicacionLeer" class="explicacionBox">
+			<div id="explicacionLeer" class="explicacionBox col-lg-11 col-md-11 col-sm-11 col-xs-11">
 				<h1>Lee artículos</h1>
 
 				<p>Puedes leer todos los artículos de articlea sin necesidad de registrarte, pero registrarse tiene sus ventajas.</p>
@@ -144,14 +144,12 @@
 				<p>Haz click en la categoría y te mostraremos más artículos de la misma. Lo mismo puedes hacer con los tags.</p>
 
 				<p>Por último verás que también te recomendaremos los dos artículos más leídos de esa categoría y el artículo más leído de ese autor.</p>
-
-				<button class="btn botonSubir center-block"><span class="glyphicon glyphicon-upload"></span></button>
 				
 			</div>
 		</div>
 
 		<div class="row">
-			<div id="explicacionEscribir" class="explicacionBox">
+			<div id="explicacionEscribir" class="explicacionBox col-lg-11 col-md-11 col-sm-11 col-xs-11">
 				<h1>Escribe sobre lo que te apasiona</h1>
 
 				<p>Desde Articlea creemos que nadie puede transmitir algo mejor que aquel que lo siente y disfruta con pasión.</p>
@@ -162,13 +160,12 @@
 
 				<p>Como equivocarse es humano, podrás editar tu artículo o eliminarlo cuando quieras. Sólo tendrás que entrar en tu artículo y debajo de la barra de favoritos y de "enviar a mi revista" encontrarás los comandos necesarios.</p>
 
-				<button class="btn botonSubir center-block"><span class="glyphicon glyphicon-upload"></span></button>
-
+				
 			</div>
 		</div>
 
 		<div class="row">
-			<div id="explicacionConfeccionar" class="explicacionBox">
+			<div id="explicacionConfeccionar" class="explicacionBox col-lg-11 col-md-11 col-sm-11 col-xs-11">
 				<h1>Crea tu propia revista personalizada</h1>
 
 				<p>"Revista" es como llamamos en Articlea a las páginas de inicio de cada usuario. En tu revista recibirás los artículos de los usuarios a los que te hayas suscrito, además podrás enviar a tu revista cualquier artículo que leas y que desees conservar. </p>
@@ -182,50 +179,51 @@
 			</div>
 		</div>
 	</div>
+	<button id="botonSubir"><span class="glyphicon glyphicon-upload"></span></button>
 
 		
 	<script>
-		$( document ).ready(function() {
-			$(".botonSaber1").click(function(){
-				
-				$("#explicacionLeer").css("display", "block");
-				$("#explicacionEscribir").css("display", "none");
-				$("#explicacionConfeccionar").css("display", "none");
-				
-				 $('html, body').animate({
-                scrollTop: $("#botonRegistro").offset().top
-           		 }, 1000);
+			$( document ).ready(function() {
+    			$(".botonSaber1").click(function(){
+    				
+    				 $('html, body').animate({
+                    scrollTop: $("#explicacionLeer").offset().top
+               		 }, 1000);
+    			});
+
+    			$(".botonSaber2").click(function(){
+    				
+    				$('html, body').animate({
+                    scrollTop: $("#explicacionEscribir").offset().top
+               		 }, 1000);
+
+    			});
+
+    			$(".botonSaber3").click(function(){
+    				
+    				$('html, body').animate({
+                    scrollTop: $("#explicacionConfeccionar").offset().top
+               		 }, 1000);
+    			});
+
+    			$("#botonSubir").click(function(){
+    				console.log("hola");
+    				$('html, body').animate({
+                    scrollTop: $("#bienvenida").offset().top
+               		 }, 1000);
+    			});
+
+    			$(window).scroll(function() {
+			        var scroll = $(this).scrollTop();
+			        if (scroll > 200) {
+			            $('#botonSubir').fadeIn(200);
+			        }if (scroll < 200){
+			          $('#botonSubir').fadeOut(200);
+			        }
+    
+				});
 			});
 
-			$(".botonSaber2").click(function(){
-				
-				$("#explicacionLeer").css("display", "none");
-				$("#explicacionEscribir").css("display", "block");
-				$("#explicacionConfeccionar").css("display", "none");
-				
-				$('html, body').animate({
-                scrollTop: $("#botonRegistro").offset().top
-           		 }, 1000);
-
-			});
-
-			$(".botonSaber3").click(function(){
-				
-				$("#explicacionLeer").css("display", "none");
-				$("#explicacionEscribir").css("display", "none");
-				$("#explicacionConfeccionar").css("display", "block");
-				$('html, body').animate({
-                scrollTop: $("#botonRegistro").offset().top
-           		 }, 1000);
-			});
-
-			$(".botonSubir").click(function(){
-				$('html, body').animate({
-                scrollTop: $("#bienvenida").offset().top
-           		 }, 1000);
-			});
-		});
-
-	</script>
+		</script>
    
 {% endblock %}
