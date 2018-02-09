@@ -212,6 +212,8 @@ a .tag{
 
 .explicacionBox{
     font-size: 1.5em;
+    text-align:justify;  
+    text-justify:distribute;
 
 }
 
@@ -267,6 +269,8 @@ a .tag{
 
     .explicacionBox{
     font-size: 1.2em;
+    text-align:justify;  
+    text-justify:distribute;
     }
 
     .botonSubir, .botonSubir:hover, .botonSubir:focus{
